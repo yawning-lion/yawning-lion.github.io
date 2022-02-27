@@ -52,7 +52,7 @@
 <meta property="og:image" content="f:/PROJECT/HexoBlog/blog/source/img/post3/d02f6d72bb473cdc2a92a979ca108e6.png">
 <meta property="og:image" content="f:/PROJECT/HexoBlog/blog/source/img/post3/eafaf3034a5d3aa8f06de5cb92d2031.png">
 <meta property="article:published_time" content="2022-02-27T12:29:40.000Z">
-<meta property="article:modified_time" content="2022-02-27T15:58:53.921Z">
+<meta property="article:modified_time" content="2022-02-27T16:05:03.173Z">
 <meta property="article:author" content="yawning-lion">
 <meta property="article:tag" content="张量">
 <meta property="article:tag" content="弹性力学">
@@ -237,7 +237,7 @@
 
     </div>
      
-    <div class="post-footer__meta"><p>updated at 2022-02-27</p></div> 
+    <div class="post-footer__meta"><p>updated at 2022-02-28</p></div> 
     <div class="post-entry__tags"><a href="/tags/%E5%BC%A0%E9%87%8F/" class="post-tags__link button"># 张量</a><a href="/tags/%E5%BC%B9%E6%80%A7%E5%8A%9B%E5%AD%A6/" class="post-tags__link button"># 弹性力学</a><a href="/tags/%E6%B5%81%E4%BD%93%E5%8A%9B%E5%AD%A6/" class="post-tags__link button"># 流体力学</a><a href="/tags/%E8%BF%9E%E7%BB%AD%E4%BB%8B%E8%B4%A8%E5%8A%9B%E5%AD%A6/" class="post-tags__link button"># 连续介质力学</a></div> 
 </article>
 
@@ -330,6 +330,56 @@
 
  
 
+
+    <script>
+        if (typeof MathJax === 'undefined') {
+            window.MathJax = {
+                loader: {
+                    source: {
+                        '[tex]/amsCd': '[tex]/amscd',
+                        '[tex]/AMScd': '[tex]/amscd'
+                    }
+                },
+                tex: {
+                    inlineMath: {'[+]': [['$', '$']]},
+                    tags: 'ams'
+                },
+                options: {
+                    renderActions: {
+                        findScript: [10, doc => {
+                            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                                const display = !!node.type.match(/; *mode=display/);
+                                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                                const text = document.createTextNode('');
+                                node.parentNode.replaceChild(text, node);
+                                math.start = {node: text, delim: '', n: 0};
+                                math.end = {node: text, delim: '', n: 0};
+                                doc.math.push(math);
+                            });
+                        }, '', false],
+                        insertedScript: [200, () => {
+                            document.querySelectorAll('mjx-container').forEach(node => {
+                                let target = node.parentNode;
+                                if (target.nodeName.toLowerCase() === 'li') {
+                                    target.parentNode.classList.add('has-jax');
+                                }
+                            });
+                        }, '', false]
+                    }
+                }
+            };
+            (function () {
+                var script = document.createElement('script');
+                script.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js";
+                script.defer = true;
+                document.head.appendChild(script);
+            })();
+        } else {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+        }
+    </script>
  
 
  
