@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+
+    
+
+    <!-- 渲染优化 -->
+    <meta name="renderer" content="webkit">
+    <meta name="force-rendering" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="HandheldFriendly" content="True" >
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!--icon-->
+
+    
+        <link rel="shortcut icon" href="/images/favicon32.ico">
+    
+    
+        <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon16.ico">
+    
+    
+        <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon32.ico">
+    
+    
+    
+
+
+    <!-- meta -->
+
+
+<title>张量-01-运算法则与求和约定 | 狮子大张嘴&#39;s blog</title>
+
+
+    <meta name="keywords" content="张量, 弹性力学, 流体力学, 连续介质力学">
+
+
+
+
+    <!-- OpenGraph -->
+ 
+    <meta name="description" content="大三上开始了弹性力学的学习，最开始又讲了遍张量。算起来是第三遍学张量了，这次终于搞明白了张量求导法则。这篇博文提供理解张量的一个（自认为）比较好的切口和脉络，一些细节各类参考书里很详细了，便不赘述。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="张量-01-运算法则与求和约定">
+<meta property="og:url" content="https://yawninglion.github.io/2022/02/27/%E5%BC%A0%E9%87%8F-01-%E8%BF%90%E7%AE%97%E6%B3%95%E5%88%99%E4%B8%8E%E6%B1%82%E5%92%8C%E7%BA%A6%E5%AE%9A/index.html">
+<meta property="og:site_name" content="狮子大张嘴&#39;s blog">
+<meta property="og:description" content="大三上开始了弹性力学的学习，最开始又讲了遍张量。算起来是第三遍学张量了，这次终于搞明白了张量求导法则。这篇博文提供理解张量的一个（自认为）比较好的切口和脉络，一些细节各类参考书里很详细了，便不赘述。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="f:/PROJECT/HexoBlog/blog/source/img/post3/image-20220227232118354.png">
+<meta property="og:image" content="f:/PROJECT/HexoBlog/blog/source/img/post3/d02f6d72bb473cdc2a92a979ca108e6.png">
+<meta property="og:image" content="f:/PROJECT/HexoBlog/blog/source/img/post3/eafaf3034a5d3aa8f06de5cb92d2031.png">
+<meta property="article:published_time" content="2022-02-27T12:29:40.000Z">
+<meta property="article:modified_time" content="2022-02-27T15:58:53.921Z">
+<meta property="article:author" content="yawning-lion">
+<meta property="article:tag" content="张量">
+<meta property="article:tag" content="弹性力学">
+<meta property="article:tag" content="流体力学">
+<meta property="article:tag" content="连续介质力学">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="f:/PROJECT/HexoBlog/blog/source/img/post3/image-20220227232118354.png">
+
+
+    
+<link rel="stylesheet" href="/css/style/main.css">
+ 
+
+    
+    
+        <link rel="stylesheet" id="hl-default-theme" href="/css/highlight/default.css" media="none" >
+        
+            <link rel="stylesheet" id="hl-dark-theme" href="/css/highlight/dark.css" media="none">
+        
+    
+
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/style/dark.css">
+
+    
+<script src="/js/darkmode.js"></script>
+
+
+
+     
+
+    <!-- custom head -->
+
+<meta name="generator" content="Hexo 5.4.1"></head>
+
+    <body>
+        <div id="app">
+            <header class="header">
+    <div class="header__left">
+        <a href="/" class="button">
+            <span class="logo__text">狮子大张嘴&#39;s blog</span>
+        </a>
+    </div>
+    <div class="header__right">
+        
+            <div class="navbar__menus">
+                
+                    <a href="/" class="navbar-menu button">home</a>
+                
+                    <a href="/tags/" class="navbar-menu button">tags</a>
+                
+                    <a href="/categories" class="navbar-menu button">categories</a>
+                
+                    <a href="/archives/" class="navbar-menu button">archives</a>
+                
+                    <a href="/friends/" class="navbar-menu button">friends</a>
+                
+                    <a href="/page/" class="navbar-menu button">Page</a>
+                
+            </div>
+        
+        
+        
+    <a href="/search/" id="btn-search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="24" height="24" fill="currentColor" stroke="currentColor" stroke-width="32"><path d="M192 448c0-141.152 114.848-256 256-256s256 114.848 256 256-114.848 256-256 256-256-114.848-256-256z m710.624 409.376l-206.88-206.88A318.784 318.784 0 0 0 768 448c0-176.736-143.264-320-320-320S128 271.264 128 448s143.264 320 320 320a318.784 318.784 0 0 0 202.496-72.256l206.88 206.88 45.248-45.248z"></path></svg>
+    </a>
+
+
+        
+        
+    <a href="javaScript:void(0);" id="btn-toggle-dark">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+    </a>
+
+
+        
+            <a class="dropdown-icon button" id="btn-dropdown" tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width='24' height='24' fill="none" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"><path fill="currentColor" d="M3.314,4.8h13.372c0.41,0,0.743-0.333,0.743-0.743c0-0.41-0.333-0.743-0.743-0.743H3.314c-0.41,0-0.743,0.333-0.743,0.743C2.571,4.467,2.904,4.8,3.314,4.8z M16.686,15.2H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,15.2,16.686,15.2z M16.686,9.257H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,9.257,16.686,9.257z"></path></svg></a>
+            <div class="dropdown-menus" id="dropdown-menus">
+                
+                    <a href="/" class="dropdown-menu button">home</a>
+                
+                    <a href="/tags/" class="dropdown-menu button">tags</a>
+                
+                    <a href="/categories" class="dropdown-menu button">categories</a>
+                
+                    <a href="/archives/" class="dropdown-menu button">archives</a>
+                
+                    <a href="/friends/" class="dropdown-menu button">friends</a>
+                
+                    <a href="/page/" class="dropdown-menu button">Page</a>
+                
+            </div>
+        
+    </div>
+</header>
+
+
+            <main class="main">
+    
+
+<div class="post-title">
+    <h1 class="post-title__text">
+        张量-01-运算法则与求和约定
+    </h1>
+    <div class="post-title__meta">
+        <a href="/archives/2022/02/" class="post-meta__date button">2022-02-27</a>
+        
+    <span class="separate-dot"></span><a href="/categories/%E6%95%B0%E7%90%86%E5%9F%BA%E7%A1%80%E8%A1%A5%E5%AE%8C%E8%AE%A1%E5%88%92/" class="button">数理基础补完计划</a>
+
+ 
+        
+    
+    
+
+
+ 
+
+ 
+    </div>
+</div>
+
+
+    <aside class="post-side">
+        <div class="post-side__toc">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%A0%E9%87%8F%E6%98%AF%E5%A6%82%E4%BD%95%E7%88%86%E6%9D%80%E6%88%91%E7%9A%84"><span class="toc-text">张量是如何爆杀我的</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%A0%E9%87%8F%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-text">张量是什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%88%B1%E5%9B%A0%E6%96%AF%E5%9D%A6%E6%B1%82%E5%92%8C%E7%BA%A6%E5%AE%9A%EF%BC%88summation-convention%EF%BC%89"><span class="toc-text">爱因斯坦求和约定（summation convention）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%A0%E9%87%8F%E4%B9%98%E6%B3%95"><span class="toc-text">张量乘法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E7%9F%A2"><span class="toc-text">基矢</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8C%E4%B9%98"><span class="toc-text">双乘</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%A0%E9%87%8F%E6%B1%82%E5%AF%BC"><span class="toc-text">张量求导</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%97%E5%8F%B7%E5%89%B2index-amp-variable"><span class="toc-text">逗号割index &amp; variable</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B1%82%E5%AF%BC%E6%B3%95%E5%88%99"><span class="toc-text">求导法则</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-text">注意事项</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BD%AC%E7%BD%AE%E5%8F%AA%E8%BD%AC%E5%88%86%E9%87%8F"><span class="toc-text">转置只转分量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%84%E9%A1%B9%E5%90%8C%E6%80%A7%E5%BC%A0%E9%87%8F"><span class="toc-text">各项同性张量</span></a></li></ol></li></ol>
+        </div>
+    </aside>
+    <a class="btn-toc button" id="btn-toc" tabindex="0">
+        <svg viewBox="0 0 1024 1024" width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+            <path d="M128 256h64V192H128zM320 256h576V192H320zM128 544h64v-64H128zM320 544h576v-64H320zM128 832h64v-64H128zM320 832h576v-64H320z" fill="currentColor"></path>
+        </svg>
+    </a>
+    <div class="toc-menus" id="toc-menus">
+        <div class="toc-title">Article Directory</div>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%A0%E9%87%8F%E6%98%AF%E5%A6%82%E4%BD%95%E7%88%86%E6%9D%80%E6%88%91%E7%9A%84"><span class="toc-text">张量是如何爆杀我的</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%A0%E9%87%8F%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-text">张量是什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%88%B1%E5%9B%A0%E6%96%AF%E5%9D%A6%E6%B1%82%E5%92%8C%E7%BA%A6%E5%AE%9A%EF%BC%88summation-convention%EF%BC%89"><span class="toc-text">爱因斯坦求和约定（summation convention）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%A0%E9%87%8F%E4%B9%98%E6%B3%95"><span class="toc-text">张量乘法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E7%9F%A2"><span class="toc-text">基矢</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8C%E4%B9%98"><span class="toc-text">双乘</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%A0%E9%87%8F%E6%B1%82%E5%AF%BC"><span class="toc-text">张量求导</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%97%E5%8F%B7%E5%89%B2index-amp-variable"><span class="toc-text">逗号割index &amp; variable</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B1%82%E5%AF%BC%E6%B3%95%E5%88%99"><span class="toc-text">求导法则</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-text">注意事项</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BD%AC%E7%BD%AE%E5%8F%AA%E8%BD%AC%E5%88%86%E9%87%8F"><span class="toc-text">转置只转分量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%84%E9%A1%B9%E5%90%8C%E6%80%A7%E5%BC%A0%E9%87%8F"><span class="toc-text">各项同性张量</span></a></li></ol></li></ol>
+    </div>
+
+
+<article class="post post__with-toc content-card">
+    <div class="post__header"></div>
+    <div class="post__content">
+        <h2 id="张量是如何爆杀我的"><a href="#张量是如何爆杀我的" class="headerlink" title="张量是如何爆杀我的"></a>张量是如何爆杀我的</h2><p>大二下上李植老师的连续介质力学基础，用的是谢多夫那本书，一上来就用曲线坐标系，从协变性逆变性开始讲起，并且默认大家只消几道习题就可以熟练掌握爱因斯坦求和约定。彼时我还没锻炼出学业上的抗压能力，直接被斩于马下，迷迷糊糊听了半学期一节课都没跟上过，遂退课跑路:)</p>
+<p>大三上杨延涛老师讲流体力学，用了吴望一老师的流体力学，张量是在笛卡尔坐标系里讲的，那个时候才算能用张量做一些计算，但一碰到对张量求导就卡壳。</p>
+<p>这学期魏悦广院士教弹性力学，用了王敏中老师的弹性力学教程，这才对各种张量求导法则有了比较清晰的认知。</p>
+<p>之后肯定会还会在各种地方碰到张量，协变性逆变性也许还会重新学一遍，这篇博文的内容就仅限于基础运算法则了。</p>
+<h2 id="张量是什么"><a href="#张量是什么" class="headerlink" title="张量是什么"></a>张量是什么</h2><p>张量有一个非常物理非常漂亮的定义：在坐标变换下具有不变性的量（区别各向同性张量是各分量保持不变），即具有协变性的量。但很显然，这不是一个利于初学者快速掌握张量运算的定义:)</p>
+<p>说的直白点，零阶张量就是标量，一阶张量就是矢量，二维张量就是矩阵，三维的张量就是三维矩阵etc.（事实上矩阵的表现形式只能说是张量的分量，比较本质的定义方式一定要用到<strong>坐标变换</strong>，这里不过多赘述）</p>
+<p>例如三阶张量可以写成$A_{ijk}$，$ijk$三个<strong>指标</strong>就分别是三个维度上的索引，很自然的可以想到这也是三阶矩阵的形式。到这里就可以开始进入下一阶段了。</p>
+<h2 id="爱因斯坦求和约定（summation-convention）"><a href="#爱因斯坦求和约定（summation-convention）" class="headerlink" title="爱因斯坦求和约定（summation convention）"></a>爱因斯坦求和约定（summation convention）</h2><p>首先不要把这个当成什么特别高大上的东西，这玩意只是个记号，就算是爱因斯坦提出来的它也只是一种记号(x)</p>
+<p>先写一个矩阵矢量相乘的求和约定记法：<br>$$<br>A \cdot a = A_{ij}a_j = B_i<br>$$<br>大家有注意到$j$<strong>成对</strong>出现了，这叫<strong>哑标</strong>，不具有特定的值，$i$单独出现，是<strong>自由标</strong>，是一个索引。</p>
+<p>哑标的意义就是求和，如固定$i=1$，即我们关注$A \cdot a$第一个分量<br>$$<br>A_{1j}a_j = A_{11}a_1 +A_{12}a_1+A_{13}a_3<br>$$<br>到这里大家就可以看的很明白了，爱因斯坦求和约定的作用在于<strong>简化表达式</strong>，把具有相同形式的一串待求和项<strong>紧凑</strong>的用哑标表示出来。</p>
+<p>所以为什么说哑标不具有特定的值，因为哑标正是用于简写这种对特定指标求和的表达式，如在这个例子里，和式的每一项都具有***$A$的列指标与$a$的指标相同<em><strong>的格式。从来</strong>成对出现</em>*的原因也在这里。</p>
+<p>所以可以把爱因斯坦求和理解成用和式的<strong>通项公式</strong>紧凑的表示和式。</p>
+<p>再来一个例子<br>$$<br>A_{iij} = A_{11j}+A_{22j}+A_{33j}<br>$$<br>更多的需要在各种例子里体会哑标的用法，接下来关于张量运算法则的说明也可以加深对爱因斯坦求和约定的理解。</p>
+<h2 id="张量乘法"><a href="#张量乘法" class="headerlink" title="张量乘法"></a>张量乘法</h2><h3 id="基矢"><a href="#基矢" class="headerlink" title="基矢"></a>基矢</h3><p>想更好的理解张量乘法，一定要回到分量与基矢。</p>
+<p>上面说到，$A_{ij}$等矩阵形式只是张量的分量，那张量到底是啥呢？</p>
+<p>完整的表示应该是这样，以二阶张量为例<br>$$<br>A=A_{ij}e_ie_j<br>$$<br>这样一个和式，就是完整的张量，就好像矢量里的<br>$$<br>a = a_ie_i<br>$$</p>
+<p>这里有一个很难懂的概念，<strong>并矢</strong><br>$$<br>e_ie_j<br>$$<br>$e_i$是这个坐标系的基矢，并矢其实就是把两个基矢拼起来了，有9种拼法，就是说完整表示一个二维张量需要9个不同维度的信息。</p>
+<p>这里回到弹性力学，可以更好理解这件事。应该放一个弹性力学Note的链接，但还没写，之后补上。</p>
+<p>弹性力学里我们考察体元的一个面上的某一个应力，面有三个法向朝向，面上应力分解出来同样有三个朝向。那么我想确定一个“基应力”的完整状态，我需要同时给出它所在的面和它自己的朝向——是不是和并矢的概念有异曲同工之妙。这样得到的基应力有9个，构成了一个二维张量：应力矩阵。</p>
+<h3 id="双乘"><a href="#双乘" class="headerlink" title="双乘"></a>双乘</h3><p>直接上双乘了，一些基本的运算规则不在本博文里叙述。这里放了王敏中先生书上内容。</p>
+<p><img src="F:\PROJECT\HexoBlog\blog\source\img\post3\image-20220227232118354.png" class="lazy" data-srcset="F:\PROJECT\HexoBlog\blog\source\img\post3\image-20220227232118354.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAABlBMVEXMzMyWlpYU2uzLAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAACklEQVQImWNgAAAAAgAB9HFkpgAAAABJRU5ErkJggg==" alt="image-20220227232118354"></p>
+<p>千万记住，分量的指标是跟着基矢的指标走的，比如A点叉B，是基矢$e_ie_j$和$e_ke_s$先点后叉，服从基矢量由内到外的规则，相应的，分量$A_{ij}B_{ks}$中的$jk$和$is$分别先后参与了点乘和叉乘（在考虑某一对指标的时候忽视其余指标就行，把分量with其余指标当成整体，如考虑点乘时，把$A_i$当成整体），得到的基矢量从右到左写（如双叉乘是最后得到了$e_pe_q$，说明乘在前面的pq位置上的分量，如果写反了就成了转置了）。（<strong>这一部分写的好糟糕…希望时间一长自己还能读懂</strong>）</p>
+<p>运用基矢量是为了方便看清楚每一个分量指标参与的运算，如果熟练了是完全可以不用的。新手比较头疼的是做叉乘时置换记号下的三个分量不易写出，运用基矢量就能看的很清楚了。</p>
+<p>补充下转置<br>$$<br>A = A_{ij}e_ie_j,A^{T} = A_{ji}e_ie_j<br>$$<br>是不一样的。</p>
+<h2 id="张量求导"><a href="#张量求导" class="headerlink" title="张量求导"></a>张量求导</h2><h3 id="逗号割index-amp-variable"><a href="#逗号割index-amp-variable" class="headerlink" title="逗号割index &amp; variable"></a>逗号割index &amp; variable</h3><p>王敏中先生的一个记法是，下标中，逗号后面的指标代表求导的位置。这个记法非常好的一点就是可以非常清楚的看出一个分量的位置（索引）和对哪些变量求导。</p>
+<p>如<br>$$<br>A_{ij,ks}<br>$$<br>说明这是给对$x_s,x_k$求了二阶导的$A_{ij}$分量，一个逗号就起到了分割的作用，拎得很清。</p>
+<h3 id="求导法则"><a href="#求导法则" class="headerlink" title="求导法则"></a>求导法则</h3><p><img src="F:\PROJECT\HexoBlog\blog\source\img\post3\d02f6d72bb473cdc2a92a979ca108e6.png" class="lazy" data-srcset="F:\PROJECT\HexoBlog\blog\source\img\post3\d02f6d72bb473cdc2a92a979ca108e6.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAABlBMVEXMzMyWlpYU2uzLAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAACklEQVQImWNgAAAAAgAB9HFkpgAAAABJRU5ErkJggg==" alt="d02f6d72bb473cdc2a92a979ca108e6"></p>
+<p>这里说的很清楚了，同样要记住分量跟着基矢量走，基矢量运算满足从里到外原则。</p>
+<p>![屏幕截图 2022-02-27 234528](F:\PROJECT\HexoBlog\blog\source\img\post3\屏幕截图 2022-02-27 234528.png)</p>
+<p>上流体的时候一直没搞明白矢量梯度张量梯度的含义，用基矢量去理解才弄明白。</p>
+<p>散度也是一样，算子的基矢量在哪，求导就在哪。</p>
+<p><img src="F:\PROJECT\HexoBlog\blog\source\img\post3\eafaf3034a5d3aa8f06de5cb92d2031.png" class="lazy" data-srcset="F:\PROJECT\HexoBlog\blog\source\img\post3\eafaf3034a5d3aa8f06de5cb92d2031.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAABlBMVEXMzMyWlpYU2uzLAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAACklEQVQImWNgAAAAAgAB9HFkpgAAAABJRU5ErkJggg==" alt="eafaf3034a5d3aa8f06de5cb92d2031"></p>
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><p>到这里其实就应该差不多了，关键就是做运算的时候看紧基矢量的指标。再写一些自己会犯错的地方。</p>
+<h3 id="转置只转分量"><a href="#转置只转分量" class="headerlink" title="转置只转分量"></a>转置只转分量</h3><p>比如<br>$$<br>A \times B = A_{ij}B_{ks}\epsilon_{jkl}<br>$$<br>但<br>$$<br>A \times B^{T} =A_{ij}B_{sk}\epsilon_{jsl}<br>$$<br>是错的，这样同时转了分量与基矢量，相当于完全没转。</p>
+<p>请看基矢量，正确写法应该是<br>$$<br>A \times B^{T} =A_{ij}B_{sk}e_i(e_j \times e_k)e_s = A \times B^{T} =A_{ij}B_{sk}\epsilon_{jkl}e_ie_le_s<br>$$</p>
+<h3 id="各项同性张量"><a href="#各项同性张量" class="headerlink" title="各项同性张量"></a>各项同性张量</h3><p>各阶各向同性张量的证明很有意思，是把坐标系旋转$2\pi,\pi, \pi /2$等特殊角度，找到分量的规律，非常代数风格的证明。</p>
+
+    </div>
+     
+    <div class="post-footer__meta"><p>updated at 2022-02-27</p></div> 
+    <div class="post-entry__tags"><a href="/tags/%E5%BC%A0%E9%87%8F/" class="post-tags__link button"># 张量</a><a href="/tags/%E5%BC%B9%E6%80%A7%E5%8A%9B%E5%AD%A6/" class="post-tags__link button"># 弹性力学</a><a href="/tags/%E6%B5%81%E4%BD%93%E5%8A%9B%E5%AD%A6/" class="post-tags__link button"># 流体力学</a><a href="/tags/%E8%BF%9E%E7%BB%AD%E4%BB%8B%E8%B4%A8%E5%8A%9B%E5%AD%A6/" class="post-tags__link button"># 连续介质力学</a></div> 
+</article>
+
+
+    <div class="nav">
+        <div class="nav__prev">
+            
+        </div>
+        <div class="nav__next">
+            
+                <a href="/2022/02/26/Github-01-%E6%9C%80%E6%9C%80%E5%9F%BA%E6%9C%AC%E7%9A%84%E6%93%8D%E4%BD%9C/" class="nav__link">
+                    <div>
+                        <div class="nav__label">
+                            Next Post
+                        </div>
+                        <div class="nav__title">
+                            Github-01-最最基本的操作
+                        </div>
+                    </div>
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M434.944 790.624l-45.248-45.248L623.04 512l-233.376-233.376 45.248-45.248L713.568 512z" fill="#808080"></path></svg>
+                    </div>
+                </a>
+            
+        </div>
+    </div>
+
+
+
+
+
+</main>
+
+            <footer class="footer">
+     
+    <a href="#" class="button" id="b2t" aria-label="Back to Top" title="Back to Top">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M233.376 722.752L278.624 768 512 534.624 745.376 768l45.248-45.248L512 444.128zM192 352h640V288H192z" fill="currentColor"></path>
+        </svg>
+    </a>
+
+    
+
+
+    
+     
+ 
+
+ 
+    
+        
+        <p class="footer-copyright">
+            Copyright © 2022 <a href="/">狮子大张嘴&#39;s blog</a>
+        </p>
+    
+    
+    <p>Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme - <a href="https://github.com/ChrAlpha/hexo-theme-cards" target="_blank">Cards</a></p>
+</footer>
+
+        </div>
+        
+    <script defer src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.1.0/dist/lazyload.min.js"></script>
+    <script>
+        window.lazyLoadOptions = {
+            elements_selector: ".lazy",
+            threshold: 0
+        };
+    </script>
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+    
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+
+    </body>
+</html>
