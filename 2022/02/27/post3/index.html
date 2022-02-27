@@ -44,14 +44,14 @@
     <meta name="description" content="大三上开始了弹性力学的学习，最开始又讲了遍张量。算起来是第三遍学张量了，这次终于搞明白了张量求导法则。这篇博文提供理解张量的一个（自认为）比较好的切口和脉络，一些细节各类参考书里很详细了，便不赘述。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="张量-01-运算法则与求和约定">
-<meta property="og:url" content="https://yawninglion.github.io/2022/02/27/%E5%BC%A0%E9%87%8F-01-%E8%BF%90%E7%AE%97%E6%B3%95%E5%88%99%E4%B8%8E%E6%B1%82%E5%92%8C%E7%BA%A6%E5%AE%9A/index.html">
+<meta property="og:url" content="https://yawninglion.github.io/2022/02/27/post3/index.html">
 <meta property="og:site_name" content="狮子大张嘴&#39;s blog">
 <meta property="og:description" content="大三上开始了弹性力学的学习，最开始又讲了遍张量。算起来是第三遍学张量了，这次终于搞明白了张量求导法则。这篇博文提供理解张量的一个（自认为）比较好的切口和脉络，一些细节各类参考书里很详细了，便不赘述。">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://yawninglion.github.io/2022/02/27/%E5%BC%A0%E9%87%8F-01-%E8%BF%90%E7%AE%97%E6%B3%95%E5%88%99%E4%B8%8E%E6%B1%82%E5%92%8C%E7%BA%A6%E5%AE%9A/image-20220227232118354.png">
-<meta property="og:image" content="https://yawninglion.github.io/2022/02/27/%E5%BC%A0%E9%87%8F-01-%E8%BF%90%E7%AE%97%E6%B3%95%E5%88%99%E4%B8%8E%E6%B1%82%E5%92%8C%E7%BA%A6%E5%AE%9A/d02f6d72bb473cdc2a92a979ca108e6.png">
-<meta property="og:image" content="https://yawninglion.github.io/2022/02/27/%E5%BC%A0%E9%87%8F-01-%E8%BF%90%E7%AE%97%E6%B3%95%E5%88%99%E4%B8%8E%E6%B1%82%E5%92%8C%E7%BA%A6%E5%AE%9A/234528.png">
-<meta property="og:image" content="https://yawninglion.github.io/2022/02/27/%E5%BC%A0%E9%87%8F-01-%E8%BF%90%E7%AE%97%E6%B3%95%E5%88%99%E4%B8%8E%E6%B1%82%E5%92%8C%E7%BA%A6%E5%AE%9A/eafaf3034a5d3aa8f06de5cb92d2031.png">
+<meta property="og:image" content="https://yawninglion.github.io/2022/02/27/post3/image-20220227232118354.png">
+<meta property="og:image" content="https://yawninglion.github.io/2022/02/27/post3/d02f6d72bb473cdc2a92a979ca108e6.png">
+<meta property="og:image" content="https://yawninglion.github.io/2022/02/27/post3/234528.png">
+<meta property="og:image" content="https://yawninglion.github.io/2022/02/27/post3/eafaf3034a5d3aa8f06de5cb92d2031.png">
 <meta property="article:published_time" content="2022-02-27T12:29:40.000Z">
 <meta property="article:modified_time" content="2022-02-27T16:27:16.629Z">
 <meta property="article:author" content="yawning-lion">
@@ -60,7 +60,7 @@
 <meta property="article:tag" content="流体力学">
 <meta property="article:tag" content="连续介质力学">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://yawninglion.github.io/2022/02/27/%E5%BC%A0%E9%87%8F-01-%E8%BF%90%E7%AE%97%E6%B3%95%E5%88%99%E4%B8%8E%E6%B1%82%E5%92%8C%E7%BA%A6%E5%AE%9A/image-20220227232118354.png">
+<meta name="twitter:image" content="https://yawninglion.github.io/2022/02/27/post3/image-20220227232118354.png">
 
 
     
@@ -219,18 +219,18 @@
 <p>这里回到弹性力学，可以更好理解这件事。应该放一个弹性力学Note的链接，但还没写，之后补上。</p>
 <p>弹性力学里我们考察体元的一个面上的某一个应力，面有三个法向朝向，面上应力分解出来同样有三个朝向。那么我想确定一个“基应力”的完整状态，我需要同时给出它所在的面和它自己的朝向——是不是和并矢的概念有异曲同工之妙。这样得到的基应力有9个，构成了一个二维张量：应力矩阵。</p>
 <h3 id="双乘"><a href="#双乘" class="headerlink" title="双乘"></a>双乘</h3><p>直接上双乘了，一些基本的运算规则不在本博文里叙述。这里放了王敏中先生书上内容。</p>
-<p><img src="/2022/02/27/%E5%BC%A0%E9%87%8F-01-%E8%BF%90%E7%AE%97%E6%B3%95%E5%88%99%E4%B8%8E%E6%B1%82%E5%92%8C%E7%BA%A6%E5%AE%9A/image-20220227232118354.png" class="lazy" data-srcset="/2022/02/27/%E5%BC%A0%E9%87%8F-01-%E8%BF%90%E7%AE%97%E6%B3%95%E5%88%99%E4%B8%8E%E6%B1%82%E5%92%8C%E7%BA%A6%E5%AE%9A/image-20220227232118354.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAABlBMVEXMzMyWlpYU2uzLAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAACklEQVQImWNgAAAAAgAB9HFkpgAAAABJRU5ErkJggg==" alt="image-20220227232118354"></p>
+<p><img src="/2022/02/27/post3/image-20220227232118354.png" class="lazy" data-srcset="/2022/02/27/post3/image-20220227232118354.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAABlBMVEXMzMyWlpYU2uzLAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAACklEQVQImWNgAAAAAgAB9HFkpgAAAABJRU5ErkJggg==" alt="image-20220227232118354"></p>
 <p>千万记住，分量的指标是跟着基矢的指标走的，比如A点叉B，是基矢$e_ie_j$和$e_ke_s$先点后叉，服从基矢量由内到外的规则，相应的，分量$A_{ij}B_{ks}$中的$jk$和$is$分别先后参与了点乘和叉乘（在考虑某一对指标的时候忽视其余指标就行，把分量with其余指标当成整体，如考虑点乘时，把$A_i$当成整体），得到的基矢量从右到左写（如双叉乘是最后得到了$e_pe_q$，说明乘在前面的pq位置上的分量，如果写反了就成了转置了）。（<strong>这一部分写的好糟糕…希望时间一长自己还能读懂</strong>）</p>
 <p>运用基矢量是为了方便看清楚每一个分量指标参与的运算，如果熟练了是完全可以不用的。新手比较头疼的是做叉乘时置换记号下的三个分量不易写出，运用基矢量就能看的很清楚了。</p>
 <p>补充下转置<br>$$<br>A = A_{ij}e_ie_j,A^{T} = A_{ji}e_ie_j<br>$$<br>是不一样的。</p>
 <h2 id="张量求导"><a href="#张量求导" class="headerlink" title="张量求导"></a>张量求导</h2><h3 id="逗号割index-amp-variable"><a href="#逗号割index-amp-variable" class="headerlink" title="逗号割index &amp; variable"></a>逗号割index &amp; variable</h3><p>王敏中先生的一个记法是，下标中，逗号后面的指标代表求导的位置。这个记法非常好的一点就是可以非常清楚的看出一个分量的位置（索引）和对哪些变量求导。</p>
 <p>如<br>$$<br>A_{ij,ks}<br>$$<br>说明这是给对$x_s,x_k$求了二阶导的$A_{ij}$分量，一个逗号就起到了分割的作用，拎得很清。</p>
-<h3 id="求导法则"><a href="#求导法则" class="headerlink" title="求导法则"></a>求导法则</h3><p><img src="/2022/02/27/%E5%BC%A0%E9%87%8F-01-%E8%BF%90%E7%AE%97%E6%B3%95%E5%88%99%E4%B8%8E%E6%B1%82%E5%92%8C%E7%BA%A6%E5%AE%9A/d02f6d72bb473cdc2a92a979ca108e6.png" class="lazy" data-srcset="/2022/02/27/%E5%BC%A0%E9%87%8F-01-%E8%BF%90%E7%AE%97%E6%B3%95%E5%88%99%E4%B8%8E%E6%B1%82%E5%92%8C%E7%BA%A6%E5%AE%9A/d02f6d72bb473cdc2a92a979ca108e6.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAABlBMVEXMzMyWlpYU2uzLAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAACklEQVQImWNgAAAAAgAB9HFkpgAAAABJRU5ErkJggg==" alt="d02f6d72bb473cdc2a92a979ca108e6"></p>
+<h3 id="求导法则"><a href="#求导法则" class="headerlink" title="求导法则"></a>求导法则</h3><p><img src="/2022/02/27/post3/d02f6d72bb473cdc2a92a979ca108e6.png" class="lazy" data-srcset="/2022/02/27/post3/d02f6d72bb473cdc2a92a979ca108e6.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAABlBMVEXMzMyWlpYU2uzLAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAACklEQVQImWNgAAAAAgAB9HFkpgAAAABJRU5ErkJggg==" alt="d02f6d72bb473cdc2a92a979ca108e6"></p>
 <p>这里说的很清楚了，同样要记住分量跟着基矢量走，基矢量运算满足从里到外原则。</p>
-<p><img src="/2022/02/27/%E5%BC%A0%E9%87%8F-01-%E8%BF%90%E7%AE%97%E6%B3%95%E5%88%99%E4%B8%8E%E6%B1%82%E5%92%8C%E7%BA%A6%E5%AE%9A/234528.png" class="lazy" data-srcset="/2022/02/27/%E5%BC%A0%E9%87%8F-01-%E8%BF%90%E7%AE%97%E6%B3%95%E5%88%99%E4%B8%8E%E6%B1%82%E5%92%8C%E7%BA%A6%E5%AE%9A/234528.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAABlBMVEXMzMyWlpYU2uzLAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAACklEQVQImWNgAAAAAgAB9HFkpgAAAABJRU5ErkJggg==" alt="234528"></p>
+<p><img src="/2022/02/27/post3/234528.png" class="lazy" data-srcset="/2022/02/27/post3/234528.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAABlBMVEXMzMyWlpYU2uzLAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAACklEQVQImWNgAAAAAgAB9HFkpgAAAABJRU5ErkJggg==" alt="234528"></p>
 <p>上流体的时候一直没搞明白矢量梯度张量梯度的含义，用基矢量去理解才弄明白。</p>
 <p>散度也是一样，算子的基矢量在哪，求导就在哪。</p>
-<p><img src="/2022/02/27/%E5%BC%A0%E9%87%8F-01-%E8%BF%90%E7%AE%97%E6%B3%95%E5%88%99%E4%B8%8E%E6%B1%82%E5%92%8C%E7%BA%A6%E5%AE%9A/eafaf3034a5d3aa8f06de5cb92d2031.png" class="lazy" data-srcset="/2022/02/27/%E5%BC%A0%E9%87%8F-01-%E8%BF%90%E7%AE%97%E6%B3%95%E5%88%99%E4%B8%8E%E6%B1%82%E5%92%8C%E7%BA%A6%E5%AE%9A/eafaf3034a5d3aa8f06de5cb92d2031.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAABlBMVEXMzMyWlpYU2uzLAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAACklEQVQImWNgAAAAAgAB9HFkpgAAAABJRU5ErkJggg==" alt="eafaf3034a5d3aa8f06de5cb92d2031"></p>
+<p><img src="/2022/02/27/post3/eafaf3034a5d3aa8f06de5cb92d2031.png" class="lazy" data-srcset="/2022/02/27/post3/eafaf3034a5d3aa8f06de5cb92d2031.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAABlBMVEXMzMyWlpYU2uzLAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAACklEQVQImWNgAAAAAgAB9HFkpgAAAABJRU5ErkJggg==" alt="eafaf3034a5d3aa8f06de5cb92d2031"></p>
 <h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><p>到这里其实就应该差不多了，关键就是做运算的时候看紧基矢量的指标。再写一些自己会犯错的地方。</p>
 <h3 id="转置只转分量"><a href="#转置只转分量" class="headerlink" title="转置只转分量"></a>转置只转分量</h3><p>比如<br>$$<br>A \times B = A_{ij}B_{ks}\epsilon_{jkl}<br>$$<br>但<br>$$<br>A \times B^{T} =A_{ij}B_{sk}\epsilon_{jsl}<br>$$<br>是错的，这样同时转了分量与基矢量，相当于完全没转。</p>
 <p>请看基矢量，正确写法应该是<br>$$<br>A \times B^{T} =A_{ij}B_{sk}e_i(e_j \times e_k)e_s = A \times B^{T} =A_{ij}B_{sk}\epsilon_{jkl}e_ie_le_s<br>$$</p>
@@ -246,7 +246,7 @@
     <div class="nav">
         <div class="nav__prev">
             
-                <a href="/2022/02/28/%E5%8D%9A%E5%AE%A2%E5%BB%BA%E8%AE%BE%E6%97%A5%E5%BF%97/" class="nav__link">
+                <a href="/2022/02/28/post4/" class="nav__link">
                     <div>
                         <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M589.088 790.624L310.464 512l278.624-278.624 45.248 45.248L400.96 512l233.376 233.376z" fill="#808080"></path></svg>
                     </div>
@@ -255,7 +255,7 @@
                             Previous Post
                         </div>
                         <div class="nav__title">
-                            00-欢迎
+                            博客建设日志
                         </div>
                     </div>
                 </a>
@@ -263,7 +263,7 @@
         </div>
         <div class="nav__next">
             
-                <a href="/2022/02/26/Github-01-%E6%9C%80%E6%9C%80%E5%9F%BA%E6%9C%AC%E7%9A%84%E6%93%8D%E4%BD%9C/" class="nav__link">
+                <a href="/2022/02/26/post2/" class="nav__link">
                     <div>
                         <div class="nav__label">
                             Next Post
