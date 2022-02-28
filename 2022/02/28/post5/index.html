@@ -48,12 +48,16 @@
 <meta property="og:site_name" content="狮子大张嘴&#39;s blog">
 <meta property="og:description" content="量纲分析基本量任何物理量都涉及最多七个物理量，力学问题一般只涉及三个（质量、长度、时间，被称为LMT问题）。    物理量名称 量纲 单位    质量 M kg   长度 L m   时间 T s   热力学温度 $\theta$ K   电流 I A   光强 J cd   物质的量 N mol   量纲要学习$\pi$定理得熟悉量纲写法。 我们比较熟悉的是单位，如表面张力$\sigma_{s}">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://yawninglion.github.io/2022/02/28/post5/pic1.jpg">
+<meta property="og:image" content="https://yawninglion.github.io/2022/02/28/post5/pic2.jpg">
+<meta property="og:image" content="https://yawninglion.github.io/2022/02/28/post5/pic3.jpg">
 <meta property="article:published_time" content="2022-02-28T13:38:39.000Z">
-<meta property="article:modified_time" content="2022-02-28T14:06:23.402Z">
+<meta property="article:modified_time" content="2022-02-28T16:50:48.515Z">
 <meta property="article:author" content="yawning-lion">
 <meta property="article:tag" content="流体力学">
 <meta property="article:tag" content="连续介质力学">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://yawninglion.github.io/2022/02/28/post5/pic1.jpg">
 
 
     
@@ -175,7 +179,7 @@
 
     <aside class="post-side">
         <div class="post-side__toc">
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%87%8F%E7%BA%B2%E5%88%86%E6%9E%90"><span class="toc-text">量纲分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E9%87%8F"><span class="toc-text">基本量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8F%E7%BA%B2"><span class="toc-text">量纲</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8F%E7%BA%B2%E7%9B%B8%E5%85%B3%E5%AE%9A%E5%BE%8B"><span class="toc-text">量纲相关定律</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pi-%E5%AE%9A%E7%90%86"><span class="toc-text">$\pi$定理</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%87%8F%E7%BA%B2%E5%88%86%E6%9E%90"><span class="toc-text">量纲分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E9%87%8F"><span class="toc-text">基本量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8F%E7%BA%B2"><span class="toc-text">量纲</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8F%E7%BA%B2%E7%9B%B8%E5%85%B3%E5%AE%9A%E5%BE%8B"><span class="toc-text">量纲相关定律</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pi-%E5%AE%9A%E7%90%86"><span class="toc-text">$\pi$定理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A0%E9%87%8F%E7%BA%B2%E5%8F%82%E6%95%B0"><span class="toc-text">无量纲参数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%B8%E4%BC%BC%E6%80%A7%E5%8E%9F%E7%90%86"><span class="toc-text">相似性原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8C%83%E5%BE%B7%E7%93%A6%E5%B0%94%E6%96%AF%E6%96%B9%E7%A8%8B"><span class="toc-text">范德瓦尔斯方程</span></a></li></ol></li></ol>
         </div>
     </aside>
     <a class="btn-toc button" id="btn-toc" tabindex="0">
@@ -185,7 +189,7 @@
     </a>
     <div class="toc-menus" id="toc-menus">
         <div class="toc-title">Article Directory</div>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%87%8F%E7%BA%B2%E5%88%86%E6%9E%90"><span class="toc-text">量纲分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E9%87%8F"><span class="toc-text">基本量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8F%E7%BA%B2"><span class="toc-text">量纲</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8F%E7%BA%B2%E7%9B%B8%E5%85%B3%E5%AE%9A%E5%BE%8B"><span class="toc-text">量纲相关定律</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pi-%E5%AE%9A%E7%90%86"><span class="toc-text">$\pi$定理</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%87%8F%E7%BA%B2%E5%88%86%E6%9E%90"><span class="toc-text">量纲分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E9%87%8F"><span class="toc-text">基本量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8F%E7%BA%B2"><span class="toc-text">量纲</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8F%E7%BA%B2%E7%9B%B8%E5%85%B3%E5%AE%9A%E5%BE%8B"><span class="toc-text">量纲相关定律</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pi-%E5%AE%9A%E7%90%86"><span class="toc-text">$\pi$定理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A0%E9%87%8F%E7%BA%B2%E5%8F%82%E6%95%B0"><span class="toc-text">无量纲参数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%B8%E4%BC%BC%E6%80%A7%E5%8E%9F%E7%90%86"><span class="toc-text">相似性原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8C%83%E5%BE%B7%E7%93%A6%E5%B0%94%E6%96%AF%E6%96%B9%E7%A8%8B"><span class="toc-text">范德瓦尔斯方程</span></a></li></ol></li></ol>
     </div>
 
 
@@ -247,11 +251,27 @@
 <li>任何物理量量纲都是基本物理量的幂次单项式。</li>
 <li>每个公式里相加的量其量纲必须一致。</li>
 </ul>
-<p>理解了第一个就很好理解第二个，当运算中幂次具有线性性的时候，我们往往不关注和，关注积。这里隐隐有窥见一般性规律的道路，事实上这两个定律分别对应Lie群的拉伸群和对称性，可惜笔者不会。</p>
-<h3 id="pi-定理"><a href="#pi-定理" class="headerlink" title="$\pi$定理"></a>$\pi$定理</h3>
+<p>理解了第一个就很好理解第二个，当运算中幂次具有线性性的时候，我们往往不关注和，而关注积。这里隐隐有窥见一般性规律的道路，事实上这两个定律分别对应Lie群的拉伸群和对称性，可惜笔者不会。</p>
+<h3 id="pi-定理"><a href="#pi-定理" class="headerlink" title="$\pi$定理"></a>$\pi$定理</h3><p>$\pi$定理很神奇，它说：一个物理问题里有$n$个物理量，这$n$个物理量最少可以$m$个基本物理量表示，那么我们从这$n$个物理量里找出无法相互表示（独立）的$m$个物理量，从而剩下的$n-m$个物理量可以被表示成这$m$个物理量的某种组合，即无量纲化为$\pi _{i}$，物理问题内蕴的规律就可以用仅含有无量纲参数的函数表示。</p>
+<p>其实这本质上反应了线性代数里的一件事：</p>
+<p>从n个向量里找出m个最大线性无关组，把这m个表达为1组基，事实上这组基一定能构成方针——$m$也是这个问题涉及的基本物理量的个数，相当于这个问题的标准正交基是$m \times m$的（不关心其余基本物理量了），再找最大线性无关组也一定是$m \times m$的。于是有了一件很平凡的事，剩下的物理量一定可以被唯一表示成这组基的线性组合。</p>
+<p><img src="/2022/02/28/post5/pic1.jpg" class="lazy" data-srcset="/2022/02/28/post5/pic1.jpg" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAABlBMVEXMzMyWlpYU2uzLAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAACklEQVQImWNgAAAAAgAB9HFkpgAAAABJRU5ErkJggg==" alt="pic1"></p>
+<p>这样一番操作看似没有给出更多信息，其实在应用该定理时，期望得到的形式是<strong>关注的因变量的无量纲化参数等于一个包含一系列无量纲参数的函数</strong>，如果恢复因变量的量纲，那就得到了因变量等于一系列物理量相乘的形式，系数是无量纲参数的函数，往往需要由实验或者物理知识分析确定。</p>
+<p>但其实已经得到无量纲参数的关系式了，没必要把它拆回去，事实上无量纲参数的关系更能反映一个物理问题的本质。</p>
+<h3 id="无量纲参数"><a href="#无量纲参数" class="headerlink" title="无量纲参数"></a>无量纲参数</h3><p>附上常见无量纲参数。</p>
+<p><img src="/2022/02/28/post5/pic2.jpg" class="lazy" data-srcset="/2022/02/28/post5/pic2.jpg" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAABlBMVEXMzMyWlpYU2uzLAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAACklEQVQImWNgAAAAAgAB9HFkpgAAAABJRU5ErkJggg==" alt="pic2"></p>
+<p><img src="/2022/02/28/post5/pic3.jpg" class="lazy" data-srcset="/2022/02/28/post5/pic3.jpg" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAABlBMVEXMzMyWlpYU2uzLAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAACklEQVQImWNgAAAAAgAB9HFkpgAAAABJRU5ErkJggg==" alt="pic3"></p>
+<h2 id="相似性原理"><a href="#相似性原理" class="headerlink" title="相似性原理"></a>相似性原理</h2><p>一个物理问题完全由它的控制方程，往往是一组pde决定，这些方程同样是物理量之间的关系。</p>
+<p>假如有两个问题，它们的几何情况相似，即它们的几何特征在找到合适的尺度放缩后完全一致；也具有时空相似性，指四维空间里的点$（\vec{r},t）$在找到对应的$R_i,Ti$标准化后，点点相同；也具有动力学相似，即任意相对应的力$\vec{f_i}$，在找到对应的$\vec F_i$标准化后，也可以处处相同，我们说这两个问题相似。</p>
+<p>相似有什么用呢？相似意味着将这两个问题用合适的特征量无量纲化后，得到的方程是完全一致的。</p>
+<p>到这里可以解释为什么说更关心无量纲参数的关系，这反映了一个物理问题的本质。需要得到具体的量时，用特征量表示出来就行。这位一些大尺度问题的研究带来了思路：完全可以用对相似问题的研究来替代。这对实验实践的指导意义是无穷的。</p>
+<p>口说无凭，到这里我可以把上学期热统学到的范德瓦尔斯方程串起来了。</p>
+<h3 id="范德瓦尔斯方程"><a href="#范德瓦尔斯方程" class="headerlink" title="范德瓦尔斯方程"></a>范德瓦尔斯方程</h3><p>可以用平均场原理和粒子占体积的想法推导出来：<br>$$<br>(p+\frac{N^2a}{V^2})(V-Nb)=N\tau<br>$$<br>a,b的值决定了这个体系相变的性质。</p>
+<p>定义<strong>critical point</strong>为P-V曲线一阶导二阶导都为0时$p,V,\tau$的取值：<br>$$<br>p_c=\frac{a}{27b^2},V_c=3Nb,\tau_c=\frac{8a}{27b}<br>$$<br>用这一组量将$p,V,\tau$无量纲化，得到：<br>$$<br>(\widehat p+\frac{3}{\widehat V^2})(\widehat V-\frac{1}{3})=\frac{8}{3}\widehat \tau<br>$$<br>任何没有特殊作用力的气液体系相变都可以用这个方程描述，不管具体的体系(a,b值)。即，这一系列问题都相似，这就是无量纲化相似性原理的强力之处。</p>
+
     </div>
      
-    <div class="post-footer__meta"><p>updated at 2022-02-28</p></div> 
+    <div class="post-footer__meta"><p>updated at 2022-03-01</p></div> 
     <div class="post-entry__tags"><a href="/tags/%E6%B5%81%E4%BD%93%E5%8A%9B%E5%AD%A6/" class="post-tags__link button"># 流体力学</a><a href="/tags/%E8%BF%9E%E7%BB%AD%E4%BB%8B%E8%B4%A8%E5%8A%9B%E5%AD%A6/" class="post-tags__link button"># 连续介质力学</a></div> 
 </article>
 
