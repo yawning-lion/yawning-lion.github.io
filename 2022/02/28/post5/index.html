@@ -52,7 +52,7 @@
 <meta property="og:image" content="https://yawninglion.github.io/2022/02/28/post5/pic2.jpg">
 <meta property="og:image" content="https://yawninglion.github.io/2022/02/28/post5/pic3.jpg">
 <meta property="article:published_time" content="2022-02-28T13:38:39.000Z">
-<meta property="article:modified_time" content="2022-02-28T16:50:48.515Z">
+<meta property="article:modified_time" content="2022-03-01T11:30:05.265Z">
 <meta property="article:author" content="yawning-lion">
 <meta property="article:tag" content="流体力学">
 <meta property="article:tag" content="连续介质力学">
@@ -262,12 +262,12 @@
 <p><img src="/2022/02/28/post5/pic2.jpg" class="lazy" data-srcset="/2022/02/28/post5/pic2.jpg" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAABlBMVEXMzMyWlpYU2uzLAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAACklEQVQImWNgAAAAAgAB9HFkpgAAAABJRU5ErkJggg==" alt="pic2"></p>
 <p><img src="/2022/02/28/post5/pic3.jpg" class="lazy" data-srcset="/2022/02/28/post5/pic3.jpg" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAABlBMVEXMzMyWlpYU2uzLAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAACklEQVQImWNgAAAAAgAB9HFkpgAAAABJRU5ErkJggg==" alt="pic3"></p>
 <h2 id="相似性原理"><a href="#相似性原理" class="headerlink" title="相似性原理"></a>相似性原理</h2><p>一个物理问题完全由它的控制方程，往往是一组pde决定，这些方程同样是物理量之间的关系。</p>
-<p>假如有两个问题，它们的几何情况相似，即它们的几何特征在找到合适的尺度放缩后完全一致；也具有时空相似性，指四维空间里的点$（\vec{r},t）$在找到对应的$R_i,Ti$标准化后，点点相同；也具有动力学相似，即任意相对应的力$\vec{f_i}$，在找到对应的$\vec F_i$标准化后，也可以处处相同，我们说这两个问题相似。</p>
+<p>假如有两个问题，它们的几何情况相似，即它们的几何特征在找到合适的尺度放缩后完全一致；也具有时空相似性，指四维空间里的点$（\vec{r},t）$在找到对应的$R_i,Ti$标准化后，点点相同；也具有动力学相似，即任意相对应的力$\vec{f_i}$，在找到对应的$\vec F_i$标准化后，也可以处处相同，我们说这两个问题相似。<em><strong>（这里说的很不清楚，大部分书上都有这部分的详尽叙述）</strong></em></p>
 <p>相似有什么用呢？相似意味着将这两个问题用合适的特征量无量纲化后，得到的方程是完全一致的。</p>
-<p>到这里可以解释为什么说更关心无量纲参数的关系，这反映了一个物理问题的本质。需要得到具体的量时，用特征量表示出来就行。这位一些大尺度问题的研究带来了思路：完全可以用对相似问题的研究来替代。这对实验实践的指导意义是无穷的。</p>
+<p>到这里可以解释为什么说更关心无量纲参数的关系，这反映了一个物理问题的本质。需要得到具体的量时，用特征量表示出来就行。这为一些大尺度问题的研究带来了思路：完全可以用对相似问题的研究来替代，得到无量纲参数的关系后一切自明。这事实上指导了实验探究。</p>
 <p>口说无凭，到这里我可以把上学期热统学到的范德瓦尔斯方程串起来了。</p>
 <h3 id="范德瓦尔斯方程"><a href="#范德瓦尔斯方程" class="headerlink" title="范德瓦尔斯方程"></a>范德瓦尔斯方程</h3><p>可以用平均场原理和粒子占体积的想法推导出来：<br>$$<br>(p+\frac{N^2a}{V^2})(V-Nb)=N\tau<br>$$<br>a,b的值决定了这个体系相变的性质。</p>
-<p>定义<strong>critical point</strong>为P-V曲线一阶导二阶导都为0时$p,V,\tau$的取值：<br>$$<br>p_c=\frac{a}{27b^2},V_c=3Nb,\tau_c=\frac{8a}{27b}<br>$$<br>用这一组量将$p,V,\tau$无量纲化，得到：<br>$$<br>(\widehat p+\frac{3}{\widehat V^2})(\widehat V-\frac{1}{3})=\frac{8}{3}\widehat \tau<br>$$<br>任何没有特殊作用力的气液体系相变都可以用这个方程描述，不管具体的体系(a,b值)。即，这一系列问题都相似，这就是无量纲化相似性原理的强力之处。</p>
+<p>定义<strong>critical point</strong>为P-V曲线一阶导二阶导都为0时$p,V,\tau$的取值：<br>$$<br>p_c=\frac{a}{27b^2},V_c=3Nb,\tau_c=\frac{8a}{27b}<br>$$<br>用这一组量将$p,V,\tau$无量纲化，得到：<br>$$<br>(\widehat p+\frac{3}{\widehat V^2})(\widehat V-\frac{1}{3})=\frac{8}{3}\widehat \tau<br>$$<br>任何没有特殊作用力的气液体系相变都可以用这个方程描述，不管具体的体系a,b值。即这一系列问题都相似，搞明白了一个方程就搞明白了一堆方程👍我的评价是帅的不谈</p>
 
     </div>
      
@@ -278,6 +278,20 @@
 
     <div class="nav">
         <div class="nav__prev">
+            
+                <a href="/2022/03/01/post6/" class="nav__link">
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M589.088 790.624L310.464 512l278.624-278.624 45.248 45.248L400.96 512l233.376 233.376z" fill="#808080"></path></svg>
+                    </div>
+                    <div>
+                        <div class="nav__label">
+                            Previous Post
+                        </div>
+                        <div class="nav__title">
+                            弹性力学-01-基本假设
+                        </div>
+                    </div>
+                </a>
             
         </div>
         <div class="nav__next">
