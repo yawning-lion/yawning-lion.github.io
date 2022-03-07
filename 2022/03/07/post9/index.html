@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+
+    
+
+    <!-- 渲染优化 -->
+    <meta name="renderer" content="webkit">
+    <meta name="force-rendering" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="HandheldFriendly" content="True" >
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!--icon-->
+
+    
+        <link rel="shortcut icon" href="/images/favicon32.ico">
+    
+    
+        <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon16.ico">
+    
+    
+        <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon32.ico">
+    
+    
+    
+
+
+    <!-- meta -->
+
+
+<title>并行计算-01-当代处理器与并行 | 狮子大张嘴&#39;s blog</title>
+
+
+    <meta name="keywords" content="硬件, 并行计算">
+
+
+
+
+    <!-- OpenGraph -->
+ 
+    <meta name="description" content="这学期选了数院的并行计算Ⅱ，是研究生课。如果能坚持下来那我也是上过数院研本课的人了（狗头）目前这门课还在讲硬件方面的基础知识。发现ppt上有些话都属于非常形象化的描述，但可能并没有把本质的东西传达出来，这篇博文的目的一方面在于梳理下比较碎片化的硬件知识，一方面在于把一些知识用我喜欢的方式重新叙述一遍。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="并行计算-01-当代处理器与并行">
+<meta property="og:url" content="https://yawninglion.github.io/2022/03/07/post9/index.html">
+<meta property="og:site_name" content="狮子大张嘴&#39;s blog">
+<meta property="og:description" content="这学期选了数院的并行计算Ⅱ，是研究生课。如果能坚持下来那我也是上过数院研本课的人了（狗头）目前这门课还在讲硬件方面的基础知识。发现ppt上有些话都属于非常形象化的描述，但可能并没有把本质的东西传达出来，这篇博文的目的一方面在于梳理下比较碎片化的硬件知识，一方面在于把一些知识用我喜欢的方式重新叙述一遍。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://yawninglion.github.io/2022/03/07/post9/pic1.png">
+<meta property="og:image" content="https://yawninglion.github.io/2022/03/07/post9/pic2.png">
+<meta property="og:image" content="https://yawninglion.github.io/2022/03/07/post9/pic3.png">
+<meta property="article:published_time" content="2022-03-07T11:17:02.000Z">
+<meta property="article:modified_time" content="2022-03-07T12:33:48.621Z">
+<meta property="article:author" content="yawning-lion">
+<meta property="article:tag" content="硬件">
+<meta property="article:tag" content="并行计算">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://yawninglion.github.io/2022/03/07/post9/pic1.png">
+
+
+    
+<link rel="stylesheet" href="/css/style/main.css">
+ 
+
+    
+    
+        <link rel="stylesheet" id="hl-default-theme" href="/css/highlight/default.css" media="none" >
+        
+            <link rel="stylesheet" id="hl-dark-theme" href="/css/highlight/dark.css" media="none">
+        
+    
+
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/style/dark.css">
+
+    
+<script src="/js/darkmode.js"></script>
+
+
+
+     
+
+    <!-- custom head -->
+
+<meta name="generator" content="Hexo 5.4.1"></head>
+
+    <body>
+        <div id="app">
+            <header class="header">
+    <div class="header__left">
+        <a href="/" class="button">
+            <span class="logo__text">狮子大张嘴&#39;s blog</span>
+        </a>
+    </div>
+    <div class="header__right">
+        
+            <div class="navbar__menus">
+                
+                    <a href="/" class="navbar-menu button">home</a>
+                
+                    <a href="/tags/" class="navbar-menu button">tags</a>
+                
+                    <a href="/categories" class="navbar-menu button">categories</a>
+                
+                    <a href="/archives/" class="navbar-menu button">archives</a>
+                
+                    <a href="/friends/" class="navbar-menu button">friends</a>
+                
+                    <a href="/page/" class="navbar-menu button">Page</a>
+                
+            </div>
+        
+        
+        
+    <a href="/search/" id="btn-search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="24" height="24" fill="currentColor" stroke="currentColor" stroke-width="32"><path d="M192 448c0-141.152 114.848-256 256-256s256 114.848 256 256-114.848 256-256 256-256-114.848-256-256z m710.624 409.376l-206.88-206.88A318.784 318.784 0 0 0 768 448c0-176.736-143.264-320-320-320S128 271.264 128 448s143.264 320 320 320a318.784 318.784 0 0 0 202.496-72.256l206.88 206.88 45.248-45.248z"></path></svg>
+    </a>
+
+
+        
+        
+    <a href="javaScript:void(0);" id="btn-toggle-dark">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+    </a>
+
+
+        
+            <a class="dropdown-icon button" id="btn-dropdown" tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width='24' height='24' fill="none" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"><path fill="currentColor" d="M3.314,4.8h13.372c0.41,0,0.743-0.333,0.743-0.743c0-0.41-0.333-0.743-0.743-0.743H3.314c-0.41,0-0.743,0.333-0.743,0.743C2.571,4.467,2.904,4.8,3.314,4.8z M16.686,15.2H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,15.2,16.686,15.2z M16.686,9.257H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,9.257,16.686,9.257z"></path></svg></a>
+            <div class="dropdown-menus" id="dropdown-menus">
+                
+                    <a href="/" class="dropdown-menu button">home</a>
+                
+                    <a href="/tags/" class="dropdown-menu button">tags</a>
+                
+                    <a href="/categories" class="dropdown-menu button">categories</a>
+                
+                    <a href="/archives/" class="dropdown-menu button">archives</a>
+                
+                    <a href="/friends/" class="dropdown-menu button">friends</a>
+                
+                    <a href="/page/" class="dropdown-menu button">Page</a>
+                
+            </div>
+        
+    </div>
+</header>
+
+
+            <main class="main">
+    
+
+<div class="post-title">
+    <h1 class="post-title__text">
+        并行计算-01-当代处理器与并行
+    </h1>
+    <div class="post-title__meta">
+        <a href="/archives/2022/03/" class="post-meta__date button">2022-03-07</a>
+        
+    <span class="separate-dot"></span><a href="/categories/%E6%88%91%E6%9D%A5%E6%88%91%E8%A7%81%E6%88%91%E5%BE%81%E6%9C%8D/" class="button">我来我见我征服</a>
+
+ 
+        
+    
+    
+
+
+ 
+
+ 
+    </div>
+</div>
+
+
+    <aside class="post-side">
+        <div class="post-side__toc">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Von-Neumann%E6%9E%B6%E6%9E%84"><span class="toc-text">Von Neumann架构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%84%E6%88%90%E9%83%A8%E5%88%86"><span class="toc-text">组成部分</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%AB%98%E6%80%A7%E8%83%BD%E7%AD%96%E7%95%A5%E5%88%86%E7%B1%BB"><span class="toc-text">高性能策略分类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%92%88%E5%AF%B9%E6%8C%87%E4%BB%A4"><span class="toc-text">针对指令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AE%80%E5%8C%96%E6%8C%87%E4%BB%A4"><span class="toc-text">简化指令</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%87%E4%BB%A4%E7%BA%A7%E5%B9%B6%E8%A1%8C"><span class="toc-text">指令级并行</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#superscalar-%E8%B6%85%E6%A0%87%E9%87%8F"><span class="toc-text">superscalar(超标量)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B5%81%E6%B0%B4%E7%BA%BF"><span class="toc-text">流水线</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%92%88%E5%AF%B9%E6%95%B0%E6%8D%AE"><span class="toc-text">针对数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A6%8F%E6%9E%97%E5%88%86%E7%B1%BB"><span class="toc-text">福林分类</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%81%E6%B0%B4%E7%BA%BF-1"><span class="toc-text">流水线</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%87%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%96%B9%E5%BC%8F"><span class="toc-text">指令执行方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89"><span class="toc-text">定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8F%AF%E4%BB%A5%E6%B5%81%E6%B0%B4"><span class="toc-text">为什么可以流水</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E4%B8%8D%E4%BE%9D%E8%B5%96"><span class="toc-text">数据不依赖</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%81%E6%B0%B4%E7%9A%84%E9%99%90%E5%88%B6"><span class="toc-text">流水的限制</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF"><span class="toc-text">存储技术</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%AF%E8%AF%BA%E4%BE%9D%E6%9B%BC%E6%9E%B6%E6%9E%84%E7%9A%84%E7%BC%BA%E9%99%B7"><span class="toc-text">冯诺依曼架构的缺陷</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E7%BA%A7%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF"><span class="toc-text">多级存储技术</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%93%E5%AD%98%E5%91%BD%E4%B8%AD"><span class="toc-text">缓存命中</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98%E7%9A%84%E5%90%88%E7%90%86%E6%80%A7"><span class="toc-text">多级缓存的合理性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A0%E9%80%9F%E6%89%8B%E6%AE%B5"><span class="toc-text">加速手段</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%93%E5%AD%98%E7%BA%BF"><span class="toc-text">缓存线</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%B1%80%E9%83%A8%E6%80%A7"><span class="toc-text">数据局部性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%98%A0%E5%B0%84%E5%85%B3%E8%81%94"><span class="toc-text">映射关联</span></a></li></ol></li></ol>
+        </div>
+    </aside>
+    <a class="btn-toc button" id="btn-toc" tabindex="0">
+        <svg viewBox="0 0 1024 1024" width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+            <path d="M128 256h64V192H128zM320 256h576V192H320zM128 544h64v-64H128zM320 544h576v-64H320zM128 832h64v-64H128zM320 832h576v-64H320z" fill="currentColor"></path>
+        </svg>
+    </a>
+    <div class="toc-menus" id="toc-menus">
+        <div class="toc-title">Article Directory</div>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Von-Neumann%E6%9E%B6%E6%9E%84"><span class="toc-text">Von Neumann架构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%84%E6%88%90%E9%83%A8%E5%88%86"><span class="toc-text">组成部分</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%AB%98%E6%80%A7%E8%83%BD%E7%AD%96%E7%95%A5%E5%88%86%E7%B1%BB"><span class="toc-text">高性能策略分类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%92%88%E5%AF%B9%E6%8C%87%E4%BB%A4"><span class="toc-text">针对指令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AE%80%E5%8C%96%E6%8C%87%E4%BB%A4"><span class="toc-text">简化指令</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%87%E4%BB%A4%E7%BA%A7%E5%B9%B6%E8%A1%8C"><span class="toc-text">指令级并行</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#superscalar-%E8%B6%85%E6%A0%87%E9%87%8F"><span class="toc-text">superscalar(超标量)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B5%81%E6%B0%B4%E7%BA%BF"><span class="toc-text">流水线</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%92%88%E5%AF%B9%E6%95%B0%E6%8D%AE"><span class="toc-text">针对数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A6%8F%E6%9E%97%E5%88%86%E7%B1%BB"><span class="toc-text">福林分类</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%81%E6%B0%B4%E7%BA%BF-1"><span class="toc-text">流水线</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%87%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%96%B9%E5%BC%8F"><span class="toc-text">指令执行方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89"><span class="toc-text">定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8F%AF%E4%BB%A5%E6%B5%81%E6%B0%B4"><span class="toc-text">为什么可以流水</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E4%B8%8D%E4%BE%9D%E8%B5%96"><span class="toc-text">数据不依赖</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%81%E6%B0%B4%E7%9A%84%E9%99%90%E5%88%B6"><span class="toc-text">流水的限制</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF"><span class="toc-text">存储技术</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%AF%E8%AF%BA%E4%BE%9D%E6%9B%BC%E6%9E%B6%E6%9E%84%E7%9A%84%E7%BC%BA%E9%99%B7"><span class="toc-text">冯诺依曼架构的缺陷</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E7%BA%A7%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF"><span class="toc-text">多级存储技术</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%93%E5%AD%98%E5%91%BD%E4%B8%AD"><span class="toc-text">缓存命中</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98%E7%9A%84%E5%90%88%E7%90%86%E6%80%A7"><span class="toc-text">多级缓存的合理性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A0%E9%80%9F%E6%89%8B%E6%AE%B5"><span class="toc-text">加速手段</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%93%E5%AD%98%E7%BA%BF"><span class="toc-text">缓存线</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%B1%80%E9%83%A8%E6%80%A7"><span class="toc-text">数据局部性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%98%A0%E5%B0%84%E5%85%B3%E8%81%94"><span class="toc-text">映射关联</span></a></li></ol></li></ol>
+    </div>
+
+
+<article class="post post__with-toc content-card">
+    <div class="post__header"></div>
+    <div class="post__content">
+        <p>本文的组织结构总体是讲一个硬件知识，讲一组对应的高性能优化方式。毕竟硬件是一切高性能优化手段的根源。</p>
+<h2 id="Von-Neumann架构"><a href="#Von-Neumann架构" class="headerlink" title="Von Neumann架构"></a>Von Neumann架构</h2><p>当代计算机的机构基本都可以归结为冯诺伊曼架构，实现并行计算、高性能计算的落脚点也在架构本身。</p>
+<h3 id="组成部分"><a href="#组成部分" class="headerlink" title="组成部分"></a>组成部分</h3><ul>
+<li>控制单元：解释指令（译码）</li>
+<li>处理单元：执行指令</li>
+<li>内存（memory unit，翻译成内存似不妥）：存储数据与指令（指令也以数据的形式存储，高速缓存中指令与数据不显示区分）</li>
+<li>I/O：与外界交互</li>
+</ul>
+<p>控制单元与处理单元组成CPU，与内存（memory unit）通信。</p>
+<p>指令处理数据是计算机完成任务的单元。</p>
+<h2 id="高性能策略分类"><a href="#高性能策略分类" class="headerlink" title="高性能策略分类"></a>高性能策略分类</h2><h3 id="针对指令"><a href="#针对指令" class="headerlink" title="针对指令"></a>针对指令</h3><h4 id="简化指令"><a href="#简化指令" class="headerlink" title="简化指令"></a>简化指令</h4><p>CISC到RISC。</p>
+<h3 id="指令级并行"><a href="#指令级并行" class="headerlink" title="指令级并行"></a>指令级并行</h3><h4 id="superscalar-超标量"><a href="#superscalar-超标量" class="headerlink" title="superscalar(超标量)"></a>superscalar(超标量)</h4><p>同时译码多个指令。</p>
+<h4 id="流水线"><a href="#流水线" class="headerlink" title="流水线"></a>流水线</h4><p>之后会详细讲，这可能也是最常见的指令级并行手段</p>
+<h3 id="针对数据"><a href="#针对数据" class="headerlink" title="针对数据"></a>针对数据</h3><p>数据级并行，单指令处理多数据，即<strong>向量化、阵列化</strong>。</p>
+<h3 id="福林分类"><a href="#福林分类" class="headerlink" title="福林分类"></a>福林分类</h3><p><img src="/2022/03/07/post9/pic1.png" class="lazy" data-srcset="/2022/03/07/post9/pic1.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAABlBMVEXMzMyWlpYU2uzLAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAACklEQVQImWNgAAAAAgAB9HFkpgAAAABJRU5ErkJggg==" alt="pic1"></p>
+<p>从数据流、指令流两个维度进行分类。</p>
+<p>最常见的应该是单指令多数据的并行方式。事实上大部分指令级并行都集成在硬件上，能人为在程序实现的一般也都是数据级并行。</p>
+<h2 id="流水线-1"><a href="#流水线-1" class="headerlink" title="流水线"></a>流水线</h2><h3 id="指令执行方式"><a href="#指令执行方式" class="headerlink" title="指令执行方式"></a>指令执行方式</h3><ul>
+<li>从寄存器（register，最快的一块存储）中<strong>取指</strong></li>
+<li>控制单元<strong>译码</strong></li>
+<li><strong>执行</strong></li>
+<li>写回到寄存器</li>
+</ul>
+<p>一般来说，一个时刻每个阶段都只能有一个指令正在进行（超标量就是可以同时译码多个指令），由计算机的不同unit分别完成。流水线就是要让这几个unit都充分发挥作用。</p>
+<h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p><img src="/2022/03/07/post9/pic2.png" class="lazy" data-srcset="/2022/03/07/post9/pic2.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAABlBMVEXMzMyWlpYU2uzLAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAACklEQVQImWNgAAAAAgAB9HFkpgAAAABJRU5ErkJggg==" alt="pic2"></p>
+<p>如一个任务由五条指令顺序完成，每条指令执行有四个阶段，就可以流水如图，如果等每条指令四个阶段都完成了再执行下一条指令，效率会大大降低。</p>
+<p>流水线的超集是脉动阵列。</p>
+<h3 id="为什么可以流水"><a href="#为什么可以流水" class="headerlink" title="为什么可以流水"></a>为什么可以流水</h3><h3 id="数据不依赖"><a href="#数据不依赖" class="headerlink" title="数据不依赖"></a>数据不依赖</h3><p>流水其实不是一件平凡的事。第二条指令可以在第一条指令还没结束就开始译码，需要保证这两条指令<strong>相互独立</strong>。如果说第二条指令需要用到第一条指令处理的某个数据，那在第一条指令完成前就开始译码显然是行不通的。</p>
+<h3 id="流水的限制"><a href="#流水的限制" class="headerlink" title="流水的限制"></a>流水的限制</h3><ul>
+<li>更多相互独立的指令可以加深流水，提高效率，但这不现实。</li>
+<li>分支预测错误。上面我们提到了数据不依赖，但在条件判断语句中，条件判断完成之前不与后面的语句独立的。为了能在这个地方也流水，大部分CPU都集成了分支预测功能。即在条件判断完成前先找一种最可能的情况往下跑，但假如预测错误就得全部倒带回去重跑。这个代价是比较高昂的。</li>
+</ul>
+<h2 id="存储技术"><a href="#存储技术" class="headerlink" title="存储技术"></a>存储技术</h2><h3 id="冯诺依曼架构的缺陷"><a href="#冯诺依曼架构的缺陷" class="headerlink" title="冯诺依曼架构的缺陷"></a>冯诺依曼架构的缺陷</h3><p>前端总线（FSB）连接内存和处理器，它的延迟和带宽极大限制了性能。</p>
+<p>存储的速度越来越落后于处理的速度（摩尔定律），这催生了多级存储技术。</p>
+<h3 id="多级存储技术"><a href="#多级存储技术" class="headerlink" title="多级存储技术"></a>多级存储技术</h3><p>越快的存储芯片，越因为发热量和造价，造不大。所以有寄存器到缓存到内存到外存的多级存储技术。</p>
+<h3 id="缓存命中"><a href="#缓存命中" class="headerlink" title="缓存命中"></a>缓存命中</h3><p>访问数据时会从寄存器到各级缓存中查找，假如在缓存中就称命中，不然则失效。</p>
+<h3 id="多级缓存的合理性"><a href="#多级缓存的合理性" class="headerlink" title="多级缓存的合理性"></a>多级缓存的合理性</h3><p><img src="/2022/03/07/post9/pic3.png" class="lazy" data-srcset="/2022/03/07/post9/pic3.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAABlBMVEXMzMyWlpYU2uzLAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAACklEQVQImWNgAAAAAgAB9HFkpgAAAABJRU5ErkJggg==" alt="pic3"></p>
+<h3 id="加速手段"><a href="#加速手段" class="headerlink" title="加速手段"></a>加速手段</h3><p>数据越是在高速缓存里，程序跑的越快。但这不能由程序员控制。只能通过对存储架构的理解，用特定的写法、编程技巧来暗示编译器把他们想要的数据放进高速缓存。</p>
+<h2 id="缓存线"><a href="#缓存线" class="headerlink" title="缓存线"></a>缓存线</h2><p>是数据进入、清出缓存的最小单位。</p>
+<h3 id="数据局部性"><a href="#数据局部性" class="headerlink" title="数据局部性"></a>数据局部性</h3><p>缓存线的是有限的。就是说如果你的数据都挨一块，那有一个数据进了缓存线那么一坨数据都进了缓存线；假如需要的数据存的很散，那可能触发了数据进入缓存线，仅有一小部分数据真正进入，其余混在缓存线进去的数据都是用不到的。</p>
+<p>这就是所谓的局部性越高，数据进入缓存的机会越大。（确实很形象但这种说法总感觉不太舒服😂和大部分力学数学教材的说法不是同一种风格）</p>
+<h3 id="映射关联"><a href="#映射关联" class="headerlink" title="映射关联"></a>映射关联</h3><p>数据进入缓存的一种方案是根据数据地址按12取模进入对应的缓存线。有一种缓存失效为冲突失效，不同数据被映射到同一块缓存，解决这个方案有多路关联。即缓存线多个一组与内存数据映射。</p>
+<p>这种做的好处在于，可能一段时间里数据按12取模的值的分布不是均匀的，比如模4的多，模8的少；如果单路关联，模4的缓存线冲突了而模8的甚至没完全利用，通过多路关联将这两路合为一组，模4的模8的都进入这一组缓存线，就可以提高缓存线利用效率。</p>
+
+    </div>
+     
+    <div class="post-footer__meta"><p>updated at 2022-03-07</p></div> 
+    <div class="post-entry__tags"><a href="/tags/%E7%A1%AC%E4%BB%B6/" class="post-tags__link button"># 硬件</a><a href="/tags/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97/" class="post-tags__link button"># 并行计算</a></div> 
+</article>
+
+
+    <div class="nav">
+        <div class="nav__prev">
+            
+        </div>
+        <div class="nav__next">
+            
+                <a href="/2022/03/07/post8/" class="nav__link">
+                    <div>
+                        <div class="nav__label">
+                            Next Post
+                        </div>
+                        <div class="nav__title">
+                            流体力学-02-重新审视基本方程组
+                        </div>
+                    </div>
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M434.944 790.624l-45.248-45.248L623.04 512l-233.376-233.376 45.248-45.248L713.568 512z" fill="#808080"></path></svg>
+                    </div>
+                </a>
+            
+        </div>
+    </div>
+
+
+
+
+
+</main>
+
+            <footer class="footer">
+     
+    <a href="#" class="button" id="b2t" aria-label="Back to Top" title="Back to Top">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M233.376 722.752L278.624 768 512 534.624 745.376 768l45.248-45.248L512 444.128zM192 352h640V288H192z" fill="currentColor"></path>
+        </svg>
+    </a>
+
+    
+
+
+    
+     
+ 
+
+ 
+    
+        
+        <p class="footer-copyright">
+            Copyright © 2022 <a href="/">狮子大张嘴&#39;s blog</a>
+        </p>
+    
+    
+    <p>Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme - <a href="https://github.com/ChrAlpha/hexo-theme-cards" target="_blank">Cards</a></p>
+</footer>
+
+        </div>
+        
+    <script defer src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.1.0/dist/lazyload.min.js"></script>
+    <script>
+        window.lazyLoadOptions = {
+            elements_selector: ".lazy",
+            threshold: 0
+        };
+    </script>
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+    
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+
+    </body>
+</html>
