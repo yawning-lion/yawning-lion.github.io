@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+
+    
+
+    <!-- 渲染优化 -->
+    <meta name="renderer" content="webkit">
+    <meta name="force-rendering" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="HandheldFriendly" content="True" >
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!--icon-->
+
+    
+        <link rel="shortcut icon" href="/images/favicon32.ico">
+    
+    
+        <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon16.ico">
+    
+    
+        <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon32.ico">
+    
+    
+    
+
+
+    <!-- meta -->
+
+
+<title>应数讨-01-ode inspire NN architecture design | 狮子大张嘴&#39;s blog</title>
+
+
+    <meta name="keywords" content="machine learning, 动力系统">
+
+
+
+
+    <!-- OpenGraph -->
+ 
+    <meta name="description" content="应用数学讨论班的第三节课，董彬老师讲了他在机器学习方面的一些工作。但我只抓住了ode离散格式启发神经网络架构设计的insight，就记录在这里，当然不会很全面，想深入了解还是得读文献。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="应数讨-01-ode inspire NN architecture design">
+<meta property="og:url" content="https://yawninglion.github.io/2022/03/09/post10/index.html">
+<meta property="og:site_name" content="狮子大张嘴&#39;s blog">
+<meta property="og:description" content="应用数学讨论班的第三节课，董彬老师讲了他在机器学习方面的一些工作。但我只抓住了ode离散格式启发神经网络架构设计的insight，就记录在这里，当然不会很全面，想深入了解还是得读文献。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-03-09T07:39:47.000Z">
+<meta property="article:modified_time" content="2022-03-09T08:51:59.654Z">
+<meta property="article:author" content="yawning-lion">
+<meta property="article:tag" content="machine learning">
+<meta property="article:tag" content="动力系统">
+<meta name="twitter:card" content="summary_large_image">
+
+
+    
+<link rel="stylesheet" href="/css/style/main.css">
+ 
+
+    
+    
+        <link rel="stylesheet" id="hl-default-theme" href="/css/highlight/default.css" media="none" >
+        
+            <link rel="stylesheet" id="hl-dark-theme" href="/css/highlight/dark.css" media="none">
+        
+    
+
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/style/dark.css">
+
+    
+<script src="/js/darkmode.js"></script>
+
+
+
+     
+
+    <!-- custom head -->
+
+<meta name="generator" content="Hexo 5.4.1"></head>
+
+    <body>
+        <div id="app">
+            <header class="header">
+    <div class="header__left">
+        <a href="/" class="button">
+            <span class="logo__text">狮子大张嘴&#39;s blog</span>
+        </a>
+    </div>
+    <div class="header__right">
+        
+            <div class="navbar__menus">
+                
+                    <a href="/" class="navbar-menu button">home</a>
+                
+                    <a href="/tags/" class="navbar-menu button">tags</a>
+                
+                    <a href="/categories" class="navbar-menu button">categories</a>
+                
+                    <a href="/archives/" class="navbar-menu button">archives</a>
+                
+                    <a href="/friends/" class="navbar-menu button">friends</a>
+                
+                    <a href="/page/" class="navbar-menu button">Page</a>
+                
+            </div>
+        
+        
+        
+    <a href="/search/" id="btn-search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="24" height="24" fill="currentColor" stroke="currentColor" stroke-width="32"><path d="M192 448c0-141.152 114.848-256 256-256s256 114.848 256 256-114.848 256-256 256-256-114.848-256-256z m710.624 409.376l-206.88-206.88A318.784 318.784 0 0 0 768 448c0-176.736-143.264-320-320-320S128 271.264 128 448s143.264 320 320 320a318.784 318.784 0 0 0 202.496-72.256l206.88 206.88 45.248-45.248z"></path></svg>
+    </a>
+
+
+        
+        
+    <a href="javaScript:void(0);" id="btn-toggle-dark">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+    </a>
+
+
+        
+            <a class="dropdown-icon button" id="btn-dropdown" tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width='24' height='24' fill="none" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"><path fill="currentColor" d="M3.314,4.8h13.372c0.41,0,0.743-0.333,0.743-0.743c0-0.41-0.333-0.743-0.743-0.743H3.314c-0.41,0-0.743,0.333-0.743,0.743C2.571,4.467,2.904,4.8,3.314,4.8z M16.686,15.2H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,15.2,16.686,15.2z M16.686,9.257H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,9.257,16.686,9.257z"></path></svg></a>
+            <div class="dropdown-menus" id="dropdown-menus">
+                
+                    <a href="/" class="dropdown-menu button">home</a>
+                
+                    <a href="/tags/" class="dropdown-menu button">tags</a>
+                
+                    <a href="/categories" class="dropdown-menu button">categories</a>
+                
+                    <a href="/archives/" class="dropdown-menu button">archives</a>
+                
+                    <a href="/friends/" class="dropdown-menu button">friends</a>
+                
+                    <a href="/page/" class="dropdown-menu button">Page</a>
+                
+            </div>
+        
+    </div>
+</header>
+
+
+            <main class="main">
+    
+
+<div class="post-title">
+    <h1 class="post-title__text">
+        应数讨-01-ode inspire NN architecture design
+    </h1>
+    <div class="post-title__meta">
+        <a href="/archives/2022/03/" class="post-meta__date button">2022-03-09</a>
+        
+    <span class="separate-dot"></span><a href="/categories/%E6%95%B0%E7%90%86%E5%9F%BA%E7%A1%80%E8%A1%A5%E5%AE%8C%E8%AE%A1%E5%88%92/" class="button">数理基础补完计划</a>
+
+ 
+        
+    
+    
+
+
+ 
+
+ 
+    </div>
+</div>
+
+
+    <aside class="post-side">
+        <div class="post-side__toc">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B7%B1%E5%BA%A6%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C"><span class="toc-text">深度神经网络</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Resnet"><span class="toc-text">Resnet</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ode-inspired"><span class="toc-text">ode inspired</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8B%E6%9C%9F%E9%A2%84%E5%91%8A"><span class="toc-text">下期预告</span></a></li></ol>
+        </div>
+    </aside>
+    <a class="btn-toc button" id="btn-toc" tabindex="0">
+        <svg viewBox="0 0 1024 1024" width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+            <path d="M128 256h64V192H128zM320 256h576V192H320zM128 544h64v-64H128zM320 544h576v-64H320zM128 832h64v-64H128zM320 832h576v-64H320z" fill="currentColor"></path>
+        </svg>
+    </a>
+    <div class="toc-menus" id="toc-menus">
+        <div class="toc-title">Article Directory</div>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B7%B1%E5%BA%A6%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C"><span class="toc-text">深度神经网络</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Resnet"><span class="toc-text">Resnet</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ode-inspired"><span class="toc-text">ode inspired</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8B%E6%9C%9F%E9%A2%84%E5%91%8A"><span class="toc-text">下期预告</span></a></li></ol>
+    </div>
+
+
+<article class="post post__with-toc content-card">
+    <div class="post__header"></div>
+    <div class="post__content">
+        <p>应用数学讨论班的第三节课，董彬老师讲了他在机器学习方面的一些工作。但我只抓住了ode离散格式启发神经网络架构设计的insight，就记录在这里，当然不会很全面，想深入了解还是得读文献。</p>
+<h2 id="深度神经网络"><a href="#深度神经网络" class="headerlink" title="深度神经网络"></a>深度神经网络</h2><p>以全连接网络为例，输入$x$，每一层网络的运算都相当于$Ax+b$，把$x$加个维度，数值是1，就可以紧凑的写成$A \hat x$，再考虑激活函数，我们一般性的，把神经网络每一层都看做一个单层感知机，接受的输入是上一层的输出，如果我们关心每一层间发生的事情，就可以把正向传播写成：<br>$$<br>x^{k+1}=f(x^{k},\theta)<br>$$<br>$\theta$是网络参数。传统的网络可以预料的会出现梯度消失梯度爆炸的问题，因为本质就是<br>$$<br>y = f^n\circ f^{n-1}\circ …f^{2} \circ f^1(x)<br>$$<br>函数层层复合，层层迭代后<strong>李雅普诺夫指数</strong>就爆炸了（好像是这个原因？）</p>
+<h2 id="Resnet"><a href="#Resnet" class="headerlink" title="Resnet"></a>Resnet</h2><p>Resnet可以显著的缓解这个问题，让梯度消失梯度爆炸不再制约神经网络的加深。我们还是关心神经网络每一层间发生的事，resnet做的事情其实就是<br>$$<br>x^{k+1}=x^k+f(x^{k},\theta)<br>$$<br>把输入加到这一层的输出，一起作为下一层的输入。</p>
+<p>到这里，神经网络和离散动力系统的关系就很明晰了。</p>
+<h2 id="ode-inspired"><a href="#ode-inspired" class="headerlink" title="ode inspired"></a>ode inspired</h2><p>于是想到，ode的离散求解格式千千万，比如explicit euler,RK-form，可以不可以设计神经网络，使得他们每一层发生的事都满足那些离散格式呢？答案是可以的。最简单的为例：<br>$$<br>x^{k+1}=x^k+f(x^{k},\theta)\Delta \eta<br>$$<br>这里的$\Delta \eta$就是离散格式里的步长(step size)，回到神经网络架构，就是下一层的输入里包含本层输入和乘上权重的本层输出，调整步长也就是调整了神经网络架构。需知这里的step size并不是一个像learning rate那样的超参数，改变它意味着改变了网络架构。</p>
+<p>当然好的工作采用了更复杂的离散格式，引入了加速算法（松弛因子啊什么的），果然可以做到引入离散格式架构的网络在较浅的层数下就可以达到一般较深网络的优化效果。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li>ode inspired架构设计不关心ode，关系的是怎么根据ode离散格式设计网络架构，使具有更好的优化效率。</li>
+<li>ode离散格式里同样可以引入优化算法，但这个优化算法和神经网络优化算法（如admm）不是一回事，比如引入Nesterov加速算法，是为了找到对应具有更优效率的神经网络架构，和求解神经网络参数的gradient descent优化算法不是一回事。</li>
+<li>董老师上课还讲到把离散格式连续化会对应成一个最优控制（optimal control）问题，但并没有搞懂。“从离散到连续可以采取很多方式”，不是很理解这句话。</li>
+<li>鄂院讲到有篇工作是正儿八经的把神经网络转化成最优控制问题，不是传统的gradient descent，董老师介绍的这些工作其实本质还是反向传播神经网络，但用ode启发架构设计，而这些离散动力系统可以与一个最优控制问题相对应，并不是说把这些网络都转化为了最优控制问题。</li>
+</ul>
+<h2 id="下期预告"><a href="#下期预告" class="headerlink" title="下期预告"></a>下期预告</h2><p>董老师还讲了pde net，但并没有听懂，之后找文献读一读争取看懂吧。</p>
+
+    </div>
+     
+    <div class="post-footer__meta"><p>updated at 2022-03-09</p></div> 
+    <div class="post-entry__tags"><a href="/tags/machine-learning/" class="post-tags__link button"># machine learning</a><a href="/tags/%E5%8A%A8%E5%8A%9B%E7%B3%BB%E7%BB%9F/" class="post-tags__link button"># 动力系统</a></div> 
+</article>
+
+
+    <div class="nav">
+        <div class="nav__prev">
+            
+        </div>
+        <div class="nav__next">
+            
+                <a href="/2022/03/07/post9/" class="nav__link">
+                    <div>
+                        <div class="nav__label">
+                            Next Post
+                        </div>
+                        <div class="nav__title">
+                            并行计算-01-当代处理器与并行
+                        </div>
+                    </div>
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M434.944 790.624l-45.248-45.248L623.04 512l-233.376-233.376 45.248-45.248L713.568 512z" fill="#808080"></path></svg>
+                    </div>
+                </a>
+            
+        </div>
+    </div>
+
+
+
+
+
+</main>
+
+            <footer class="footer">
+     
+    <a href="#" class="button" id="b2t" aria-label="Back to Top" title="Back to Top">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M233.376 722.752L278.624 768 512 534.624 745.376 768l45.248-45.248L512 444.128zM192 352h640V288H192z" fill="currentColor"></path>
+        </svg>
+    </a>
+
+    
+
+
+    
+     
+ 
+
+ 
+    
+        
+        <p class="footer-copyright">
+            Copyright © 2022 <a href="/">狮子大张嘴&#39;s blog</a>
+        </p>
+    
+    
+    <p>Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme - <a href="https://github.com/ChrAlpha/hexo-theme-cards" target="_blank">Cards</a></p>
+</footer>
+
+        </div>
+        
+    <script defer src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.1.0/dist/lazyload.min.js"></script>
+    <script>
+        window.lazyLoadOptions = {
+            elements_selector: ".lazy",
+            threshold: 0
+        };
+    </script>
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+    
+ 
+
+ 
+
+
+    <script>
+        if (typeof MathJax === 'undefined') {
+            window.MathJax = {
+                loader: {
+                    source: {
+                        '[tex]/amsCd': '[tex]/amscd',
+                        '[tex]/AMScd': '[tex]/amscd'
+                    }
+                },
+                tex: {
+                    inlineMath: {'[+]': [['$', '$']]},
+                    tags: 'ams'
+                },
+                options: {
+                    renderActions: {
+                        findScript: [10, doc => {
+                            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                                const display = !!node.type.match(/; *mode=display/);
+                                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                                const text = document.createTextNode('');
+                                node.parentNode.replaceChild(text, node);
+                                math.start = {node: text, delim: '', n: 0};
+                                math.end = {node: text, delim: '', n: 0};
+                                doc.math.push(math);
+                            });
+                        }, '', false],
+                        insertedScript: [200, () => {
+                            document.querySelectorAll('mjx-container').forEach(node => {
+                                let target = node.parentNode;
+                                if (target.nodeName.toLowerCase() === 'li') {
+                                    target.parentNode.classList.add('has-jax');
+                                }
+                            });
+                        }, '', false]
+                    }
+                }
+            };
+            (function () {
+                var script = document.createElement('script');
+                script.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js";
+                script.defer = true;
+                document.head.appendChild(script);
+            })();
+        } else {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+        }
+    </script>
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+
+    </body>
+</html>

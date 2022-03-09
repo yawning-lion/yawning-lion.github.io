@@ -49,7 +49,7 @@
 <meta property="og:description" content="上学期流体力学其实学的迷迷糊糊的，这学期听了ewn院士的课，读了一点点连续介质力学，决定换个观点重新看一遍流体力学基本方程组，重新学一遍。目的在于把自己零散的知识给串起来，不会有大量细节推导。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-03-07T07:22:07.000Z">
-<meta property="article:modified_time" content="2022-03-09T07:31:00.066Z">
+<meta property="article:modified_time" content="2022-03-09T07:37:02.128Z">
 <meta property="article:author" content="yawning-lion">
 <meta property="article:tag" content="流体力学">
 <meta property="article:tag" content="连续介质力学">
@@ -197,9 +197,9 @@
 $$
 \left\{
 \begin{aligned}
-\partial_t \rho+\nabla \cdot J_{\rho} =0 \\
-\partial_t \rho v+\nabla \cdot J_{ v} =0 \\
-\partial_t E+\nabla \cdot J_{ E} =0
+& \partial_t \rho+\nabla \cdot J_{\rho} =0 \\
+& \partial_t \rho v+\nabla \cdot J_{ v} =0 \\
+& \partial_t E+\nabla \cdot J_{ E} =0
 \end{aligned}
 \right.
 $$
@@ -223,7 +223,19 @@ $$
 <p>这里最核心的insight就是假设偏应力张量分量和速度梯度分量存在线性关系。</p>
 <h3 id="改写方程"><a href="#改写方程" class="headerlink" title="改写方程"></a>改写方程</h3><p>这样我们得到的方程里包含应力张量，这不好，因为实际上我们很难直接得到应力张量，实验很难测的，所以要改写为矢量式，看起来更复杂了但实际上更好处理了，物理意义也更加明晰。</p>
 <p>对于粘性不可压流体就得到了大名鼎鼎的N-S方程：</p>
-<p>&lt;!–swig￼1–&gt;</p>
+
+$$
+\left\{
+\begin{aligned}
+& \nabla \cdot  v = 0 \\
+& \rho \frac{d}{dt}v=\rho F-\nabla p+\mu \Delta v \\
+& P = -pI+2\mu S
+\end{aligned}
+\right.
+$$
+
+
+
 <h3 id="兰姆-葛罗米柯方程"><a href="#兰姆-葛罗米柯方程" class="headerlink" title="兰姆-葛罗米柯方程"></a>兰姆-葛罗米柯方程</h3><p>这个方程从动量方程来的，把随体导数变为就地导数后做了位势和涡旋的分解<br>$$<br>\rho(\frac{\partial v}{\partial t}+\nabla \frac{V^2}{2}+(\nabla \times v) \times v)=\rho F+\nabla \cdot P<br>$$<br>非常有用啊，所以单独注记下。</p>
 
     </div>
