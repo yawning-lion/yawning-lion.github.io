@@ -49,7 +49,7 @@
 <meta property="og:description" content="上学期流体力学其实学的迷迷糊糊的，这学期听了ewn院士的课，读了一点点连续介质力学，决定换个观点重新看一遍流体力学基本方程组，重新学一遍。目的在于把自己零散的知识给串起来，不会有大量细节推导。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-03-07T07:22:07.000Z">
-<meta property="article:modified_time" content="2022-03-08T15:26:18.462Z">
+<meta property="article:modified_time" content="2022-03-09T07:31:00.066Z">
 <meta property="article:author" content="yawning-lion">
 <meta property="article:tag" content="流体力学">
 <meta property="article:tag" content="连续介质力学">
@@ -193,7 +193,19 @@
     <div class="post__header"></div>
     <div class="post__content">
         <p>上学期流体力学基本方程组是一点没学明白，全部力气都花在看懂数学细节上了，并没有对这块形成比较成体系的认知，现在把它补回来。</p>
-<h2 id="连续介质力学方程组紧凑的表达"><a href="#连续介质力学方程组紧凑的表达" class="headerlink" title="连续介质力学方程组紧凑的表达"></a>连续介质力学方程组紧凑的表达</h2><p>$$<br>\left{<br>\begin{aligned}<br>\partial_t \rho+\nabla \cdot J_{\rho} =0 \<br>\partial_t \rho v+\nabla \cdot J_{ v} =0 \<br>\partial_t E+\nabla \cdot J_{ E} =0<br>\end{aligned}<br>\right.<br>$$</p>
+<h2 id="连续介质力学方程组紧凑的表达"><a href="#连续介质力学方程组紧凑的表达" class="headerlink" title="连续介质力学方程组紧凑的表达"></a>连续介质力学方程组紧凑的表达</h2>
+$$
+\left\{
+\begin{aligned}
+\partial_t \rho+\nabla \cdot J_{\rho} =0 \\
+\partial_t \rho v+\nabla \cdot J_{ v} =0 \\
+\partial_t E+\nabla \cdot J_{ E} =0
+\end{aligned}
+\right.
+$$
+
+
+
 <p>分别代表质量守恒、动量定理、能量守恒。$J$分别代表质量流、动量流、能量流。</p>
 <p>这意味着可以把流体力学纳入之前学习的力学体系里，上学期悟性欠缺做不到这一点sigh</p>
 <p>事实上对大部分连续介质问题都可以有一样的提法，其中<strong>本构关系</strong>决定了研究的具体是什么问题。对于流体力学的本构关系提法中最重要的假设就是偏应力分量与应变分量成<strong>线性关系</strong>，事实上线性化也是研究大部分连续介质问题会做简化的处理。</p>
@@ -210,12 +222,13 @@
 <h3 id="本构关系"><a href="#本构关系" class="headerlink" title="本构关系"></a>本构关系</h3><p>为了让方程封闭，需要引入物性的知识，也就是本构关系。</p>
 <p>这里最核心的insight就是假设偏应力张量分量和速度梯度分量存在线性关系。</p>
 <h3 id="改写方程"><a href="#改写方程" class="headerlink" title="改写方程"></a>改写方程</h3><p>这样我们得到的方程里包含应力张量，这不好，因为实际上我们很难直接得到应力张量，实验很难测的，所以要改写为矢量式，看起来更复杂了但实际上更好处理了，物理意义也更加明晰。</p>
-<p>对于粘性不可压流体就得到了大名鼎鼎的N-S方程：<br>$$<br>\left{<br>\begin{aligned}<br>&amp; \nabla \cdot  v = 0 \<br>&amp; \rho \frac{d}{dt}v=\rho F-\nabla p+\mu \Delta v \<br>&amp; P = -pI+2\mu S<br>\end{aligned}<br>\right.<br>$$</p>
+<p>对于粘性不可压流体就得到了大名鼎鼎的N-S方程：</p>
+<p>&lt;!–swig￼1–&gt;</p>
 <h3 id="兰姆-葛罗米柯方程"><a href="#兰姆-葛罗米柯方程" class="headerlink" title="兰姆-葛罗米柯方程"></a>兰姆-葛罗米柯方程</h3><p>这个方程从动量方程来的，把随体导数变为就地导数后做了位势和涡旋的分解<br>$$<br>\rho(\frac{\partial v}{\partial t}+\nabla \frac{V^2}{2}+(\nabla \times v) \times v)=\rho F+\nabla \cdot P<br>$$<br>非常有用啊，所以单独注记下。</p>
 
     </div>
      
-    <div class="post-footer__meta"><p>updated at 2022-03-08</p></div> 
+    <div class="post-footer__meta"><p>updated at 2022-03-09</p></div> 
     <div class="post-entry__tags"><a href="/tags/%E6%B5%81%E4%BD%93%E5%8A%9B%E5%AD%A6/" class="post-tags__link button"># 流体力学</a><a href="/tags/%E8%BF%9E%E7%BB%AD%E4%BB%8B%E8%B4%A8%E5%8A%9B%E5%AD%A6/" class="post-tags__link button"># 连续介质力学</a></div> 
 </article>
 
