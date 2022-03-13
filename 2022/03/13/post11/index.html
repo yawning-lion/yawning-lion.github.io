@@ -51,7 +51,7 @@
 <meta property="og:image" content="https://yawninglion.github.io/2022/03/13/post11/pic1.png">
 <meta property="og:image" content="https://yawninglion.github.io/2022/03/13/post11/pic2.png">
 <meta property="article:published_time" content="2022-03-13T13:19:43.000Z">
-<meta property="article:modified_time" content="2022-03-13T13:58:27.437Z">
+<meta property="article:modified_time" content="2022-03-13T15:17:26.031Z">
 <meta property="article:author" content="yawning-lion">
 <meta property="article:tag" content="弹性力学">
 <meta property="article:tag" content="连续介质力学">
@@ -199,7 +199,7 @@
 <p>这里的$u$即位移场。</p>
 <h2 id="几何方程"><a href="#几何方程" class="headerlink" title="几何方程"></a>几何方程</h2><p>就是非常非常径直的泰勒展开…<br>$$<br>u(r+dr)=u(r)+(u\nabla)\cdot dr<br>$$<br>$u\nabla$是我们关心的东西，它可以做对称与反对称部分的展开。对称部分即应变张量$T$。</p>
 <p>这个东西可以描述任意小的线元（$dr$）变形后的样子（$(u\nabla)\cdot dr$），也就是包含了所有这一点上变形的信息。</p>
-<p>和流体力学变形张量不同的是，那里研究的是流体速度梯度，但一样的是都需要关注挨的足够近的质点。事实上速度与位移只差一个时间，并没有本质上区别；只是对于弹性力学问题没有时间的提法。</p>
+<p>和流体力学变形张量不同的是，那里研究的是流体速度梯度，但一样的是都需要关注挨的足够近的质点。事实上速度与位移只差一个时间，并没有本质上区别；只是对于弹性力学问题没有时间的提法（其实也不一定？可能更多因为弹性力学问题中容易测量得到的是变形，而流体力学中相对容易测得的是速度）。</p>
 <h2 id="应变协调方程"><a href="#应变协调方程" class="headerlink" title="应变协调方程"></a>应变协调方程</h2><p>我们可以从位移得到变形，这是几何方程干的事。</p>
 <p>这里有一个非常有价值的反问题，我们是否可以从变形（应变）还原得到位移场？</p>
 <p>答案是可以的。考虑现实情况，变形不能用位错等奇奇怪怪的情况，变形显然不能是任意的，我们需要对变形张量提出限制。<br>$$<br>\nabla \times \Gamma \times \nabla = 0<br>$$<br>这是因为假如可以还原到位移场，那么$\Gamma$来自于$u$的梯度，大致可以理解为有势，所以就可以提这样的应变协调条件。</p>
@@ -211,6 +211,7 @@
 <p><img src="/2022/03/13/post11/pic1.png" class="lazy" data-srcset="/2022/03/13/post11/pic1.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAABlBMVEXMzMyWlpYU2uzLAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAACklEQVQImWNgAAAAAgAB9HFkpgAAAABJRU5ErkJggg==" alt="pic1"></p>
 <h2 id="格林应变张量"><a href="#格林应变张量" class="headerlink" title="格林应变张量"></a>格林应变张量</h2><p>这一派关心微元变形前后长度的变化。</p>
 <p><img src="/2022/03/13/post11/pic2.png" class="lazy" data-srcset="/2022/03/13/post11/pic2.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAABlBMVEXMzMyWlpYU2uzLAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAACklEQVQImWNgAAAAAgAB9HFkpgAAAABJRU5ErkJggg==" alt="image-20220313215720648"></p>
+<p>所以某方向$\xi$上的应变率为（小变形时）<br>$$<br>\epsilon = \xi_i \gamma_{ij}\xi_j<br>$$</p>
 
     </div>
      
@@ -221,6 +222,20 @@
 
     <div class="nav">
         <div class="nav__prev">
+            
+                <a href="/2022/03/13/post12/" class="nav__link">
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M589.088 790.624L310.464 512l278.624-278.624 45.248 45.248L400.96 512l233.376 233.376z" fill="#808080"></path></svg>
+                    </div>
+                    <div>
+                        <div class="nav__label">
+                            Previous Post
+                        </div>
+                        <div class="nav__title">
+                            张量-03-弹性力学中的分量变换
+                        </div>
+                    </div>
+                </a>
             
         </div>
         <div class="nav__next">

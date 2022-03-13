@@ -31,27 +31,29 @@
     <!-- meta -->
 
 
-<title>博客建设日志 | 狮子大张嘴&#39;s blog</title>
+<title>张量-03-弹性力学中的分量变换 | 狮子大张嘴&#39;s blog</title>
 
 
-    <meta name="keywords" content="重大说明">
+    <meta name="keywords" content="张量, 弹性力学, 线性代数">
 
 
 
 
     <!-- OpenGraph -->
  
-    <meta name="description" content="记录下建设这个博客的过程，遇到的问题和解决方案。">
+    <meta name="description" content="弹性力学中由于问题的特殊性，张量分量的坐标变换也根据特定的物理图像有简单的变换形式，就目前学到的整理在这里。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="博客建设日志">
-<meta property="og:url" content="https://yawninglion.github.io/2022/02/28/post4/index.html">
+<meta property="og:title" content="张量-03-弹性力学中的分量变换">
+<meta property="og:url" content="https://yawninglion.github.io/2022/03/13/post12/index.html">
 <meta property="og:site_name" content="狮子大张嘴&#39;s blog">
-<meta property="og:description" content="记录下建设这个博客的过程，遇到的问题和解决方案。">
+<meta property="og:description" content="弹性力学中由于问题的特殊性，张量分量的坐标变换也根据特定的物理图像有简单的变换形式，就目前学到的整理在这里。">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2022-02-27T16:30:40.000Z">
-<meta property="article:modified_time" content="2022-03-13T13:59:47.489Z">
+<meta property="article:published_time" content="2022-03-13T14:39:15.000Z">
+<meta property="article:modified_time" content="2022-03-13T15:17:19.303Z">
 <meta property="article:author" content="yawning-lion">
-<meta property="article:tag" content="重大说明">
+<meta property="article:tag" content="张量">
+<meta property="article:tag" content="弹性力学">
+<meta property="article:tag" content="线性代数">
 <meta name="twitter:card" content="summary_large_image">
 
 
@@ -152,12 +154,12 @@
 
 <div class="post-title">
     <h1 class="post-title__text">
-        博客建设日志
+        张量-03-弹性力学中的分量变换
     </h1>
     <div class="post-title__meta">
-        <a href="/archives/2022/02/" class="post-meta__date button">2022-02-28</a>
+        <a href="/archives/2022/03/" class="post-meta__date button">2022-03-13</a>
         
-    <span class="separate-dot"></span><a href="/categories/%E5%8E%BB%E7%A0%81%E5%A4%B4%E6%95%B4%E7%82%B9%E8%96%AF%E6%9D%A1/" class="button">去码头整点薯条</a>
+    <span class="separate-dot"></span><a href="/categories/%E6%95%B0%E7%90%86%E5%9F%BA%E7%A1%80%E8%A1%A5%E5%AE%8C%E8%AE%A1%E5%88%92/" class="button">数理基础补完计划</a>
 
  
         
@@ -174,7 +176,7 @@
 
     <aside class="post-side">
         <div class="post-side__toc">
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#02-28-22"><span class="toc-text">02.28.22</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD"><span class="toc-text">图片加载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F"><span class="toc-text">数学公式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#03-09-22"><span class="toc-text">03.09.22</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A0%E6%B3%95%E6%B8%B2%E6%9F%93%E5%A4%9A%E8%A1%8C%E5%85%AC%E5%BC%8F"><span class="toc-text">无法渲染多行公式</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E8%88%AC%E7%9A%84%E5%9D%90%E6%A0%87%E5%8F%98%E6%8D%A2"><span class="toc-text">一般的坐标变换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%8B%E8%BD%AC%E5%9D%90%E6%A0%87%E5%8F%98%E6%8D%A2"><span class="toc-text">旋转坐标变换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%94%E5%8F%98%E5%BC%A0%E9%87%8F%E7%9A%84%E5%9D%90%E6%A0%87%E5%8F%98%E6%8D%A2"><span class="toc-text">应变张量的坐标变换</span></a></li></ol>
         </div>
     </aside>
     <a class="btn-toc button" id="btn-toc" tabindex="0">
@@ -184,56 +186,39 @@
     </a>
     <div class="toc-menus" id="toc-menus">
         <div class="toc-title">Article Directory</div>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#02-28-22"><span class="toc-text">02.28.22</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD"><span class="toc-text">图片加载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F"><span class="toc-text">数学公式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#03-09-22"><span class="toc-text">03.09.22</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A0%E6%B3%95%E6%B8%B2%E6%9F%93%E5%A4%9A%E8%A1%8C%E5%85%AC%E5%BC%8F"><span class="toc-text">无法渲染多行公式</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E8%88%AC%E7%9A%84%E5%9D%90%E6%A0%87%E5%8F%98%E6%8D%A2"><span class="toc-text">一般的坐标变换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%8B%E8%BD%AC%E5%9D%90%E6%A0%87%E5%8F%98%E6%8D%A2"><span class="toc-text">旋转坐标变换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%94%E5%8F%98%E5%BC%A0%E9%87%8F%E7%9A%84%E5%9D%90%E6%A0%87%E5%8F%98%E6%8D%A2"><span class="toc-text">应变张量的坐标变换</span></a></li></ol>
     </div>
 
 
 <article class="post post__with-toc content-card">
     <div class="post__header"></div>
     <div class="post__content">
-        <h2 id="02-28-22"><a href="#02-28-22" class="headerlink" title="02.28.22"></a>02.28.22</h2><h3 id="图片加载"><a href="#图片加载" class="headerlink" title="图片加载"></a>图片加载</h3><p>感谢<a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_43401436/article/details/107191688">这篇博客</a>。一般能找到的教程只会说安装某插件，但其实markdown的里图片插入路径也得改，而且改了之后markdown页面无法正常显示图片，网页上才能正常显示。</p>
-<h3 id="数学公式"><a href="#数学公式" class="headerlink" title="数学公式"></a>数学公式</h3><p>需要在文章的front matter里加一行</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mathjax: true</span><br></pre></td></tr></table></figure>
-
-<h2 id="03-09-22"><a href="#03-09-22" class="headerlink" title="03.09.22"></a>03.09.22</h2><h3 id="无法渲染多行公式"><a href="#无法渲染多行公式" class="headerlink" title="无法渲染多行公式"></a>无法渲染多行公式</h3><p>原因在于hexo会把//转义为/。</p>
-<p>使用如下提示，让公式按原有规则渲染。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;% raw %&#125;</span><br><span class="line">...</span><br><span class="line">&#123;% endraw %&#125;</span><br></pre></td></tr></table></figure>
-
+        <h2 id="一般的坐标变换"><a href="#一般的坐标变换" class="headerlink" title="一般的坐标变换"></a>一般的坐标变换</h2><p>在<a target="_blank" rel="noopener" href="https://yawning-lion.github.io/2022/03/07/post7/">张量-02-协变逆变 </a>中有提到比较一般的坐标变换。</p>
+<h2 id="旋转坐标变换"><a href="#旋转坐标变换" class="headerlink" title="旋转坐标变换"></a>旋转坐标变换</h2><p>比较特殊的一点是，此时的变换矩阵是单位正交阵。就是说，如果<br>$$<br> c_{ij}\hat e_i  = e_j<br>$$<br>一定有<br>$$<br>\hat e_i = (c^{-1})<em>{ij}e_j<br>$$<br>但因为单位正交阵有$C^TC=I$，所以有<br>$$<br>\hat e_i = C</em>{ji}e_j<br>$$<br>那么二阶张量的坐标变换可以写成<br>$$<br>\hat A_{ij} = C_{ki}C_{sj}A_{ks}<br>$$</p>
+<h2 id="应变张量的坐标变换"><a href="#应变张量的坐标变换" class="headerlink" title="应变张量的坐标变换"></a>应变张量的坐标变换</h2><p>由这篇<a target="_blank" rel="noopener" href="https://yawning-lion.github.io/2022/03/13/post11/">弹性力学-02-应变分析</a>，所以$\xi$上的应变率为（小变形时）</p>
+<p>$$<br>\epsilon = \xi_i \gamma_{ij}\xi_j<br>$$<br>我们提出<br>$$<br>\hat e_i = C_{ij}e_j<br>$$<br>得到<br>$$<br>\hat \gamma_ij = C_{ik}C_{js}\gamma_{ks}<br>$$<br>等等，好像和上面的不太一样？事实上$\Gamma$是对称张量，上面$C_{ij}$的提法也和上面不一样，其实是一样的。</p>
+<p>但是有一个问题，任意方向上应变率的结论是在小变形的条件下适用的，那么应变张量的坐标变换是否也在小变形下成立？可是单纯从坐标变换角度出发那个式子是总可以推导出的，或者说，只有在小变形下这个变换公式才是有实际意义的？不知道。之后问出来了再补上。</p>
 
     </div>
      
     <div class="post-footer__meta"><p>updated at 2022-03-13</p></div> 
-    <div class="post-entry__tags"><a href="/tags/%E9%87%8D%E5%A4%A7%E8%AF%B4%E6%98%8E/" class="post-tags__link button"># 重大说明</a></div> 
+    <div class="post-entry__tags"><a href="/tags/%E5%BC%A0%E9%87%8F/" class="post-tags__link button"># 张量</a><a href="/tags/%E5%BC%B9%E6%80%A7%E5%8A%9B%E5%AD%A6/" class="post-tags__link button"># 弹性力学</a><a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/" class="post-tags__link button"># 线性代数</a></div> 
 </article>
 
 
     <div class="nav">
         <div class="nav__prev">
             
-                <a href="/2022/02/28/post5/" class="nav__link">
-                    <div>
-                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M589.088 790.624L310.464 512l278.624-278.624 45.248 45.248L400.96 512l233.376 233.376z" fill="#808080"></path></svg>
-                    </div>
-                    <div>
-                        <div class="nav__label">
-                            Previous Post
-                        </div>
-                        <div class="nav__title">
-                            流体力学-01-量纲分析与相似律
-                        </div>
-                    </div>
-                </a>
-            
         </div>
         <div class="nav__next">
             
-                <a href="/2022/02/27/post3/" class="nav__link">
+                <a href="/2022/03/13/post11/" class="nav__link">
                     <div>
                         <div class="nav__label">
                             Next Post
                         </div>
                         <div class="nav__title">
-                            张量-01-运算法则与求和约定
+                            弹性力学-02-应变分析
                         </div>
                     </div>
                     <div>
