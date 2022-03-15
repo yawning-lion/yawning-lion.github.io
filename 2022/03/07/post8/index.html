@@ -49,7 +49,7 @@
 <meta property="og:description" content="上学期流体力学其实学的迷迷糊糊的，这学期听了ewn院士的课，读了一点点连续介质力学，决定换个观点重新看一遍流体力学基本方程组，重新学一遍。目的在于把自己零散的知识给串起来，不会有大量细节推导。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-03-07T07:22:07.000Z">
-<meta property="article:modified_time" content="2022-03-09T07:37:02.128Z">
+<meta property="article:modified_time" content="2022-03-15T15:51:42.510Z">
 <meta property="article:author" content="yawning-lion">
 <meta property="article:tag" content="流体力学">
 <meta property="article:tag" content="连续介质力学">
@@ -213,10 +213,10 @@ $$
 <p>古典流体力学（不包括湍流）的研究思路都是对流体引入连续介质假设，就可以用<strong>场论</strong>的手法去处理流体问题——可微了嘛！事实上包括弹性力学、电动力学在内都可以包入连续介质问题的范畴内，可以根据各种更基本的原理拿出方程、本构关系，但数学模型是类似的；比如说流体力学中的涡量感生的数学模型和电磁学中磁场问题是一模一样的。不过电动力学和流体力学、弹性力学不太一样，它的力场更复杂些，也可以提出更复杂的本构。</p>
 <p>事实上场论处理的是欧拉观点的下的问题，要处理拉格朗日观点下的问题，就用的是分析手段，似乎也引入很多物理intuition(?)</p>
 <p>比如我印象非常深的一个连续性方程的提法，由奥高定理<br>$$<br>\nabla \cdot v = \frac{\oint_s v_n ds}{\delta V}<br>$$<br>曲面积分的积分区域取为物质体微元，所以$\oint_s v_n ds$是物质体体积变化量，故$\nabla \cdot v $是物质微元体积变化率，当流体不可压时速度散度就为0.</p>
-<p>连续性方程的提法是非常一般的。这里我们关注质量守恒，所以考察了物理量是速度$v$，如果是电荷守恒那就另说了。</p>
+<p>连续性方程的提法是非常一般的。这里我们关注质量守恒，所以考察的物理量是速度$v$，如果是电荷守恒那就另说了。</p>
 <h2 id="流体力学方程组的提法"><a href="#流体力学方程组的提法" class="headerlink" title="流体力学方程组的提法"></a>流体力学方程组的提法</h2><p>把脉络梳理一遍。</p>
 <h3 id="应变张量"><a href="#应变张量" class="headerlink" title="应变张量"></a>应变张量</h3><p>从<br>$$<br>v = v_0 + \frac{\partial v}{\partial x_i}\delta x_i<br>$$<br>到<br>$$<br>v_i = v_{0i}+ a_{ij}\delta x_{j}+S_{ij}\delta x_j<br>$$<br>再到亥姆霍兹分解<br>$$<br>v=v_0+\frac{1}{2}rotv \times\delta r+grad\phi<br>$$<br>其中<br>$$<br>\phi = \frac{1}{2}\delta r \cdot S \cdot \delta r<br>$$<br>其实并没有提供什么多余的信息，只是把物理量用更紧凑更具有物理意义的形式写出来了而已，纯纯的场论分析手法，没另外提供什么物理图像。</p>
-<p>然后分析应变张量的物理意义，这是不平凡的；发现<br>$$<br>\frac{d}{dt}\delta r=\frac{\delta v}{\delta x_i}\delta x_i<br>$$<br>捯饬来捯饬去就可以构建起速度梯度与长度变化量之间的关系。上学期根本就没把这件事看清楚，现在大抵可以做到独立的从头把这件事捯饬明白了。</p>
+<p>然后分析应变张量的物理意义，这是不平凡的；发现<br>$$<br>\frac{d}{dt}\delta r=\frac{\delta v}{\delta x_i}\delta x_i<br>$$<br>捯饬来捯饬去就可以构建起速度梯度与长度变化量之间的关系。上学期根本就没把这件事看清楚，现在大抵可以做到独立的从头把这件事明白了。</p>
 <h3 id="基本方程"><a href="#基本方程" class="headerlink" title="基本方程"></a>基本方程</h3><p>连续性方程、动量方程和能量方程都是关注物质微元，根据基本原理非常直接的就能写出来。</p>
 <p>对于动量矩方程，意义在于发现应力张量分量是对称的，相当于将九个未知量减少到六个，但此时方程组仍然不封闭。</p>
 <h3 id="本构关系"><a href="#本构关系" class="headerlink" title="本构关系"></a>本构关系</h3><p>为了让方程封闭，需要引入物性的知识，也就是本构关系。</p>
@@ -240,7 +240,7 @@ $$
 
     </div>
      
-    <div class="post-footer__meta"><p>updated at 2022-03-09</p></div> 
+    <div class="post-footer__meta"><p>updated at 2022-03-15</p></div> 
     <div class="post-entry__tags"><a href="/tags/%E6%B5%81%E4%BD%93%E5%8A%9B%E5%AD%A6/" class="post-tags__link button"># 流体力学</a><a href="/tags/%E8%BF%9E%E7%BB%AD%E4%BB%8B%E8%B4%A8%E5%8A%9B%E5%AD%A6/" class="post-tags__link button"># 连续介质力学</a></div> 
 </article>
 
