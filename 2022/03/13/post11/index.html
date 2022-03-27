@@ -51,7 +51,7 @@
 <meta property="og:image" content="https://yawninglion.github.io/2022/03/13/post11/pic1.png">
 <meta property="og:image" content="https://yawninglion.github.io/2022/03/13/post11/pic2.png">
 <meta property="article:published_time" content="2022-03-13T13:19:43.000Z">
-<meta property="article:modified_time" content="2022-03-13T15:17:26.031Z">
+<meta property="article:modified_time" content="2022-03-27T08:22:14.831Z">
 <meta property="article:author" content="yawning-lion">
 <meta property="article:tag" content="弹性力学">
 <meta property="article:tag" content="连续介质力学">
@@ -203,19 +203,24 @@
 <h2 id="应变协调方程"><a href="#应变协调方程" class="headerlink" title="应变协调方程"></a>应变协调方程</h2><p>我们可以从位移得到变形，这是几何方程干的事。</p>
 <p>这里有一个非常有价值的反问题，我们是否可以从变形（应变）还原得到位移场？</p>
 <p>答案是可以的。考虑现实情况，变形不能用位错等奇奇怪怪的情况，变形显然不能是任意的，我们需要对变形张量提出限制。<br>$$<br>\nabla \times \Gamma \times \nabla = 0<br>$$<br>这是因为假如可以还原到位移场，那么$\Gamma$来自于$u$的梯度，大致可以理解为有势，所以就可以提这样的应变协调条件。</p>
-<h2 id="Volterra积分表示"><a href="#Volterra积分表示" class="headerlink" title="Volterra积分表示"></a>Volterra积分表示</h2><p>这玩意太平凡了。。就是积分，然后化简一下。</p>
+<p>在直角坐标系里可以把这件事看的更清楚。（哦下面写错成应力张量的分量了！是应变张量的分量，该用$\epsilon$，$\gamma$表示）<br>$$<br>\sigma_x = \frac{\partial u}{\partial x},\sigma_y =\frac{\partial v}{\partial y}, \tau_{xy}=\frac{\partial u}{\partial y}+\frac{\partial v}{\partial x}<br>$$<br>这三个量是由$u,v$两个量表示的，所以它们之间一定满足某种关系，可以通过求导看清这件事，一定会存在这样一个关系<br>$$<br>\frac{\partial^2 \sigma_x}{\partial y^2}+\frac{\partial^2 \sigma_y}{\partial x^2} = \frac{\partial^2 \tau_{xy}}{\partial x \partial y}<br>$$<br>所以也可以发现，那三个应变分量是由一个位移场表示而来的必要条件是这个协调方程。想积分有位移场，就一定满足协调方程。</p>
+<h2 id="Volterra积分表示"><a href="#Volterra积分表示" class="headerlink" title="Volterra积分表示"></a>Volterra积分表示</h2><p>就是说，知道了应变场可不可以积找出位移场。</p>
+<p>这玩意太平凡了。。就是积分，然后化简一下。</p>
+<p>大意是位移场的积分可以做亥姆霍次分解，把含反对称部分的项分部积分，把全微分项扔出积分，里面就有$d \omega_{\rho} = d \rho \cdot \nabla \omega_{\rho}$，这件事是好的，最开始反对称项里是$\omega_{\rho} \times d \rho$，$d\rho$是以叉乘作用，没法齐整的提出来。</p>
+<p>这样转化为了点乘，就可以<em>齐整</em>的把积分表示成$d\rho$乘仅含$\Gamma$式子的积分，这件事是容易做的。</p>
 <p>值得关注的是<br>$$<br>\nabla u =-\Omega+\Gamma<br>$$</p>
 <p>$$<br>u\nabla = \Omega+\Gamma<br>$$</p>
 <p>$$<br>\Gamma \times \nabla = \frac{1}{2}(u\nabla+\nabla)\times \nabla = \frac{1}{2}\nabla(u \times \nabla) =-\nabla\omega<br>$$</p>
 <h2 id="体积变化率"><a href="#体积变化率" class="headerlink" title="体积变化率"></a>体积变化率</h2><p>这是一件有意思的事。</p>
 <p><img src="/2022/03/13/post11/pic1.png" class="lazy" data-srcset="/2022/03/13/post11/pic1.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAABlBMVEXMzMyWlpYU2uzLAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAACklEQVQImWNgAAAAAgAB9HFkpgAAAABJRU5ErkJggg==" alt="pic1"></p>
 <h2 id="格林应变张量"><a href="#格林应变张量" class="headerlink" title="格林应变张量"></a>格林应变张量</h2><p>这一派关心微元变形前后长度的变化。</p>
+<p>所以其实下图干的事情就是紧凑的表示$(d \widetilde r)^2-(dr)^2$，$\xi$是$dr$线元的方向。</p>
 <p><img src="/2022/03/13/post11/pic2.png" class="lazy" data-srcset="/2022/03/13/post11/pic2.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAABlBMVEXMzMyWlpYU2uzLAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAACklEQVQImWNgAAAAAgAB9HFkpgAAAABJRU5ErkJggg==" alt="image-20220313215720648"></p>
 <p>所以某方向$\xi$上的应变率为（小变形时）<br>$$<br>\epsilon = \xi_i \gamma_{ij}\xi_j<br>$$</p>
 
     </div>
      
-    <div class="post-footer__meta"><p>updated at 2022-03-13</p></div> 
+    <div class="post-footer__meta"><p>updated at 2022-03-27</p></div> 
     <div class="post-entry__tags"><a href="/tags/%E5%BC%B9%E6%80%A7%E5%8A%9B%E5%AD%A6/" class="post-tags__link button"># 弹性力学</a><a href="/tags/%E8%BF%9E%E7%BB%AD%E4%BB%8B%E8%B4%A8%E5%8A%9B%E5%AD%A6/" class="post-tags__link button"># 连续介质力学</a></div> 
 </article>
 
