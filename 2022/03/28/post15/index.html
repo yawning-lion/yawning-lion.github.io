@@ -31,27 +31,28 @@
     <!-- meta -->
 
 
-<title>01-再次欢迎 | 狮子大张嘴&#39;s blog</title>
+<title>弹性力学-04-应力分析 | 狮子大张嘴&#39;s blog</title>
 
 
-    <meta name="keywords" content="重大声明">
+    <meta name="keywords" content="弹性力学, 连续介质力学">
 
 
 
 
     <!-- OpenGraph -->
  
-    <meta name="description" content="博客建设了一个多月，重新明确了自己建设博客的目的和路径，所以，“再次欢迎”。">
+    <meta name="description" content="梳理应变分析的知识脉络，但这里其实没啥好说的">
 <meta property="og:type" content="article">
-<meta property="og:title" content="01-再次欢迎">
-<meta property="og:url" content="https://yawninglion.github.io/2022/03/26/post14/index.html">
+<meta property="og:title" content="弹性力学-04-应力分析">
+<meta property="og:url" content="https://yawninglion.github.io/2022/03/28/post15/index.html">
 <meta property="og:site_name" content="狮子大张嘴&#39;s blog">
-<meta property="og:description" content="博客建设了一个多月，重新明确了自己建设博客的目的和路径，所以，“再次欢迎”。">
+<meta property="og:description" content="梳理应变分析的知识脉络，但这里其实没啥好说的">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2022-03-26T08:47:26.000Z">
-<meta property="article:modified_time" content="2022-03-28T12:02:05.097Z">
+<meta property="article:published_time" content="2022-03-27T18:17:29.000Z">
+<meta property="article:modified_time" content="2022-03-28T11:33:06.443Z">
 <meta property="article:author" content="yawning-lion">
-<meta property="article:tag" content="重大声明">
+<meta property="article:tag" content="弹性力学">
+<meta property="article:tag" content="连续介质力学">
 <meta name="twitter:card" content="summary_large_image">
 
 
@@ -152,12 +153,12 @@
 
 <div class="post-title">
     <h1 class="post-title__text">
-        01-再次欢迎
+        弹性力学-04-应力分析
     </h1>
     <div class="post-title__meta">
-        <a href="/archives/2022/03/" class="post-meta__date button">2022-03-26</a>
+        <a href="/archives/2022/03/" class="post-meta__date button">2022-03-28</a>
         
-    <span class="separate-dot"></span><a href="/categories/%E8%BF%99%E4%B8%AA%E7%94%B7%E4%BA%BA%E6%9D%A5%E8%87%AA%E5%9C%B0%E7%90%83/" class="button">这个男人来自地球</a>
+    <span class="separate-dot"></span><a href="/categories/%E6%88%91%E6%9D%A5%E6%88%91%E8%A7%81%E6%88%91%E5%BE%81%E6%9C%8D/" class="button">我来我见我征服</a>
 
  
         
@@ -174,7 +175,7 @@
 
     <aside class="post-side">
         <div class="post-side__toc">
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Trivialization"><span class="toc-text">Trivialization</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BD%92%E6%A1%A3"><span class="toc-text">归档</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E6%9C%9F%E4%B8%80%E4%BC%9A%EF%BC%8C%E4%BC%9A%E8%80%85%E5%AE%9A%E7%A6%BB"><span class="toc-text">一期一会，会者定离</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9F%A5%E8%AF%86%E6%A1%86%E6%9E%B6"><span class="toc-text">知识框架</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%94%E5%8A%9B%E5%92%8C%E4%BD%93%E5%8A%9B"><span class="toc-text">应力和体力</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%94%E5%8A%9B%E5%BC%A0%E9%87%8F"><span class="toc-text">应力张量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%BB%E6%84%8F%E6%96%B9%E5%90%91%E4%B8%8A%E7%9A%84%E5%86%85%E5%8A%9B"><span class="toc-text">任意方向上的内力</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B9%B3%E8%A1%A1%E6%96%B9%E7%A8%8B"><span class="toc-text">平衡方程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%94%E5%8A%9B%E5%87%BD%E6%95%B0"><span class="toc-text">应力函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9D%90%E6%A0%87%E5%8F%98%E6%8D%A2"><span class="toc-text">坐标变换</span></a></li></ol>
         </div>
     </aside>
     <a class="btn-toc button" id="btn-toc" tabindex="0">
@@ -184,58 +185,48 @@
     </a>
     <div class="toc-menus" id="toc-menus">
         <div class="toc-title">Article Directory</div>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Trivialization"><span class="toc-text">Trivialization</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BD%92%E6%A1%A3"><span class="toc-text">归档</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E6%9C%9F%E4%B8%80%E4%BC%9A%EF%BC%8C%E4%BC%9A%E8%80%85%E5%AE%9A%E7%A6%BB"><span class="toc-text">一期一会，会者定离</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9F%A5%E8%AF%86%E6%A1%86%E6%9E%B6"><span class="toc-text">知识框架</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%94%E5%8A%9B%E5%92%8C%E4%BD%93%E5%8A%9B"><span class="toc-text">应力和体力</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%94%E5%8A%9B%E5%BC%A0%E9%87%8F"><span class="toc-text">应力张量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%BB%E6%84%8F%E6%96%B9%E5%90%91%E4%B8%8A%E7%9A%84%E5%86%85%E5%8A%9B"><span class="toc-text">任意方向上的内力</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B9%B3%E8%A1%A1%E6%96%B9%E7%A8%8B"><span class="toc-text">平衡方程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%94%E5%8A%9B%E5%87%BD%E6%95%B0"><span class="toc-text">应力函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9D%90%E6%A0%87%E5%8F%98%E6%8D%A2"><span class="toc-text">坐标变换</span></a></li></ol>
     </div>
 
 
 <article class="post post__with-toc content-card">
     <div class="post__header"></div>
     <div class="post__content">
-        <p>博客建设了一个多月，重新明确了自己建设博客的目的和路径，所以，“再次欢迎”。关于第一次欢迎，可以参见<a target="_blank" rel="noopener" href="https://yawning-lion.github.io/2022/02/11/post1/">00-欢迎</a>。</p>
-<h2 id="Trivialization"><a href="#Trivialization" class="headerlink" title="Trivialization"></a>Trivialization</h2><p>私以为，认知水平的高低在于能否把比较困难的事情“平凡化”，and take them for granted。</p>
-<p>这是在学习一些定理的证明的时候发现的。大部分定理都是由一个两个最核心的insight支撑起来的，把握了这些insight也就把握住了这些定理证明的脉络。有时候这些insight令人难以接受，即便可以看懂也无法完全接受，但对于大佬，他们往往会认为“就该是这样啊”“这不是很平凡的事情吗”，看了一遍证明就可以自己独立的把它写出来。</p>
-<p>我觉得认知水平的差异就体现在这里了：能否快速把一件事物内化为自己的储备，关键在于能否快速把晦涩的事物trivialize。想做到这一点需要对这件事有深刻的认知，理清所有条理并内化，才能清楚的把它说出来。</p>
-<p>高低差异在于，可能对于百分之八九十的定理大佬们都可以快速trivialize，但我可能只能cover一半不到的定理，剩下的都得我反复咀嚼才能做到trivialize。我想费曼学习法的作用可能就在这里，要做到能把一件事情清楚的讲给别人听是需要做到trivialize的，倒逼自己做深刻认知。</p>
-<p>而写博文就是这样一件事。我只有深度理解某个知识，才能做到不依赖或者轻度依赖书本就把一个某个知识的关口和脉络讲清楚。而这些关口和脉络也是理解一知识的过程中，我认为不那么trivial的地方，也就是我当下认知水平尚不能及之处。假如说我认为某个知识全部都是很平凡的，那就不会写出来了2333。</p>
-<p>希望可以通过写作，把一件件事情都做到trivialization，拾级而上，慢慢提高自己的认知水准。</p>
-<h2 id="归档"><a href="#归档" class="headerlink" title="归档"></a>归档</h2><p>记录下每个阶段自己零碎的想法，然后在未来几年之后一一回顾，相信会非常有趣。</p>
-<p>人的思想是连续变化的，但大部分时候我们只能看到当下的状态，过去的状态也是很珍贵的呀！所以要坚持记录下一步一步走来的过程。有些有趣的想法也不能轻易丢掉，哪天我失去了想象力，我就得靠这个博客过去的记录过活了23333。</p>
-<h2 id="一期一会，会者定离"><a href="#一期一会，会者定离" class="headerlink" title="一期一会，会者定离"></a>一期一会，会者定离</h2><p>很多说再见的时候，都是和那个人见的最后一面了。从那之后他们就在我的世界里一点点消失，一点点死去。我在他们的世界里亦然。</p>
+        <h2 id="知识框架"><a href="#知识框架" class="headerlink" title="知识框架"></a>知识框架</h2><h2 id="应力和体力"><a href="#应力和体力" class="headerlink" title="应力和体力"></a>应力和体力</h2><p>应力是内力，是体内微元之间的作用力。某个面上，单位面积上所受作用力的集度，与压强同量纲。</p>
+<p>体力是外力，比如重力，定义为<br>$$<br>f = \lim\limits_{\Delta V\rightarrow 0} \frac{a(\Delta V)}{\Delta V}<br>$$<br>常见的是重力场下的体力，比重。</p>
+<h2 id="应力张量"><a href="#应力张量" class="headerlink" title="应力张量"></a>应力张量</h2><p>这里的想法是自然的。</p>
+<p>取一个立方微元体，每个面都有力作用，在面上对力可以正交分解为三个方向：法向，面上两个互相垂直的方向。但是面的法向又有三种情况。</p>
+<p>所以在直角坐标系下，想精确的确定一个力需要9个维度的信息，每个维度都有面的法向（3维）和面上力的取向（3维）共同构成。</p>
+<p>这就是应力张量$T$,它的各个分量甫一提出就可以看到鲜明的物理意义。</p>
+<p>$\sigma_i$代表$T_{ii}$，为某个面上与法向共线的力，也就是正应力。</p>
+<p>$\tau <em>{ij}$代表$T</em>{ij}$，是法向为$i$的面上，与$j$同向的力，此时$i,j$不互等，为剪应力。</p>
+<h2 id="任意方向上的内力"><a href="#任意方向上的内力" class="headerlink" title="任意方向上的内力"></a>任意方向上的内力</h2><p>$$<br>n \cdot T = t<br>$$</p>
+<p>这里的n是方向。这个式子的证明利用了正四面体的平衡条件。直观的说，就是把$t$分解到直角坐标系的三个方向分别平衡。</p>
+<h2 id="平衡方程"><a href="#平衡方程" class="headerlink" title="平衡方程"></a>平衡方程</h2><p>取正六面体，平衡时，应有合外力为0，即应力和体力之和为0.<br>$$<br>\int <em>{\partial \Omega}Tds+\int</em>{\Omega}fd\tau = 0<br>$$<br>利用奥高公式，得<br>$$<br>\nabla \cdot T + f =0<br>$$<br>对于力矩平衡，也可类似地提出方程。证明过程中的要点是，尽力转化出同类型并合并，利用平衡方程可证得应力张量的对称性。</p>
+<h2 id="应力函数"><a href="#应力函数" class="headerlink" title="应力函数"></a>应力函数</h2><p>这里的意思是，想求无外力时的应力，即<br>$$<br>\nabla \cdot T =0<br>$$<br>的解，发现这种情况应力的分量可以由几个任意的“足够好”的函数的导数表示。得到Beltrami-Scharfer解<br>$$<br>T=\nabla \times \Phi \times \nabla+h\nabla+\nabla h-I\nabla \cdot h<br>$$<br>其中$\Phi$是对称张量场，$h$是调和矢量场。</p>
+<p>其实也挺平凡的，可以看成是一种张量分解。</p>
+<h2 id="坐标变换"><a href="#坐标变换" class="headerlink" title="坐标变换"></a>坐标变换</h2><p>同样满足合同变换<br>$$<br>CTC^T<br>$$<br>正应力和最大剪应力理论都是纯纯的代数内容。</p>
 
     </div>
      
     <div class="post-footer__meta"><p>updated at 2022-03-28</p></div> 
-    <div class="post-entry__tags"><a href="/tags/%E9%87%8D%E5%A4%A7%E5%A3%B0%E6%98%8E/" class="post-tags__link button"># 重大声明</a></div> 
+    <div class="post-entry__tags"><a href="/tags/%E5%BC%B9%E6%80%A7%E5%8A%9B%E5%AD%A6/" class="post-tags__link button"># 弹性力学</a><a href="/tags/%E8%BF%9E%E7%BB%AD%E4%BB%8B%E8%B4%A8%E5%8A%9B%E5%AD%A6/" class="post-tags__link button"># 连续介质力学</a></div> 
 </article>
 
 
     <div class="nav">
         <div class="nav__prev">
             
-                <a href="/2022/03/28/post15/" class="nav__link">
-                    <div>
-                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M589.088 790.624L310.464 512l278.624-278.624 45.248 45.248L400.96 512l233.376 233.376z" fill="#808080"></path></svg>
-                    </div>
-                    <div>
-                        <div class="nav__label">
-                            Previous Post
-                        </div>
-                        <div class="nav__title">
-                            弹性力学-04-应力分析
-                        </div>
-                    </div>
-                </a>
-            
         </div>
         <div class="nav__next">
             
-                <a href="/2022/03/15/post13/" class="nav__link">
+                <a href="/2022/03/26/post14/" class="nav__link">
                     <div>
                         <div class="nav__label">
                             Next Post
                         </div>
                         <div class="nav__title">
-                            十六日谈-01-他人的舞台与不灭的英雄梦想
+                            01-再次欢迎
                         </div>
                     </div>
                     <div>
