@@ -31,7 +31,7 @@
     <!-- meta -->
 
 
-<title>弹性力学-02-应变分析 | 狮子大张嘴&#39;s blog</title>
+<title>弹性力学-02-应变分析和应力分析 | 狮子大张嘴&#39;s blog</title>
 
 
     <meta name="keywords" content="弹性力学, 连续介质力学">
@@ -41,17 +41,17 @@
 
     <!-- OpenGraph -->
  
-    <meta name="description" content="梳理一下应变分析这一块的知识脉络。">
+    <meta name="description" content="梳理一下这两块的知识脉络。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="弹性力学-02-应变分析">
+<meta property="og:title" content="弹性力学-02-应变分析和应力分析">
 <meta property="og:url" content="https://yawninglion.github.io/2022/03/13/post11/index.html">
 <meta property="og:site_name" content="狮子大张嘴&#39;s blog">
-<meta property="og:description" content="梳理一下应变分析这一块的知识脉络。">
+<meta property="og:description" content="梳理一下这两块的知识脉络。">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://yawninglion.github.io/2022/03/13/post11/pic1.png">
 <meta property="og:image" content="https://yawninglion.github.io/2022/03/13/post11/pic2.png">
 <meta property="article:published_time" content="2022-03-13T13:19:43.000Z">
-<meta property="article:modified_time" content="2022-03-27T18:14:49.371Z">
+<meta property="article:modified_time" content="2022-03-29T07:37:47.735Z">
 <meta property="article:author" content="yawning-lion">
 <meta property="article:tag" content="弹性力学">
 <meta property="article:tag" content="连续介质力学">
@@ -156,7 +156,7 @@
 
 <div class="post-title">
     <h1 class="post-title__text">
-        弹性力学-02-应变分析
+        弹性力学-02-应变分析和应力分析
     </h1>
     <div class="post-title__meta">
         <a href="/archives/2022/03/" class="post-meta__date button">2022-03-13</a>
@@ -178,7 +178,7 @@
 
     <aside class="post-side">
         <div class="post-side__toc">
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9F%A5%E8%AF%86%E6%A1%86%E6%9E%B6"><span class="toc-text">知识框架</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%8D%E7%A7%BB%E5%9C%BA"><span class="toc-text">位移场</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%A0%E4%BD%95%E6%96%B9%E7%A8%8B"><span class="toc-text">几何方程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%94%E5%8F%98%E5%8D%8F%E8%B0%83%E6%96%B9%E7%A8%8B"><span class="toc-text">应变协调方程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Volterra%E7%A7%AF%E5%88%86%E8%A1%A8%E7%A4%BA"><span class="toc-text">Volterra积分表示</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%93%E7%A7%AF%E5%8F%98%E5%8C%96%E7%8E%87"><span class="toc-text">体积变化率</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%BC%E6%9E%97%E5%BA%94%E5%8F%98%E5%BC%A0%E9%87%8F"><span class="toc-text">格林应变张量</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%94%E5%8F%98%E5%88%86%E6%9E%90"><span class="toc-text">应变分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9F%A5%E8%AF%86%E6%A1%86%E6%9E%B6"><span class="toc-text">知识框架</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%8D%E7%A7%BB%E5%9C%BA"><span class="toc-text">位移场</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%A0%E4%BD%95%E6%96%B9%E7%A8%8B"><span class="toc-text">几何方程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E5%8F%98%E5%8D%8F%E8%B0%83%E6%96%B9%E7%A8%8B"><span class="toc-text">应变协调方程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Volterra%E7%A7%AF%E5%88%86%E8%A1%A8%E7%A4%BA"><span class="toc-text">Volterra积分表示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%93%E7%A7%AF%E5%8F%98%E5%8C%96%E7%8E%87"><span class="toc-text">体积变化率</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%BC%E6%9E%97%E5%BA%94%E5%8F%98%E5%BC%A0%E9%87%8F"><span class="toc-text">格林应变张量</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%94%E5%8A%9B%E5%88%86%E6%9E%90"><span class="toc-text">应力分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9F%A5%E8%AF%86%E6%A1%86%E6%9E%B6-1"><span class="toc-text">知识框架</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E5%8A%9B%E5%92%8C%E4%BD%93%E5%8A%9B"><span class="toc-text">应力和体力</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E5%8A%9B%E5%BC%A0%E9%87%8F"><span class="toc-text">应力张量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%BB%E6%84%8F%E6%96%B9%E5%90%91%E4%B8%8A%E7%9A%84%E5%86%85%E5%8A%9B"><span class="toc-text">任意方向上的内力</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B9%B3%E8%A1%A1%E6%96%B9%E7%A8%8B"><span class="toc-text">平衡方程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E5%8A%9B%E5%87%BD%E6%95%B0"><span class="toc-text">应力函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9D%90%E6%A0%87%E5%8F%98%E6%8D%A2"><span class="toc-text">坐标变换</span></a></li></ol></li></ol>
         </div>
     </aside>
     <a class="btn-toc button" id="btn-toc" tabindex="0">
@@ -188,46 +188,65 @@
     </a>
     <div class="toc-menus" id="toc-menus">
         <div class="toc-title">Article Directory</div>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9F%A5%E8%AF%86%E6%A1%86%E6%9E%B6"><span class="toc-text">知识框架</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%8D%E7%A7%BB%E5%9C%BA"><span class="toc-text">位移场</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%A0%E4%BD%95%E6%96%B9%E7%A8%8B"><span class="toc-text">几何方程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%94%E5%8F%98%E5%8D%8F%E8%B0%83%E6%96%B9%E7%A8%8B"><span class="toc-text">应变协调方程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Volterra%E7%A7%AF%E5%88%86%E8%A1%A8%E7%A4%BA"><span class="toc-text">Volterra积分表示</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%93%E7%A7%AF%E5%8F%98%E5%8C%96%E7%8E%87"><span class="toc-text">体积变化率</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%BC%E6%9E%97%E5%BA%94%E5%8F%98%E5%BC%A0%E9%87%8F"><span class="toc-text">格林应变张量</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%94%E5%8F%98%E5%88%86%E6%9E%90"><span class="toc-text">应变分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9F%A5%E8%AF%86%E6%A1%86%E6%9E%B6"><span class="toc-text">知识框架</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%8D%E7%A7%BB%E5%9C%BA"><span class="toc-text">位移场</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%A0%E4%BD%95%E6%96%B9%E7%A8%8B"><span class="toc-text">几何方程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E5%8F%98%E5%8D%8F%E8%B0%83%E6%96%B9%E7%A8%8B"><span class="toc-text">应变协调方程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Volterra%E7%A7%AF%E5%88%86%E8%A1%A8%E7%A4%BA"><span class="toc-text">Volterra积分表示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%93%E7%A7%AF%E5%8F%98%E5%8C%96%E7%8E%87"><span class="toc-text">体积变化率</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%BC%E6%9E%97%E5%BA%94%E5%8F%98%E5%BC%A0%E9%87%8F"><span class="toc-text">格林应变张量</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%94%E5%8A%9B%E5%88%86%E6%9E%90"><span class="toc-text">应力分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9F%A5%E8%AF%86%E6%A1%86%E6%9E%B6-1"><span class="toc-text">知识框架</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E5%8A%9B%E5%92%8C%E4%BD%93%E5%8A%9B"><span class="toc-text">应力和体力</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E5%8A%9B%E5%BC%A0%E9%87%8F"><span class="toc-text">应力张量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%BB%E6%84%8F%E6%96%B9%E5%90%91%E4%B8%8A%E7%9A%84%E5%86%85%E5%8A%9B"><span class="toc-text">任意方向上的内力</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B9%B3%E8%A1%A1%E6%96%B9%E7%A8%8B"><span class="toc-text">平衡方程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E5%8A%9B%E5%87%BD%E6%95%B0"><span class="toc-text">应力函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9D%90%E6%A0%87%E5%8F%98%E6%8D%A2"><span class="toc-text">坐标变换</span></a></li></ol></li></ol>
     </div>
 
 
 <article class="post post__with-toc content-card">
     <div class="post__header"></div>
     <div class="post__content">
-        <h2 id="知识框架"><a href="#知识框架" class="headerlink" title="知识框架"></a>知识框架</h2><ul>
+        <h2 id="应变分析"><a href="#应变分析" class="headerlink" title="应变分析"></a>应变分析</h2><h3 id="知识框架"><a href="#知识框架" class="headerlink" title="知识框架"></a>知识框架</h3><ul>
 <li>几何方程：从位移场出发，对位移场的微元做亥姆霍次分解，得到柯西应变张量。</li>
 <li>变形：考察线元长度平方的变化，得到格林应变张量；分别分析三个主方向上长度变化和主方向夹角变化，得到柯西应变张量各个分量的物理意义。需要注意，$\gamma$是夹角变化值的一半。</li>
 <li>坐标变换：合同变换，$\Gamma ^{‘} = C \Gamma C^T$;考察坐标变换下不变量，这里是纯代数内容，三个不变量；由应变张量对称性，知<strong>必定存在三个互相垂直的主方向</strong>，此时剪应力为0。</li>
 <li>协调方程：$\Gamma$是由位移场微分得到的，6个分量里只有3个是相互独立的，所以一定能提出约束条件</li>
 <li>volterra积分：这是一个有价值的反问题。volterra积分的目的在于根据原始的微分式找出积分，积分对象是应变张量的函数，这么做是因为方便。</li>
 </ul>
-<h2 id="位移场"><a href="#位移场" class="headerlink" title="位移场"></a>位移场</h2><p>与流体力学最不同的是，弹性力学研究物体变形关注的是变形前后物质点的位移，有点拉格朗日观点的味道。事实上给出的位移场的含义是空间中某一点变形后的位置相对于原先点的位移，是空间场。能这么做的原因在于<a target="_blank" rel="noopener" href="https://yawning-lion.github.io/2022/03/01/post6/">前文</a>提到的弹性假设，每次卸载后弹性体都可以回到原位置，所以总是可以确定下一个所谓的<strong>初始位置</strong>的。<br>$$<br>r^{‘} = r+u<br>$$</p>
+<h3 id="位移场"><a href="#位移场" class="headerlink" title="位移场"></a>位移场</h3><p>与流体力学最不同的是，弹性力学研究物体变形关注的是变形前后物质点的位移，有点拉格朗日观点的味道。事实上给出的位移场的含义是空间中某一点变形后的位置相对于原先点的位移，是空间场。能这么做的原因在于<a target="_blank" rel="noopener" href="https://yawning-lion.github.io/2022/03/01/post6/">前文</a>提到的弹性假设，每次卸载后弹性体都可以回到原位置，所以总是可以确定下一个所谓的<strong>初始位置</strong>的。<br>$$<br>r^{‘} = r+u<br>$$</p>
 <p>这里的$u$即位移场。</p>
-<h2 id="几何方程"><a href="#几何方程" class="headerlink" title="几何方程"></a>几何方程</h2><p>就是非常非常径直的泰勒展开…<br>$$<br>u(r+dr)=u(r)+(u\nabla)\cdot dr<br>$$<br>$u\nabla$是我们关心的东西，它可以做对称与反对称部分的展开。对称部分即应变张量$T$。</p>
+<h3 id="几何方程"><a href="#几何方程" class="headerlink" title="几何方程"></a>几何方程</h3><p>就是非常非常径直的泰勒展开…<br>$$<br>u(r+dr)=u(r)+(u\nabla)\cdot dr<br>$$<br>$u\nabla$是我们关心的东西，它可以做对称与反对称部分的展开。对称部分即应变张量$T$。</p>
 <p>这个东西可以描述任意小的线元（$dr$）变形后的样子（$(u\nabla)\cdot dr$），也就是包含了所有这一点上变形的信息。</p>
 <p>和流体力学变形张量不同的是，那里研究的是流体速度梯度，但一样的是都需要关注挨的足够近的质点。事实上速度与位移只差一个时间，并没有本质上区别；只是对于弹性力学问题没有时间的提法（其实也不一定？可能更多因为弹性力学问题中容易测量得到的是变形，而流体力学中相对容易测得的是速度）。</p>
-<h2 id="应变协调方程"><a href="#应变协调方程" class="headerlink" title="应变协调方程"></a>应变协调方程</h2><p>我们可以从位移得到变形，这是几何方程干的事。</p>
+<h3 id="应变协调方程"><a href="#应变协调方程" class="headerlink" title="应变协调方程"></a>应变协调方程</h3><p>我们可以从位移得到变形，这是几何方程干的事。</p>
 <p>这里有一个非常有价值的反问题，我们是否可以从变形（应变）还原得到位移场？</p>
 <p>答案是可以的。考虑现实情况，变形不能用位错等奇奇怪怪的情况，变形显然不能是任意的，我们需要对变形张量提出限制。<br>$$<br>\nabla \times \Gamma \times \nabla = 0<br>$$<br>这是因为假如可以还原到位移场，那么$\Gamma$来自于$u$的梯度，大致可以理解为有势，所以就可以提这样的应变协调条件。</p>
 <p>在直角坐标系里可以把这件事看的更清楚。（哦下面写错成应力张量的分量了！是应变张量的分量，该用$\epsilon$，$\gamma$表示）<br>$$<br>\sigma_x = \frac{\partial u}{\partial x},\sigma_y =\frac{\partial v}{\partial y}, \tau_{xy}=\frac{\partial u}{\partial y}+\frac{\partial v}{\partial x}<br>$$<br>这三个量是由$u,v$两个量表示的，所以它们之间一定满足某种关系，可以通过求导看清这件事，一定会存在这样一个关系<br>$$<br>\frac{\partial^2 \sigma_x}{\partial y^2}+\frac{\partial^2 \sigma_y}{\partial x^2} = \frac{\partial^2 \tau_{xy}}{\partial x \partial y}<br>$$<br>所以也可以发现，那三个应变分量是由一个位移场表示而来的必要条件是这个协调方程。想积分有位移场，就一定满足协调方程。</p>
-<h2 id="Volterra积分表示"><a href="#Volterra积分表示" class="headerlink" title="Volterra积分表示"></a>Volterra积分表示</h2><p>就是说，知道了应变场可不可以积找出位移场。</p>
+<h3 id="Volterra积分表示"><a href="#Volterra积分表示" class="headerlink" title="Volterra积分表示"></a>Volterra积分表示</h3><p>就是说，知道了应变场可不可以积找出位移场。</p>
 <p>这玩意太平凡了。。就是积分，然后化简一下。</p>
 <p>大意是位移场的积分可以做亥姆霍次分解，把含反对称部分的项分部积分，把全微分项扔出积分，里面就有$d \omega_{\rho} = d \rho \cdot \nabla \omega_{\rho}$，这件事是好的，最开始反对称项里是$\omega_{\rho} \times d \rho$，$d\rho$是以叉乘作用，没法齐整的提出来。</p>
 <p>这样转化为了点乘，就可以<em>齐整</em>的把积分表示成$d\rho$乘仅含$\Gamma$式子的积分，这件事是容易做的。</p>
 <p>值得关注的是<br>$$<br>\nabla u =-\Omega+\Gamma<br>$$</p>
 <p>$$<br>u\nabla = \Omega+\Gamma<br>$$</p>
 <p>$$<br>\Gamma \times \nabla = \frac{1}{2}(u\nabla+\nabla)\times \nabla = \frac{1}{2}\nabla(u \times \nabla) =-\nabla\omega<br>$$</p>
-<h2 id="体积变化率"><a href="#体积变化率" class="headerlink" title="体积变化率"></a>体积变化率</h2><p>这是一件有意思的事。</p>
+<h3 id="体积变化率"><a href="#体积变化率" class="headerlink" title="体积变化率"></a>体积变化率</h3><p>这是一件有意思的事。</p>
 <p><img src="/2022/03/13/post11/pic1.png" class="lazy" data-srcset="/2022/03/13/post11/pic1.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAABlBMVEXMzMyWlpYU2uzLAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAACklEQVQImWNgAAAAAgAB9HFkpgAAAABJRU5ErkJggg==" alt="pic1"></p>
-<h2 id="格林应变张量"><a href="#格林应变张量" class="headerlink" title="格林应变张量"></a>格林应变张量</h2><p>这一派关心微元变形前后长度的变化。</p>
+<h3 id="格林应变张量"><a href="#格林应变张量" class="headerlink" title="格林应变张量"></a>格林应变张量</h3><p>这一派关心微元变形前后长度的变化。</p>
 <p>所以其实下图干的事情就是紧凑的表示$(d \widetilde r)^2-(dr)^2$，$\xi$是$dr$线元的方向。</p>
 <p><img src="/2022/03/13/post11/pic2.png" class="lazy" data-srcset="/2022/03/13/post11/pic2.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAABlBMVEXMzMyWlpYU2uzLAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAACklEQVQImWNgAAAAAgAB9HFkpgAAAABJRU5ErkJggg==" alt="image-20220313215720648"></p>
 <p>所以某方向$\xi$上的应变率为（小变形时）<br>$$<br>\epsilon = \xi_i \gamma_{ij}\xi_j<br>$$</p>
+<h2 id="应力分析"><a href="#应力分析" class="headerlink" title="应力分析"></a>应力分析</h2><h3 id="知识框架-1"><a href="#知识框架-1" class="headerlink" title="知识框架"></a>知识框架</h3><ul>
+<li>定义了应力，体力</li>
+<li>由应力定义可以引出应力张量分量变化公式，再是纯代数的内容，推导出不变量、最大剪应力等结论。</li>
+<li>由受力平衡推导出平衡方程，力矩平衡推导出应力张量对称。</li>
+</ul>
+<h3 id="应力和体力"><a href="#应力和体力" class="headerlink" title="应力和体力"></a>应力和体力</h3><p>应力是内力，是体内微元之间的作用力。某个面上，单位面积上所受作用力的集度，与压强同量纲。</p>
+<p>体力是外力，比如重力，定义为<br>$$<br>f = \lim\limits_{\Delta V\rightarrow 0} \frac{a(\Delta V)}{\Delta V}<br>$$<br>常见的是重力场下的体力，比重。</p>
+<h3 id="应力张量"><a href="#应力张量" class="headerlink" title="应力张量"></a>应力张量</h3><p>这里的想法是自然的。</p>
+<p>取一个立方微元体，每个面都有力作用，在面上对力可以正交分解为三个方向：法向，面上两个互相垂直的方向。但是面的法向又有三种情况。</p>
+<p>所以在直角坐标系下，想精确的确定一个力需要9个维度的信息，每个维度都有面的法向（3维）和面上力的取向（3维）共同构成。</p>
+<p>这就是应力张量$T$,它的各个分量甫一提出就可以看到鲜明的物理意义。</p>
+<p>$\sigma_i$代表$T_{ii}$，为某个面上与法向共线的力，也就是正应力。</p>
+<p>$\tau <em>{ij}$代表$T</em>{ij}$，是法向为$i$的面上，与$j$同向的力，此时$i,j$不互等，为剪应力。</p>
+<h3 id="任意方向上的内力"><a href="#任意方向上的内力" class="headerlink" title="任意方向上的内力"></a>任意方向上的内力</h3><p>$$<br>n \cdot T = t<br>$$</p>
+<p>这里的n是方向。这个式子的证明利用了正四面体的平衡条件。直观的说，就是把$t$分解到直角坐标系的三个方向分别平衡。</p>
+<h3 id="平衡方程"><a href="#平衡方程" class="headerlink" title="平衡方程"></a>平衡方程</h3><p>取正六面体，平衡时，应有合外力为0，即应力和体力之和为0.<br>$$<br>\int <em>{\partial \Omega}Tds+\int</em>{\Omega}fd\tau = 0<br>$$<br>利用奥高公式，得<br>$$<br>\nabla \cdot T + f =0<br>$$<br>对于力矩平衡，也可类似地提出方程。证明过程中的要点是，尽力转化出同类型并合并，利用平衡方程可证得应力张量的对称性。</p>
+<h3 id="应力函数"><a href="#应力函数" class="headerlink" title="应力函数"></a>应力函数</h3><p>这里的意思是，想求无外力时的应力，即<br>$$<br>\nabla \cdot T =0<br>$$<br>的解，发现这种情况应力的分量可以由几个任意的“足够好”的函数的导数表示。得到Beltrami-Scharfer解<br>$$<br>T=\nabla \times \Phi \times \nabla+h\nabla+\nabla h-I\nabla \cdot h<br>$$<br>其中$\Phi$是对称张量场，$h$是调和矢量场。</p>
+<p>其实也挺平凡的，可以看成是一种张量分解。</p>
+<h3 id="坐标变换"><a href="#坐标变换" class="headerlink" title="坐标变换"></a>坐标变换</h3><p>同样满足合同变换<br>$$<br>CTC^T<br>$$<br>正应力和最大剪应力理论都是纯纯的代数内容。</p>
 
     </div>
      
-    <div class="post-footer__meta"><p>updated at 2022-03-28</p></div> 
+    <div class="post-footer__meta"><p>updated at 2022-03-29</p></div> 
     <div class="post-entry__tags"><a href="/tags/%E5%BC%B9%E6%80%A7%E5%8A%9B%E5%AD%A6/" class="post-tags__link button"># 弹性力学</a><a href="/tags/%E8%BF%9E%E7%BB%AD%E4%BB%8B%E8%B4%A8%E5%8A%9B%E5%AD%A6/" class="post-tags__link button"># 连续介质力学</a></div> 
 </article>
 

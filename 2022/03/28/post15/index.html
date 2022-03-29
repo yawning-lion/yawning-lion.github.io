@@ -31,7 +31,7 @@
     <!-- meta -->
 
 
-<title>弹性力学-04-应力分析 | 狮子大张嘴&#39;s blog</title>
+<title>弹性力学-04-应变能密度的故事 | 狮子大张嘴&#39;s blog</title>
 
 
     <meta name="keywords" content="弹性力学, 连续介质力学">
@@ -41,15 +41,15 @@
 
     <!-- OpenGraph -->
  
-    <meta name="description" content="梳理应变分析的知识脉络，但这里其实没啥好说的">
+    <meta name="description" content="弹性力学上到了本构关系和边值问题。内容多且繁琐，但笔者很惊喜的发现，应变能密度在这两部分里都扮演了很重要的角色，也有着很鲜明的物理意义，所以争取在这篇博文里用应变能密度把重要的内容串起来。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="弹性力学-04-应力分析">
+<meta property="og:title" content="弹性力学-04-应变能密度的故事">
 <meta property="og:url" content="https://yawninglion.github.io/2022/03/28/post15/index.html">
 <meta property="og:site_name" content="狮子大张嘴&#39;s blog">
-<meta property="og:description" content="梳理应变分析的知识脉络，但这里其实没啥好说的">
+<meta property="og:description" content="弹性力学上到了本构关系和边值问题。内容多且繁琐，但笔者很惊喜的发现，应变能密度在这两部分里都扮演了很重要的角色，也有着很鲜明的物理意义，所以争取在这篇博文里用应变能密度把重要的内容串起来。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-03-27T18:17:29.000Z">
-<meta property="article:modified_time" content="2022-03-28T12:38:04.373Z">
+<meta property="article:modified_time" content="2022-03-29T13:46:11.543Z">
 <meta property="article:author" content="yawning-lion">
 <meta property="article:tag" content="弹性力学">
 <meta property="article:tag" content="连续介质力学">
@@ -153,7 +153,7 @@
 
 <div class="post-title">
     <h1 class="post-title__text">
-        弹性力学-04-应力分析
+        弹性力学-04-应变能密度的故事
     </h1>
     <div class="post-title__meta">
         <a href="/archives/2022/03/" class="post-meta__date button">2022-03-28</a>
@@ -175,7 +175,7 @@
 
     <aside class="post-side">
         <div class="post-side__toc">
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9F%A5%E8%AF%86%E6%A1%86%E6%9E%B6"><span class="toc-text">知识框架</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%94%E5%8A%9B%E5%92%8C%E4%BD%93%E5%8A%9B"><span class="toc-text">应力和体力</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%94%E5%8A%9B%E5%BC%A0%E9%87%8F"><span class="toc-text">应力张量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%BB%E6%84%8F%E6%96%B9%E5%90%91%E4%B8%8A%E7%9A%84%E5%86%85%E5%8A%9B"><span class="toc-text">任意方向上的内力</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B9%B3%E8%A1%A1%E6%96%B9%E7%A8%8B"><span class="toc-text">平衡方程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%94%E5%8A%9B%E5%87%BD%E6%95%B0"><span class="toc-text">应力函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9D%90%E6%A0%87%E5%8F%98%E6%8D%A2"><span class="toc-text">坐标变换</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9F%A5%E8%AF%86%E6%A1%86%E6%9E%B6"><span class="toc-text">知识框架</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%98%E5%BD%A2%E6%97%B6%E5%A4%96%E5%8A%9B%EF%BC%88%E9%9D%A2%E5%8A%9B%E4%BD%93%E5%8A%9B%EF%BC%89%E5%81%9A%E5%8A%9F"><span class="toc-text">变形时外力（面力体力）做功</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B9%BF%E4%B9%89%E8%83%A1%E5%85%8B%E5%AE%9A%E5%BE%8B"><span class="toc-text">广义胡克定律</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%B9%E6%80%A7%E5%8A%9B%E5%AD%A6%E8%BE%B9%E5%80%BC%E9%97%AE%E9%A2%98"><span class="toc-text">弹性力学边值问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%B9%E5%80%BC%E9%97%AE%E9%A2%98%E7%9A%84%E5%94%AF%E4%B8%80%E6%80%A7"><span class="toc-text">边值问题的唯一性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E5%8A%BF%E8%83%BD%E7%9A%84%E5%8F%98%E5%88%86"><span class="toc-text">总势能的变分</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%90%E5%8A%A8%E5%AD%A6%E3%80%81%E9%9D%99%E5%8A%9B%E5%AD%A6%E8%AE%B8%E5%8F%AF%E7%8A%B6%E6%80%81"><span class="toc-text">运动学、静力学许可状态</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%80%E5%B0%8F%E4%BD%99%E8%83%BD"><span class="toc-text">最小余能</span></a></li></ol>
         </div>
     </aside>
     <a class="btn-toc button" id="btn-toc" tabindex="0">
@@ -185,7 +185,7 @@
     </a>
     <div class="toc-menus" id="toc-menus">
         <div class="toc-title">Article Directory</div>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9F%A5%E8%AF%86%E6%A1%86%E6%9E%B6"><span class="toc-text">知识框架</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%94%E5%8A%9B%E5%92%8C%E4%BD%93%E5%8A%9B"><span class="toc-text">应力和体力</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%94%E5%8A%9B%E5%BC%A0%E9%87%8F"><span class="toc-text">应力张量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%BB%E6%84%8F%E6%96%B9%E5%90%91%E4%B8%8A%E7%9A%84%E5%86%85%E5%8A%9B"><span class="toc-text">任意方向上的内力</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B9%B3%E8%A1%A1%E6%96%B9%E7%A8%8B"><span class="toc-text">平衡方程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%94%E5%8A%9B%E5%87%BD%E6%95%B0"><span class="toc-text">应力函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9D%90%E6%A0%87%E5%8F%98%E6%8D%A2"><span class="toc-text">坐标变换</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9F%A5%E8%AF%86%E6%A1%86%E6%9E%B6"><span class="toc-text">知识框架</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%98%E5%BD%A2%E6%97%B6%E5%A4%96%E5%8A%9B%EF%BC%88%E9%9D%A2%E5%8A%9B%E4%BD%93%E5%8A%9B%EF%BC%89%E5%81%9A%E5%8A%9F"><span class="toc-text">变形时外力（面力体力）做功</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B9%BF%E4%B9%89%E8%83%A1%E5%85%8B%E5%AE%9A%E5%BE%8B"><span class="toc-text">广义胡克定律</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%B9%E6%80%A7%E5%8A%9B%E5%AD%A6%E8%BE%B9%E5%80%BC%E9%97%AE%E9%A2%98"><span class="toc-text">弹性力学边值问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%B9%E5%80%BC%E9%97%AE%E9%A2%98%E7%9A%84%E5%94%AF%E4%B8%80%E6%80%A7"><span class="toc-text">边值问题的唯一性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E5%8A%BF%E8%83%BD%E7%9A%84%E5%8F%98%E5%88%86"><span class="toc-text">总势能的变分</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%90%E5%8A%A8%E5%AD%A6%E3%80%81%E9%9D%99%E5%8A%9B%E5%AD%A6%E8%AE%B8%E5%8F%AF%E7%8A%B6%E6%80%81"><span class="toc-text">运动学、静力学许可状态</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%80%E5%B0%8F%E4%BD%99%E8%83%BD"><span class="toc-text">最小余能</span></a></li></ol>
     </div>
 
 
@@ -193,28 +193,83 @@
     <div class="post__header"></div>
     <div class="post__content">
         <h2 id="知识框架"><a href="#知识框架" class="headerlink" title="知识框架"></a>知识框架</h2><ul>
-<li>定义了应力，体力</li>
-<li>由应力定义可以引出应力张量分量变化公式，再是纯代数的内容，推导出不变量、最大剪应力等结论。</li>
-<li>由受力平衡推导出平衡方程，力矩平衡推导出应力张量对称。</li>
+<li>由变形过程中由位移变分推导出外力、内力做功变分公式，和在不同热力学条件下应变能密度对应的热力学量，后者是平凡的。</li>
+<li>由做功变分公式，应变能密度对位移的偏导为应力，小变形下对应变能密度泰勒展开，得到应力和应变的线性关系。这就是广义胡克定律。E是弹性常数。</li>
+<li>应变能密度应当具有正定性，正定的性质在弹性力学边值问题的解的唯一性中起到了作用。（本质上就是能量积分证明pde唯一性）</li>
+<li>弹性势能本质上就是内能加外力势能，可以对位移变分推导出最小势能原理，对应虚功原理。最小势能原理在运动学许可状态下给出，本质是是给出了$\delta s$的约束，这种许可状态下$\delta s$遍历弹性力学边值问题中可能出现的位移。</li>
+<li>弹性余能是让应力变分，对应虚力原理。</li>
+<li>弹性势能和弹性余能二者本质都是势能——内能与外力势能之和极小值原理，不同的变分对象导致了不同了表达式。</li>
 </ul>
-<h2 id="应力和体力"><a href="#应力和体力" class="headerlink" title="应力和体力"></a>应力和体力</h2><p>应力是内力，是体内微元之间的作用力。某个面上，单位面积上所受作用力的集度，与压强同量纲。</p>
-<p>体力是外力，比如重力，定义为<br>$$<br>f = \lim\limits_{\Delta V\rightarrow 0} \frac{a(\Delta V)}{\Delta V}<br>$$<br>常见的是重力场下的体力，比重。</p>
-<h2 id="应力张量"><a href="#应力张量" class="headerlink" title="应力张量"></a>应力张量</h2><p>这里的想法是自然的。</p>
-<p>取一个立方微元体，每个面都有力作用，在面上对力可以正交分解为三个方向：法向，面上两个互相垂直的方向。但是面的法向又有三种情况。</p>
-<p>所以在直角坐标系下，想精确的确定一个力需要9个维度的信息，每个维度都有面的法向（3维）和面上力的取向（3维）共同构成。</p>
-<p>这就是应力张量$T$,它的各个分量甫一提出就可以看到鲜明的物理意义。</p>
-<p>$\sigma_i$代表$T_{ii}$，为某个面上与法向共线的力，也就是正应力。</p>
-<p>$\tau <em>{ij}$代表$T</em>{ij}$，是法向为$i$的面上，与$j$同向的力，此时$i,j$不互等，为剪应力。</p>
-<h2 id="任意方向上的内力"><a href="#任意方向上的内力" class="headerlink" title="任意方向上的内力"></a>任意方向上的内力</h2><p>$$<br>n \cdot T = t<br>$$</p>
-<p>这里的n是方向。这个式子的证明利用了正四面体的平衡条件。直观的说，就是把$t$分解到直角坐标系的三个方向分别平衡。</p>
-<h2 id="平衡方程"><a href="#平衡方程" class="headerlink" title="平衡方程"></a>平衡方程</h2><p>取正六面体，平衡时，应有合外力为0，即应力和体力之和为0.<br>$$<br>\int <em>{\partial \Omega}Tds+\int</em>{\Omega}fd\tau = 0<br>$$<br>利用奥高公式，得<br>$$<br>\nabla \cdot T + f =0<br>$$<br>对于力矩平衡，也可类似地提出方程。证明过程中的要点是，尽力转化出同类型并合并，利用平衡方程可证得应力张量的对称性。</p>
-<h2 id="应力函数"><a href="#应力函数" class="headerlink" title="应力函数"></a>应力函数</h2><p>这里的意思是，想求无外力时的应力，即<br>$$<br>\nabla \cdot T =0<br>$$<br>的解，发现这种情况应力的分量可以由几个任意的“足够好”的函数的导数表示。得到Beltrami-Scharfer解<br>$$<br>T=\nabla \times \Phi \times \nabla+h\nabla+\nabla h-I\nabla \cdot h<br>$$<br>其中$\Phi$是对称张量场，$h$是调和矢量场。</p>
-<p>其实也挺平凡的，可以看成是一种张量分解。</p>
-<h2 id="坐标变换"><a href="#坐标变换" class="headerlink" title="坐标变换"></a>坐标变换</h2><p>同样满足合同变换<br>$$<br>CTC^T<br>$$<br>正应力和最大剪应力理论都是纯纯的代数内容。</p>
+<h2 id="变形时外力（面力体力）做功"><a href="#变形时外力（面力体力）做功" class="headerlink" title="变形时外力（面力体力）做功"></a>变形时外力（面力体力）做功</h2>
+$$
+\begin{cases} \nabla \cdot T + f =0,(\Omega)\\ n \cdot T = t,(\partial \Omega)\\  \end{cases}
+$$
+
+
+
+
+<p>这是弹性体平衡方程，想要计算弹性体从$u$变形到$u+\delta u$外力做的功，<br>$$<br>\delta K = \int_{\partial \Omega}t \cdot \delta uds+\int_{\Omega}f\cdot \delta ud\tau<br>$$<br>应用平衡方程$n \cdot T = t$和奥高定理，处于合并同类项的考虑，原式子化为<br>$$<br>\delta K = \int_{\Omega}(\nabla \cdot T + f)\cdot \delta ud\tau+T: \delta u\nabla d \tau<br>$$<br>这里可以发现一个有用的分部积分恒等式<br>$$<br>\nabla \cdot(T \cdot u) = (\nabla \cdot T)\cdot u+T: u<br>$$</p>
+<p>变形过程中外力做功为<br>$$<br>\delta K = \int_{\Omega}T : \delta u \nabla d\tau<br>$$<br>由$\delta u \nabla$的对称反对称分解双点乘的性质和$T$的对称性，对称张量和反对称张量双点乘结果为0，得到<br>$$<br>\delta A = T: \delta \Gamma<br>$$<br>这里的$\delta A$是单位体积上外力做的功，全区域上积分就是弹性体所受的功。</p>
+<h2 id="广义胡克定律"><a href="#广义胡克定律" class="headerlink" title="广义胡克定律"></a>广义胡克定律</h2><p>由热力学定律，物体内能（总能量）为外界输运的热能和外界机械做功之和，<br>$$<br>\delta U = \delta Q+\delta A =\theta \delta S+T: \delta \Gamma<br>$$<br>绝热条件下可以提出<br>$$<br>T_{ij} = \frac{\delta U}{\delta \Gamma_{ij}}<br>$$<br>用勒让德变换，在等温条件下可以得到<br>$$<br>T_{ij} = \frac{\delta F}{\delta \Gamma_{ij}}<br>$$<br>分别适用于变形快，热量来不及交换和变星慢，热量充分交换的过程。</p>
+<p>我们把$U$或$F$统一叫做应变能密度$W$，由上面的关系，$\Gamma$为小变形，对$W$<em><strong>泰勒展开</strong></em>，引入<strong>无初应力假定</strong>，可以干净的得到本构关系，也就是广义胡克定律<br>$$<br>\sigma_{ij} = E_{ijks}\gamma_{ks}<br>$$<br>$E$为弹性常数，是完全对称的四阶张量<br>$$<br>E_{ijks} = \frac{\partial^2W}{\partial \gamma_{ij}\gamma_{ks}}<br>$$<br>求导可交换。</p>
+<p>在完全各向同性下，可得<br>$$<br>T=\lambda J(\Gamma)I+2\mu\Gamma<br>$$<br>$\mu$和$\lambda$叫Lame（拉梅？）常数，前者也叫剪切模量（和工程对上了？）。</p>
+<p>由<br>$$<br>\delta W = E_{ijks}\gamma_{ij}\delta\gamma_{ks}<br>$$<br>以及$W$对称性得<br>$$<br>W = \frac{1}{2}E_{ijks}\gamma_{ij}\gamma_{ks}<br>$$<br>这个式子非常重要。</p>
+<p>到这里我们就得到了应变能的表达式，是一个二次型，由<em><strong>内能、自由能在稳定平衡处平衡处取极小值</strong></em>知$W$正定，故得到Lame系数的约束<br>$$<br>\mu&gt;0,3\lambda+2\mu&gt;0<br>$$<br>本构关系也可以写成<br>$$<br>\Gamma=\frac{1}{E}[(1+\nu)T-\nu J(T)I]<br>$$<br>其中<br>$$<br>\mu = \frac{E}{2(1+\nu)},\lambda = \frac{E\nu}{(1+\nu)(1-2\nu)}<br>$$<br>$E$和$\nu$满足<br>$$<br>E&gt;0,-1&lt;\nu&lt;\frac{1}{2}<br>$$</p>
+<h2 id="弹性力学边值问题"><a href="#弹性力学边值问题" class="headerlink" title="弹性力学边值问题"></a>弹性力学边值问题</h2><p>$\Gamma,T,u$满足几何方程，平衡方程，本构方程</p>
+
+$$
+\begin{cases}
+\Gamma = \frac{u\nabla+\nabla u}{2}\\
+\nabla \cdot T+f=0,(\Omega)\\ 
+T=\lambda J(\Gamma)I+2\mu\Gamma \\
+\end{cases}
+$$
+
+
+<p>这组Pde有15个变量，15个标量方程。</p>
+<p>对这个方程可以提边界条件</p>
+
+$$
+\begin{cases}
+u= \bar u(\partial_u \Omega)\\
+n \cdot T = t,(\partial_t \Omega)\\ 
+n \cdot T +ku=0,(\partial_e \Omega)
+\end{cases}
+$$
+
+
+<p>第三种弹性边界条件本质和第二种应力边界条件并无不同，不过规定了面力的形式，事实上非常特殊，后面规定运动学许可状态和静力学许可状态时，这个边条的导致的外力做功项总存在，而前两个边条未必。这个在后面细说。</p>
+<h2 id="边值问题的唯一性"><a href="#边值问题的唯一性" class="headerlink" title="边值问题的唯一性"></a>边值问题的唯一性</h2><p>其实就是证明pde的唯一性，证明它的齐次问题仅有平凡解（零解）。蔡庆东老师的数学物理方法（下）课上介绍了能量积分的方法，就是未知量各导数项的平方之和，在弹性力学问题中我们很方便的可以找到这个能量——$W$。<br>$$<br>2\int_{\Omega}Wd\tau = \int_{\Omega}T:\Gamma d\tau = \int_{\Omega}T:u\nabla = \int_{\partial \Omega}n\cdot T\cdot uds-\int_{\Omega}(\nabla \cdot T)\cdot ud\tau<br>$$<br>推导过程依次用到了双点乘性质，奥高公式，分部积分公式。然后依次带入边界条件化简得到<br>$$<br>2\int_{\Omega}Wd\tau = -\int_{\partial_e \Omega}ku_iu_id\tau<br>$$<br>而$W$正定，故$W=0$，齐次方程仅有零解，边值问题解唯一。</p>
+<h2 id="总势能的变分"><a href="#总势能的变分" class="headerlink" title="总势能的变分"></a>总势能的变分</h2><p><em><strong>这一块非常重要！！！可以说是整篇博文的精华所在了。变分推导部分请教了武鑫鑫学长。</strong></em></p>
+<p>考察<br>$$<br>s=[u,\Gamma,T]<br>$$<br>这一组值完全确定了一个弹性力学问题，叫做一个弹性状态。</p>
+<p>弹性体内能变化有赖于外力做功，即<br>$$<br>\delta U = \int_{\partial \Omega}t\cdot\delta uds+\int_{\Omega}f\cdot\delta ud\tau<br>$$<br>外力做功同样存在一个势，故我们考虑外力做功（变形）过程中的总势能的变分<br>$$<br>\delta \Pi(s) =\delta U - \int_{\partial \Omega}t\cdot\delta uds-\int_{\Omega}f\cdot\delta ud\tau = 0<br>$$<br>把变分符号提到最外面，得<br>$$<br>\delta \Pi (s) =\delta[U -\int_{\partial \Omega}t\cdot uds-\int_{\Omega}f\cdot ud\tau] = 0<br>$$<br>外力作用下变形过程中总势能的变分为0，考虑二阶变分的话可以得出：</p>
+<p><strong>真实情况下弹性体内能与外力势能之和取极小值</strong>，这就是最小势能原理。</p>
+<p>其实上面的讨论并不严谨，但我们得到了一个很重要的量，总势能（弹性势能），和<strong>最小势能原理</strong>。<br>$$<br>\Pi (s) =U -\int_{\partial \Omega}t\cdot uds-\int_{\Omega}f\cdot ud\tau<br>$$<br>在给定弹性力学边值问题下，真实弹性状态令这个量取极小值。</p>
+<p>下面，我们在给定边界条件的情况下对位移变分，进行推导。<br>$$<br>\delta \Pi(s) = \int_{\Omega}\delta W d\tau -\int_{\partial \Omega}t\cdot\delta uds-\int_{\Omega_t}f\cdot\delta ud\tau<br>$$<br>其中，由双点乘性质和几何方程<br>$$<br>\delta W = T:\delta \Gamma = T:(\delta \Gamma+\delta \Omega) = T:\delta \nabla u<br>$$<br>这里的$\Omega$是反对称部分，区别上面出现的积分区域$\Omega$。</p>
+<p>然后用上面提到的分部积分公式<br>$$<br>\delta W = \nabla(T\cdot \delta u)-(\nabla \cdot T)\cdot \delta u<br>$$<br>回代入上面的积分<br>$$<br>\delta \Pi(s) = \int_{\Omega}[\nabla(T\cdot \delta u)-(\nabla \cdot T)\cdot \delta u] d\tau -\int_{\partial \Omega}t\cdot\delta uds-\int_{\Omega_t}f\cdot\delta ud\tau<br>$$<br>由奥高公式<br>$$<br>\int_{\Omega}\nabla(T\cdot \delta u)d\tau = \int_{\partial \Omega}n\cdot T\cdot\delta u ds<br>$$<br>这里的$\Omega = \Omega_u+\Omega_t$，分别拆开代入化简<br>$$<br>\delta \Pi(s) = \int_{\partial\Omega_t}(n\cdot T-t)\delta uds+\int_{\Omega}(\nabla \cdot T-f)\delta ud\tau =0<br>$$<br>如此竟得到充分条件：控制方程，即给定边界条件、几何方程下，弹性状态必须满足的条件。</p>
+
+$$
+\begin{cases} \nabla \cdot T + f =0,(\Omega)\\ n \cdot T = t,(\partial \Omega)\\  \end{cases}
+$$
+
+
+
+
+
+<p>推导时刻满足充分必要性，除了最后控制方程是充分条件。</p>
+<p>那么我们可以说，给定几何方程、边界条件，如果一个问题满足控制方程，即对于一个弹性力学边值问题的真实解，也就是给定边界条件下的真实弹性状态，使得弹性势能最小。</p>
+<h2 id="运动学、静力学许可状态"><a href="#运动学、静力学许可状态" class="headerlink" title="运动学、静力学许可状态"></a>运动学、静力学许可状态</h2><p>考察<br>$$<br>s=[u,\Gamma,T]<br>$$<br>这一组值完全确定了一个弹性力学问题，叫做一个弹性状态。</p>
+<p>如果说$s$满足几何方程、本构方程和位移边界条件，我们把它叫做运动学许可状态，事实上表示$s$的变分不是在全空间进行，而是存在约束，$\delta s$在一个子空间上进行，这个子空间主要限定了运动学的状态（位移边条，几何方程给定了$u$和$\Gamma$的关系，本构关系给定了$\Gamma$和$T$的关系），使得$s+\delta s$遍历了可能出现的位移（在这个约束之外的位移一定是不可能的，好比如果不满足位移边条那这个位移不可能是真实解）。</p>
+<p>假如$s$满足平衡方程、应力边界条件、弹性边界条件，我们把它叫做静力学许可状态，事实上也是约束了$\delta s$所在的子空间，限定了静力学相关的量的状态，使得$s+ \delta s$遍历了可能存在的内力（假如不满足应力边条那这个应力不可能是真实解）。</p>
+<h2 id="最小余能"><a href="#最小余能" class="headerlink" title="最小余能"></a>最小余能</h2><p>最小余能在静力学许可状态下讨论。</p>
+<p>书上应力应变所表示的应变能看起来是一样的，其实这二者天差地别。因为这本书在线弹性下讨论，事实上前者叫变形势能，后者叫变形余能，代表$\gamma-\sigma$曲线下部积分和上部积分，即取微元片时固定应力不变还是应变不变，对于线弹性，曲线是直线，故势能等于余能。</p>
+<p>再来一些直观阐述：势能在位移的变分下有极小原理，此时总能量（弹性势能）表达式为应变能减外力（面力体力）做功；余能在应力变分下有极小原理，表达式理应则是余能减外力做功，此时固定位移不变，外力做功由应力变化引起，而体力是外力，我们变分时不改变体力，所以只有$n \cdot T = t$中的面力$t$改变引起外力做功。</p>
+<p>弹性余能最小原理对应虚力原理。</p>
+<p>到此intuition地阐述了弹性势能和弹性余能的区别和原因。</p>
 
     </div>
      
-    <div class="post-footer__meta"><p>updated at 2022-03-28</p></div> 
+    <div class="post-footer__meta"><p>updated at 2022-03-29</p></div> 
     <div class="post-entry__tags"><a href="/tags/%E5%BC%B9%E6%80%A7%E5%8A%9B%E5%AD%A6/" class="post-tags__link button"># 弹性力学</a><a href="/tags/%E8%BF%9E%E7%BB%AD%E4%BB%8B%E8%B4%A8%E5%8A%9B%E5%AD%A6/" class="post-tags__link button"># 连续介质力学</a></div> 
 </article>
 
@@ -231,7 +286,7 @@
                             Previous Post
                         </div>
                         <div class="nav__title">
-                            弹性力学-05-应变能密度的故事
+                            图像处理-01-从滤波器到微分算子
                         </div>
                     </div>
                 </a>
