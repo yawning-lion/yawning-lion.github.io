@@ -31,7 +31,7 @@
     <!-- meta -->
 
 
-<title>机器学习-01-理解正则化的三种视角 | 狮子大张嘴&#39;s blog</title>
+<title>机器学习-02-理解正则化的三种视角 | 狮子大张嘴&#39;s blog</title>
 
 
     <meta name="keywords" content="machine learning">
@@ -43,13 +43,13 @@
  
     <meta name="description" content="看李宏毅的机器学习网课终于知道了正则化在干嘛。为了加深理解去网上找了几篇文章看，这篇博文提供了直观、优化和概率三种视角来理解正则化。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="机器学习-01-理解正则化的三种视角">
+<meta property="og:title" content="机器学习-02-理解正则化的三种视角">
 <meta property="og:url" content="https://yawninglion.github.io/2022/03/29/post17/index.html">
 <meta property="og:site_name" content="狮子大张嘴&#39;s blog">
 <meta property="og:description" content="看李宏毅的机器学习网课终于知道了正则化在干嘛。为了加深理解去网上找了几篇文章看，这篇博文提供了直观、优化和概率三种视角来理解正则化。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-03-29T14:11:11.000Z">
-<meta property="article:modified_time" content="2022-03-29T15:24:26.269Z">
+<meta property="article:modified_time" content="2022-03-30T09:16:24.132Z">
 <meta property="article:author" content="yawning-lion">
 <meta property="article:tag" content="machine learning">
 <meta name="twitter:card" content="summary_large_image">
@@ -152,12 +152,12 @@
 
 <div class="post-title">
     <h1 class="post-title__text">
-        机器学习-01-理解正则化的三种视角
+        机器学习-02-理解正则化的三种视角
     </h1>
     <div class="post-title__meta">
         <a href="/archives/2022/03/" class="post-meta__date button">2022-03-29</a>
         
-    <span class="separate-dot"></span><a href="/categories/%E5%8E%BB%E7%A0%81%E5%A4%B4%E6%95%B4%E7%82%B9%E8%96%AF%E6%9D%A1/" class="button">去码头整点薯条</a>
+    <span class="separate-dot"></span><a href="/categories/%E6%95%B0%E7%90%86%E5%9F%BA%E7%A1%80%E8%A1%A5%E5%AE%8C%E8%AE%A1%E5%88%92/" class="button">数理基础补完计划</a>
 
  
         
@@ -192,7 +192,8 @@
     <div class="post__header"></div>
     <div class="post__content">
         <p>看李宏毅的机器学习网课终于知道了正则化在干嘛，又为了加深理解去网上找了几篇文章看。这篇博文提供了直观、优化和概率三种视角来理解正则化。</p>
-<h2 id="正则化大略"><a href="#正则化大略" class="headerlink" title="正则化大略"></a>正则化大略</h2><h3 id="介是啥"><a href="#介是啥" class="headerlink" title="介是啥"></a>介是啥</h3><p>regularization，在原loss function中加上一项，这一项往往是参数的范数，来辅助优化，又叫惩罚项，有控制模型复杂度，防止过拟合的作用。</p>
+<h2 id="正则化大略"><a href="#正则化大略" class="headerlink" title="正则化大略"></a>正则化大略</h2><p>正则化就是在训练时引入对参数的先验估计，起到一个约束的作用。</p>
+<h3 id="介是啥"><a href="#介是啥" class="headerlink" title="介是啥"></a>介是啥</h3><p>regularization，在原loss function中加上一项，这一项往往是参数的范数，来辅助优化，又叫惩罚项，有控制模型复杂度，防止过拟合的作用。</p>
 <h3 id="有哪些"><a href="#有哪些" class="headerlink" title="有哪些"></a>有哪些</h3><ul>
 <li>L1正则化。正则项是1-范数，loss function里加上$|w|$，为参数绝对值之和。</li>
 <li>L2正则化。是2-范数，加上$\sum w^2$，为参数平方之和。</li>
@@ -205,14 +206,28 @@
 <li>L1正则化。学习过程中参数捕捉了数据的特征，但不少特征是对目标无用，参数稀疏化相当于丢弃了这些无用的特征，再保证train过程中loss小的同时，inference阶段这些无用特征不会产生干扰，提高了推断效果，降低了过拟合的可能性。</li>
 <li>L2正则化。forward pass中$y =w^Tx$，我们知道$\frac{\partial y}{\partial x} = w$，L2正则化让$w$变的很小，趋向0，即能让输出值对输入值的导数很小，效果就是输出值对输入值的改变不敏感。直观的讲，就是做到让train出来的model足够smooth，而这样做的原因是我们往往认为真实数据的分布规律也是smooth的，这样做就防止了过拟合，使得model在除了train dataset的点上也能更接近真实分布。专业一点说，就是这样使得model抗扰动能力强，要知道采样得到的数据往往是会有噪声存在的，L2正则化就是增强model对这些噪声的抵抗能力。</li>
 </ul>
-<h2 id="从优化的观点看正则化"><a href="#从优化的观点看正则化" class="headerlink" title="从优化的观点看正则化"></a>从优化的观点看正则化</h2><p>以监督学习为例，本质上我们做机器学习就是解优化问题<br>$$<br>\operatorname{arg,max}_w L(w,x,y)<br>$$<br>其中$x$是data，$y$是Label。</p>
+<h2 id="从优化的观点看正则化"><a href="#从优化的观点看正则化" class="headerlink" title="从优化的观点看正则化"></a>从优化的观点看正则化</h2><p>以监督学习为例，本质上我们做机器学习就是解优化问题</p>
+
+$$
+\operatorname{arg\,max}_w L(w,x,y)
+$$
+
+
+<p>其中$x$是data，$y$是Label。</p>
 <h3 id="正则化：拉格朗日极值"><a href="#正则化：拉格朗日极值" class="headerlink" title="正则化：拉格朗日极值"></a>正则化：拉格朗日极值</h3><p>从优化的观点看，正则化就是给$w$的优化，根据对参数的先验估计（如稀疏、足够小），引入了约束条件，</p>
 <ul>
 <li>L1正则化。$s.t.\begin{Vmatrix}w  \end{Vmatrix}_1 \leq C$</li>
 <li>L2正则化。$s.t.\begin{Vmatrix}w  \end{Vmatrix}_2 \leq C$</li>
 </ul>
 <p>即对1-范数，2-范数的约束。</p>
-<p>利用拉格朗日乘子法可以构造不带约束的极值问题，即<br>$$<br>\operatorname{arg,max}<em>w [L(w,x,y)+\lambda(\begin{Vmatrix}w  \end{Vmatrix}</em>{1\ or\ 2}-C)]<br>$$<br>此即带正则化项的loss function，求解该优化问题等价于上带约束条件的优化问题。C是控制的，一般取成0。</p>
+<p>利用拉格朗日乘子法可以构造不带约束的极值问题，即</p>
+
+$$
+\operatorname{arg\,max}_w [L(w,x,y)+\lambda(\begin{Vmatrix}w  \end{Vmatrix}_{1\ or\ 2}-C)]
+$$
+
+
+<p>此即带正则化项的loss function，求解该优化问题等价于上带约束条件的优化问题。C是控制的，一般取成0。</p>
 <h2 id="从最大后验估计（MAP）看正则化"><a href="#从最大后验估计（MAP）看正则化" class="headerlink" title="从最大后验估计（MAP）看正则化"></a>从最大后验估计（MAP）看正则化</h2><p>讲道理机器学习本来就是统计学家的领地。概率是已知模型和参数（生成数据的方式），去看数据的样子，统计干的事情是根据数据分布（采样），推测参数和模型。机器学习不就是从数据里学分布嘛，所以机器学习的大部分理论都是建立在统计理论上的。</p>
 <p>概统里都学过最大似然估计（MLE），意思是有了一堆数据，又知道了模型，现在要估计模型参数，MLE干的事就是找到参数，这组参数使得样本数据出现的概率是最大的。想法是很好的，最大概率出现的最有可能被采样到，但也不是尽善尽美，比如抛十次硬币很难保证五次向上五次向下，这时候做MLE往往能把正反面出现的概率估计的很离谱。</p>
 <h3 id="最大似然估计"><a href="#最大似然估计" class="headerlink" title="最大似然估计"></a>最大似然估计</h3><p>也就是知道了,例如<br>$$<br>y\sim N(f(w,x))<br>$$<br>中$f$的形式，有了一组$(x_i,y_i)$样本，令<br>$$<br>log \Pi P(y_i|x_i;w)<br>$$<br>取最大值。</p>
@@ -224,13 +239,27 @@
 
     </div>
      
-    <div class="post-footer__meta"><p>updated at 2022-03-29</p></div> 
+    <div class="post-footer__meta"><p>updated at 2022-03-30</p></div> 
     <div class="post-entry__tags"><a href="/tags/machine-learning/" class="post-tags__link button"># machine learning</a></div> 
 </article>
 
 
     <div class="nav">
         <div class="nav__prev">
+            
+                <a href="/2022/03/30/post18/" class="nav__link">
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M589.088 790.624L310.464 512l278.624-278.624 45.248 45.248L400.96 512l233.376 233.376z" fill="#808080"></path></svg>
+                    </div>
+                    <div>
+                        <div class="nav__label">
+                            Previous Post
+                        </div>
+                        <div class="nav__title">
+                            机器学习-03-some mathematical perspectives
+                        </div>
+                    </div>
+                </a>
             
         </div>
         <div class="nav__next">
@@ -241,7 +270,7 @@
                             Next Post
                         </div>
                         <div class="nav__title">
-                            图像处理-01-从滤波器到微分算子
+                            图像处理-01-从滤波器到pde-net中的微分算子
                         </div>
                     </div>
                     <div>

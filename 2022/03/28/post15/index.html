@@ -49,7 +49,7 @@
 <meta property="og:description" content="弹性力学上到了本构关系和边值问题。内容多且繁琐，但笔者很惊喜的发现，应变能密度在这两部分里都扮演了很重要的角色，也有着很鲜明的物理意义，所以争取在这篇博文里用应变能密度把重要的内容串起来。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-03-27T18:17:29.000Z">
-<meta property="article:modified_time" content="2022-03-29T14:21:59.076Z">
+<meta property="article:modified_time" content="2022-03-30T09:38:09.523Z">
 <meta property="article:author" content="yawning-lion">
 <meta property="article:tag" content="弹性力学">
 <meta property="article:tag" content="连续介质力学">
@@ -216,7 +216,7 @@ $$
 <p>我们把$U$或$F$统一叫做应变能密度$W$，由上面的关系，$\Gamma$为小变形，对$W$<em><strong>泰勒展开</strong></em>，引入<strong>无初应力假定</strong>，可以干净的得到本构关系，也就是广义胡克定律<br>$$<br>\sigma_{ij} = E_{ijks}\gamma_{ks}<br>$$<br>$E$为弹性常数，是完全对称的四阶张量<br>$$<br>E_{ijks} = \frac{\partial^2W}{\partial \gamma_{ij}\gamma_{ks}}<br>$$<br>求导可交换。</p>
 <p>在完全各向同性下，可得<br>$$<br>T=\lambda J(\Gamma)I+2\mu\Gamma<br>$$<br>$\mu$和$\lambda$叫Lame（拉梅？）常数，前者也叫剪切模量（和工程对上了？）。</p>
 <p>由<br>$$<br>\delta W = E_{ijks}\gamma_{ij}\delta\gamma_{ks}<br>$$<br>以及$W$对称性得<br>$$<br>W = \frac{1}{2}E_{ijks}\gamma_{ij}\gamma_{ks}<br>$$<br>这个式子非常重要。</p>
-<p>到这里我们就得到了应变能的表达式，是一个二次型，由<em><strong>内能、自由能在稳定平衡处平衡处取极小值</strong></em>知$W$正定，故得到Lame系数的约束<br>$$<br>\mu&gt;0,3\lambda+2\mu&gt;0<br>$$<br>本构关系也可以写成<br>$$<br>\Gamma=\frac{1}{E}[(1+\nu)T-\nu J(T)I]<br>$$<br>其中<br>$$<br>\mu = \frac{E}{2(1+\nu)},\lambda = \frac{E\nu}{(1+\nu)(1-2\nu)}<br>$$<br>$E$和$\nu$满足<br>$$<br>E&gt;0,-1&lt;\nu&lt;\frac{1}{2}<br>$$</p>
+<p>到这里我们就得到了应变能的表达式，是一个二次型，由<em><strong>内能、自由能在稳定平衡处平衡处取极小值</strong></em>（这些都是在热力学中有严格证明的）知$W$正定，故得到Lame系数的约束<br>$$<br>\mu&gt;0,3\lambda+2\mu&gt;0<br>$$<br>本构关系也可以写成<br>$$<br>\Gamma=\frac{1}{E}[(1+\nu)T-\nu J(T)I]<br>$$<br>其中<br>$$<br>\mu = \frac{E}{2(1+\nu)},\lambda = \frac{E\nu}{(1+\nu)(1-2\nu)}<br>$$<br>$E$和$\nu$满足<br>$$<br>E&gt;0,-1&lt;\nu&lt;\frac{1}{2}<br>$$</p>
 <h2 id="弹性力学边值问题"><a href="#弹性力学边值问题" class="headerlink" title="弹性力学边值问题"></a>弹性力学边值问题</h2><p>$\Gamma,T,u$满足几何方程，平衡方程，本构方程</p>
 
 $$
@@ -271,7 +271,7 @@ $$
 
     </div>
      
-    <div class="post-footer__meta"><p>updated at 2022-03-29</p></div> 
+    <div class="post-footer__meta"><p>updated at 2022-03-30</p></div> 
     <div class="post-entry__tags"><a href="/tags/%E5%BC%B9%E6%80%A7%E5%8A%9B%E5%AD%A6/" class="post-tags__link button"># 弹性力学</a><a href="/tags/%E8%BF%9E%E7%BB%AD%E4%BB%8B%E8%B4%A8%E5%8A%9B%E5%AD%A6/" class="post-tags__link button"># 连续介质力学</a></div> 
 </article>
 
@@ -288,7 +288,7 @@ $$
                             Previous Post
                         </div>
                         <div class="nav__title">
-                            图像处理-01-从滤波器到微分算子
+                            图像处理-01-从滤波器到pde-net中的微分算子
                         </div>
                     </div>
                 </a>

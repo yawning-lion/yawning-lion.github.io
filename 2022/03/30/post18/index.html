@@ -31,27 +31,27 @@
     <!-- meta -->
 
 
-<title>图像处理-01-从滤波器到pde-net中的微分算子 | 狮子大张嘴&#39;s blog</title>
+<title>机器学习-03-some mathematical perspectives | 狮子大张嘴&#39;s blog</title>
 
 
-    <meta name="keywords" content="图像处理">
+    <meta name="keywords" content="machine learning">
 
 
 
 
     <!-- OpenGraph -->
  
-    <meta name="description" content="董彬老师的pde-net整了个好活，从图像处理的滤波器引入微分算子，用于近似pde中的微分。这篇博文就是滤波器的笔记。">
+    <meta name="description" content="本文事实上为应用数学讨论班的部分课堂笔记。解释神经网络的泛化性等等都会用到更多的数学工具。这篇博文持续更新。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="图像处理-01-从滤波器到pde-net中的微分算子">
-<meta property="og:url" content="https://yawninglion.github.io/2022/03/28/post16/index.html">
+<meta property="og:title" content="机器学习-03-some mathematical perspectives">
+<meta property="og:url" content="https://yawninglion.github.io/2022/03/30/post18/index.html">
 <meta property="og:site_name" content="狮子大张嘴&#39;s blog">
-<meta property="og:description" content="董彬老师的pde-net整了个好活，从图像处理的滤波器引入微分算子，用于近似pde中的微分。这篇博文就是滤波器的笔记。">
+<meta property="og:description" content="本文事实上为应用数学讨论班的部分课堂笔记。解释神经网络的泛化性等等都会用到更多的数学工具。这篇博文持续更新。">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2022-03-28T12:30:38.000Z">
-<meta property="article:modified_time" content="2022-03-30T09:37:52.217Z">
+<meta property="article:published_time" content="2022-03-30T08:12:44.000Z">
+<meta property="article:modified_time" content="2022-03-30T09:40:41.222Z">
 <meta property="article:author" content="yawning-lion">
-<meta property="article:tag" content="图像处理">
+<meta property="article:tag" content="machine learning">
 <meta name="twitter:card" content="summary_large_image">
 
 
@@ -152,10 +152,10 @@
 
 <div class="post-title">
     <h1 class="post-title__text">
-        图像处理-01-从滤波器到pde-net中的微分算子
+        机器学习-03-some mathematical perspectives
     </h1>
     <div class="post-title__meta">
-        <a href="/archives/2022/03/" class="post-meta__date button">2022-03-28</a>
+        <a href="/archives/2022/03/" class="post-meta__date button">2022-03-30</a>
         
     <span class="separate-dot"></span><a href="/categories/%E6%95%B0%E7%90%86%E5%9F%BA%E7%A1%80%E8%A1%A5%E5%AE%8C%E8%AE%A1%E5%88%92/" class="button">数理基础补完计划</a>
 
@@ -174,7 +174,7 @@
 
     <aside class="post-side">
         <div class="post-side__toc">
-            
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#ai-for-science"><span class="toc-text">ai for science</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#multi-scale-model"><span class="toc-text">multi-scale model</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#application-of-machine-learning-for-scientific-computing"><span class="toc-text">application of machine learning for scientific computing</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%8D%E7%9C%8B%E4%BC%98%E5%8C%96"><span class="toc-text">再看优化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#over-parameterized"><span class="toc-text">over parameterized</span></a></li></ol></li></ol>
         </div>
     </aside>
     <a class="btn-toc button" id="btn-toc" tabindex="0">
@@ -184,50 +184,64 @@
     </a>
     <div class="toc-menus" id="toc-menus">
         <div class="toc-title">Article Directory</div>
-        
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#ai-for-science"><span class="toc-text">ai for science</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#multi-scale-model"><span class="toc-text">multi-scale model</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#application-of-machine-learning-for-scientific-computing"><span class="toc-text">application of machine learning for scientific computing</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%8D%E7%9C%8B%E4%BC%98%E5%8C%96"><span class="toc-text">再看优化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#over-parameterized"><span class="toc-text">over parameterized</span></a></li></ol></li></ol>
     </div>
 
 
 <article class="post post__with-toc content-card">
     <div class="post__header"></div>
     <div class="post__content">
-        <p>董彬老师的pde-net整了个好活，从图像处理的滤波器引入微分算子，用于近似pde中的微分。这篇博文就是学习滤波器的笔记。</p>
+        <p>本文事实上为应用数学讨论班的部分课堂笔记。解释神经网络的泛化性等等都会用到更多的数学工具。这篇博文持续更新。</p>
+<h2 id="ai-for-science"><a href="#ai-for-science" class="headerlink" title="ai for science"></a>ai for science</h2><p>这可以说是整个应用数学讨论班讲的事和鄂维南院士正在大力推动的事情。</p>
+<h3 id="multi-scale-model"><a href="#multi-scale-model" class="headerlink" title="multi-scale model"></a>multi-scale model</h3><p>据ewn所授，科学计算用到的所有模型都可以归为7类，从微观到介观到宏观分别是</p>
+<ul>
+<li>QM(quantum mechanics)，量子多体模型，用薛定谔方程ab initio计算。这样做是最准的也是计算代价最大的。是唯一一个不需要model input的模型。</li>
+<li>DFT(density function theory)。密度泛函理论。有一个人指出体系基态能量与一个电子密度的泛函相对应，所以DFT做的事情就是把关注点移到电子密度而非波函数，这样做的好处在于减少了变量（维度）。比较不好的一点在于需要model input，也就是交换关联泛函（$V_{exc}$）。这个方法的计算复杂度是$N^3$，但不如ab initio准，问题在于$V_{exc}$的确定是很难的。不过所幸对于大部分问题$V_{exc}$的选取都对要研究的量不会有太大影响，除了半导体。</li>
+<li>MD(molecular dynamics)。把原子简化为刚体球，点电荷，然后粒子对对碰算体系。需要input粒子potential，过往这个potential的确定往往是通过猜，也未必好用。</li>
+<li>course grained MD。粗粒化，一些体系往往由相同性质的部分组成，比如蛋白质液晶，这时候做MD没必要单独考虑每个原子，将一些原子视作整体进行MD计算，方便许多。同样需要input potential。</li>
+<li>continuum mechanics。连续介质模型，比如流体力学弹性力学，这也是我的老本行（x）。其实感觉连续介质力学和粗粒化很像，考虑的是物质微团，这些微团宏观足够小微观足够大，一方面保证了可以用分析的手段去建模处理，一方面保证了每个微团的性质大体相同，保证了数学处理的合理性。建模时用经典力学的动量定律守恒律等获得控制方程。这里同样需要model input，是本构关系。</li>
+<li>kinetics equation。动理学方程，以玻尔茨曼（Boltzmann）方法为代表，多用于航天，考虑稀薄气体中原子的碰撞，属于介观尺度的数值模拟方法。这里的model input是表征碰撞的函数。</li>
+<li>turbulence。湍流，不多说了，青年科学家的坟墓。where the pigs don’t fly。</li>
+</ul>
+<h3 id="application-of-machine-learning-for-scientific-computing"><a href="#application-of-machine-learning-for-scientific-computing" class="headerlink" title="application of machine learning for scientific computing"></a>application of machine learning for scientific computing</h3><p>由前所述，这些科学计算模型都需要有先验的模型输入，大部分情况下确定这些输入都是困难的，在机器学习出现之前确定这些输入都需要用猜蒙碰凑的方式，包括图像处理中，一代代数学家可能一辈子研究（猜）出几个好用的特征就满意了，就是说这里的handcraft是非常difficult的。然后，here comes the machine learning。</p>
+<p>这里的机器学习都指supervised learning。直观的说机器就是一台超级插值机，利用它可以解决上述问题中model input难以手工获取的困难。例如MD，就是一个机器学习应用的非常成功的例子。这里用DFT生成小规模的高精度数据，用来train粒子的potential，效果是非常好的。</p>
+<p>这门课让我感觉非常开心的一点也在这里。我越发感觉认知到整个知识体系，overall landscape，并且明白自己所学所研究的东西到底在这个overall landscape的什么位置，这件事是非常重要的。流体力学归属于连续介质力学模型，而连续介质模型不过是七大科学计算模型中的一个而已，机器学习也并不是神乎其神无所不能，只是刚好在算力发展的背景下可以取代过往高昂的handcraft，一件趁手的工具罢了。</p>
+<p>精彩的东西还有好多啊。</p>
+<h2 id="再看优化"><a href="#再看优化" class="headerlink" title="再看优化"></a>再看优化</h2><p>都说机器学习其实就是在解一个优化问题，但其实二者的区别是很大的。</p>
+<p>比如说，Given $S = {(x_j,y_j=f^*(x_j))},learn \ f^*$,机器学习相当于优化loss function</p>
+
+$$
+\operatorname{arg\,max}_w L(w,x,y)
+$$
+
+
+<p>使得$f(x)$逼近$f^*(x)$</p>
+<p>事实上这只是针对train data，采样获得的、“看的见”的数据做优化，优化的只是”empirical risk”<br>$$<br>\hat R_n(f) = \frac{1}{n}\sum(f(x_j)-y_j)^2 = \frac{1}{n}\sum(f(x_j)-f^*(x_j))^2<br>$$<br>但我们真正关心的，是这个网络是否具有泛化性，是否拿来推断时也有好的表现，也就是在“没看见的数据”上也接近$f^*(x)$，即真正要优化的目标是”population risk”（即generalization error）<br>$$<br>R(f)=E_{x\sim \mu}[f(x)-f^*(x)] = \int(f(x)-f^*(x))^2d\mu<br>$$<br>有很多手段都可以优化empirical risk，但population risk也同样小，即得到有良好泛化性的网络是难的。</p>
+<h3 id="over-parameterized"><a href="#over-parameterized" class="headerlink" title="over parameterized"></a>over parameterized</h3><p>用解方程的视角来看待训练神经网络，给定$n$条训练数据相当于给定了$n$个方程，假如神经网络有$m$个参数，也就是说用$n$个方程来解$m$个未知数，解显然不是唯一的，解在一个$dim = m-n$的manifold上。</p>
+<p>那么这样看，训练神经网络的过程就相当于是用某种方式让一组参数落在这个$m-n$维的流形上，每组参数可以决定一个神经网络的样子，这个神经网络在样本处都足够接近$f^*(x)$。但是真实数据的分布$f^*(x)$是唯一的啊？这就导致train出来的神经网络在样本点之外的值，也就是做inference时的表现千差万别。</p>
+<p>这样就为理解过拟合提供了一种新的视角，train出来的参数分布在$m-n$的流形，如果恰好train出来一组参数有比较好的表现，那是很难得的啊！所以会有正则化对参数提供更多约束。</p>
 <p>to be continued…</p>
 
     </div>
      
     <div class="post-footer__meta"><p>updated at 2022-03-30</p></div> 
-    <div class="post-entry__tags"><a href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" class="post-tags__link button"># 图像处理</a></div> 
+    <div class="post-entry__tags"><a href="/tags/machine-learning/" class="post-tags__link button"># machine learning</a></div> 
 </article>
 
 
     <div class="nav">
         <div class="nav__prev">
             
-                <a href="/2022/03/29/post17/" class="nav__link">
-                    <div>
-                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M589.088 790.624L310.464 512l278.624-278.624 45.248 45.248L400.96 512l233.376 233.376z" fill="#808080"></path></svg>
-                    </div>
-                    <div>
-                        <div class="nav__label">
-                            Previous Post
-                        </div>
-                        <div class="nav__title">
-                            机器学习-02-理解正则化的三种视角
-                        </div>
-                    </div>
-                </a>
-            
         </div>
         <div class="nav__next">
             
-                <a href="/2022/03/28/post15/" class="nav__link">
+                <a href="/2022/03/29/post17/" class="nav__link">
                     <div>
                         <div class="nav__label">
                             Next Post
                         </div>
                         <div class="nav__title">
-                            弹性力学-04-应变能密度的故事
+                            机器学习-02-理解正则化的三种视角
                         </div>
                     </div>
                     <div>
