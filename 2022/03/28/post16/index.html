@@ -48,11 +48,19 @@
 <meta property="og:site_name" content="狮子大张嘴&#39;s blog">
 <meta property="og:description" content="董彬老师的pde-net整了个好活，从图像处理的滤波器引入微分算子，用于近似pde中的微分。这篇博文就是滤波器的笔记。">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://yawninglion.github.io/2022/03/28/post16/pic1.png">
+<meta property="og:image" content="https://yawninglion.github.io/2022/03/28/post16/pic3.png">
+<meta property="og:image" content="https://yawninglion.github.io/2022/03/28/post16/pic5.png">
+<meta property="og:image" content="https://yawninglion.github.io/2022/03/28/post16/pic6.png">
+<meta property="og:image" content="https://yawninglion.github.io/2022/03/28/post16/pic4.png">
+<meta property="og:image" content="https://yawninglion.github.io/2022/03/28/post16/pic2.png">
+<meta property="og:image" content="https://yawninglion.github.io/2022/03/28/post16/pic7.png">
 <meta property="article:published_time" content="2022-03-28T12:30:38.000Z">
-<meta property="article:modified_time" content="2022-03-30T09:37:52.217Z">
+<meta property="article:modified_time" content="2022-03-30T13:41:43.368Z">
 <meta property="article:author" content="yawning-lion">
 <meta property="article:tag" content="图像处理">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://yawninglion.github.io/2022/03/28/post16/pic1.png">
 
 
     
@@ -174,7 +182,7 @@
 
     <aside class="post-side">
         <div class="post-side__toc">
-            
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BB%A4%E6%B3%A2%E5%99%A8101"><span class="toc-text">滤波器101</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BE%AE%E5%88%86%E7%AE%97%E5%AD%90"><span class="toc-text">微分算子</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%AB%98%E9%98%B6%E5%BE%AE%E5%88%86"><span class="toc-text">高阶微分</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BB%A4%E6%B3%A2%E5%99%A8%EF%BC%9F%E6%B1%82%E5%92%8C%E8%A7%84%E5%88%99%EF%BC%81"><span class="toc-text">滤波器？求和规则！</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pde-net"><span class="toc-text">pde-net</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#nn%E6%8B%9F%E5%90%88%E5%BE%AE%E5%88%86%E7%AE%97%E5%AD%90"><span class="toc-text">nn拟合微分算子</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E6%9E%B6%E6%9E%84"><span class="toc-text">网络架构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E4%BA%9B%E7%BB%86%E8%8A%82"><span class="toc-text">一些细节</span></a></li></ol></li></ol>
         </div>
     </aside>
     <a class="btn-toc button" id="btn-toc" tabindex="0">
@@ -184,7 +192,7 @@
     </a>
     <div class="toc-menus" id="toc-menus">
         <div class="toc-title">Article Directory</div>
-        
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BB%A4%E6%B3%A2%E5%99%A8101"><span class="toc-text">滤波器101</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BE%AE%E5%88%86%E7%AE%97%E5%AD%90"><span class="toc-text">微分算子</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%AB%98%E9%98%B6%E5%BE%AE%E5%88%86"><span class="toc-text">高阶微分</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BB%A4%E6%B3%A2%E5%99%A8%EF%BC%9F%E6%B1%82%E5%92%8C%E8%A7%84%E5%88%99%EF%BC%81"><span class="toc-text">滤波器？求和规则！</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pde-net"><span class="toc-text">pde-net</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#nn%E6%8B%9F%E5%90%88%E5%BE%AE%E5%88%86%E7%AE%97%E5%AD%90"><span class="toc-text">nn拟合微分算子</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E6%9E%B6%E6%9E%84"><span class="toc-text">网络架构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E4%BA%9B%E7%BB%86%E8%8A%82"><span class="toc-text">一些细节</span></a></li></ol></li></ol>
     </div>
 
 
@@ -192,7 +200,39 @@
     <div class="post__header"></div>
     <div class="post__content">
         <p>董彬老师的pde-net整了个好活，从图像处理的滤波器引入微分算子，用于近似pde中的微分。这篇博文就是学习滤波器的笔记。</p>
-<p>to be continued…</p>
+<h2 id="滤波器101"><a href="#滤波器101" class="headerlink" title="滤波器101"></a>滤波器101</h2><p>这是图像处理中的概念，做了一件什么事呢，滤波器作用于某个像素，将这个像素的值变为周围像素的线性组合。<br>$$<br>g(x,y) = \sum_{-a}^{a}\sum_{-b}^{b}w(s,t)f(x+s,y+t)<br>$$<br>$g(x,y)$是$(x,y)$处像素变换后的值，$w(s,t)$是线性组合系数也就是滤波器，$f(x+s,y+t)$是与滤波器系数对应位置的原图像像素值。</p>
+<p><img src="/2022/03/28/post16/pic1.png" class="lazy" data-srcset="/2022/03/28/post16/pic1.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAABlBMVEXMzMyWlpYU2uzLAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAACklEQVQImWNgAAAAAgAB9HFkpgAAAABJRU5ErkJggg==" alt="image-20220330204137260"></p>
+<p>设计不同的滤波器系数可以起到不同的图像处理效果，这篇博文中不赘述。</p>
+<h2 id="微分算子"><a href="#微分算子" class="headerlink" title="微分算子"></a>微分算子</h2><p>学过数值方法的大家都知道数值微分中拉普拉斯算子的离散格式，在图像处理中</p>
+<p><img src="/2022/03/28/post16/pic3.png" class="lazy" data-srcset="/2022/03/28/post16/pic3.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAABlBMVEXMzMyWlpYU2uzLAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAACklEQVQImWNgAAAAAgAB9HFkpgAAAABJRU5ErkJggg==" alt="image-20220330205348077"></p>
+<p>在分析中是在$x,y$上加小量，在图像处理中都对像素处理，最小单位是固定的一个像素，作为某种<strong>index</strong>这里就在$x,y$上加1了。</p>
+<p>有这种求和规则，对应的滤波器是</p>
+<p><img src="/2022/03/28/post16/pic5.png" class="lazy" data-srcset="/2022/03/28/post16/pic5.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAABlBMVEXMzMyWlpYU2uzLAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAACklEQVQImWNgAAAAAgAB9HFkpgAAAABJRU5ErkJggg==" alt="image-20220330210314949"></p>
+<p>第一个就是与上面离散格式相对应的滤波器，其余几种是为了满足特定应用场景提出的，如第二种强化了中心点，提高了<em>点检测</em>的效果。</p>
+<p>对于一阶微分，也可以提出类似的滤波器</p>
+<p><img src="/2022/03/28/post16/pic6.png" class="lazy" data-srcset="/2022/03/28/post16/pic6.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAABlBMVEXMzMyWlpYU2uzLAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAACklEQVQImWNgAAAAAgAB9HFkpgAAAABJRU5ErkJggg==" alt="image-20220330210621505"></p>
+<p>一般来说一阶微分只涉及两个量，但也可以用三维的量去离散，分析意义下等价的；图中的sobel算子中线上系数是2，目的是加强边缘线的检测。</p>
+<h3 id="高阶微分"><a href="#高阶微分" class="headerlink" title="高阶微分"></a>高阶微分</h3><p><img src="/2022/03/28/post16/pic4.png" class="lazy" data-srcset="/2022/03/28/post16/pic4.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAABlBMVEXMzMyWlpYU2uzLAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAACklEQVQImWNgAAAAAgAB9HFkpgAAAABJRU5ErkJggg==" alt="image-20220330205922719"></p>
+<p>想求高阶微分就需要更广的区域，上图是计算牛顿的高阶均差示意图，实际上与数值微分离散格式有异曲同工之妙；高阶均差等于两个相邻低阶均差的均差，如此层层加码，计算$n$阶微分就需要$n+1$维的数据了。</p>
+<h2 id="滤波器？求和规则！"><a href="#滤波器？求和规则！" class="headerlink" title="滤波器？求和规则！"></a>滤波器？求和规则！</h2><p>在董老师的pde-net中有这么一个命题，当然我看的不是很懂，呜呜</p>
+<img src="/2022/03/28/post16/pic2.png" class="lazy" data-srcset="/2022/03/28/post16/pic2.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAABlBMVEXMzMyWlpYU2uzLAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAACklEQVQImWNgAAAAAgAB9HFkpgAAAABJRU5ErkJggg==" alt="image-20220330204707776" style="zoom:80%;">
+
+<p>这里的$k,\beta$都是二维的整数组，$(2)$好像定义了一种在某种求和规则下得0的滤波器，然后就定义了这种滤波器的<strong>阶</strong>；$(3)$好像就说，这种滤波器作用于一个二元函数可以视作某种微分…</p>
+<p>通过上面一节或许可以对这个命题有直观的理解；数值微分告诉我们对于任意阶的微分肯定是存在这样一个滤波器和它对应的，毕竟滤波器其实也只是一种求和规则的记法（notation）。董老师应该是非常严格的叙述了这一intuition，但我看不懂…</p>
+<p>然后在这里有$frozen$和$unfrozen$的取舍，就是微分算子滤波器使用时可以完全固定下每一个值（$frozen$），也可以放开其中几个自由度，固定的那些值确保它<strong>至少</strong>满足几阶微分。</p>
+<p>反正就，有了这个命题就可以把这个引入下面pde的讨论了。</p>
+<h2 id="pde-net"><a href="#pde-net" class="headerlink" title="pde-net"></a>pde-net</h2><h3 id="nn拟合微分算子"><a href="#nn拟合微分算子" class="headerlink" title="nn拟合微分算子"></a>nn拟合微分算子</h3><p>这里的$(x,y)$是2维场均匀离散化的角点，通过如此<strong>差分</strong>，获得了一个好比像素图的场，这里场的值$u(x,y)$就好比图像处理里的像素，图像处理里的微分算子到这里也就成了正儿八经的微分算子。</p>
+<p>这里使用的微分算子都放开了自由度，不是全frozen的，就是说这里的算子是<strong>data-depending</strong>的，其中部分参数训练得到。</p>
+<h3 id="网络架构"><a href="#网络架构" class="headerlink" title="网络架构"></a>网络架构</h3><p>然后是这篇文章非常有意思的一个地方，网络架构如下图，需知本文的网络架构是非常非常特殊的，和多层感知机之流截然不同</p>
+<p><img src="/2022/03/28/post16/pic7.png" class="lazy" data-srcset="/2022/03/28/post16/pic7.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAABlBMVEXMzMyWlpYU2uzLAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAACklEQVQImWNgAAAAAgAB9HFkpgAAAABJRU5ErkJggg==" alt="image-20220330212314706"></p>
+<p>这个网路的参数分别有滤波器的参数和神经网络的参数，如果我没理解错的话，神经网络的作用就是单纯的将经微分算子作用的值和其他项的值<strong>组合</strong>在一起，引入先验的假设，这样的组合是有限的，那么之后的就是这些组合项的线性组合。</p>
+<p>所以这个网络的架构是相当透明的，训练完之后通过check神经网络的参数就可以换算出pde控制方程中的各项参数，如果参数很接近于0，那么可以认为这一项在真实控制方程中是不存在的。这就做到了”learning pdes from data”，训练完之后的网络不仅可以推断pde的演化，也可以告诉我们数据满足怎样的控制方程（pde）产生的。</p>
+<h3 id="一些细节"><a href="#一些细节" class="headerlink" title="一些细节"></a>一些细节</h3><ul>
+<li>上图展示的架构叫一个$\delta t \ block$ ，实际网络是由好几个$\delta t \ block$组合而成的，这些$\delta t \ block$共享<strong>神经网络参数</strong>，事实上是在说每个时刻都满足一样的控制方程，这也算一种先验信息了。</li>
+<li>组合起来的效果就是，一个$\delta t \ block$算出的$\hat u(x,y)$传入下一块继续训练，我没理解错的话训练是一层一层单独进行的，自用frozen filter的预热阶段得到了神经网络参数后，每层的训练都只train滤波器中的参数了。</li>
+<li>如此train的目的是让这个网络可以有良好的推断效果。</li>
+<li>这个网络没法自动微分，只能数值微分。</li>
+</ul>
 
     </div>
      
