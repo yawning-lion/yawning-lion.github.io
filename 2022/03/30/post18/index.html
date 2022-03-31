@@ -31,7 +31,7 @@
     <!-- meta -->
 
 
-<title>机器学习-03-some mathematical perspectives | 狮子大张嘴&#39;s blog</title>
+<title>机器学习-03-some mathematical perspectives(1) | 狮子大张嘴&#39;s blog</title>
 
 
     <meta name="keywords" content="machine learning">
@@ -43,13 +43,13 @@
  
     <meta name="description" content="本文事实上为应用数学讨论班的部分课堂笔记。解释神经网络的泛化性等等都会用到更多的数学工具。这篇博文持续更新。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="机器学习-03-some mathematical perspectives">
+<meta property="og:title" content="机器学习-03-some mathematical perspectives(1)">
 <meta property="og:url" content="https://yawninglion.github.io/2022/03/30/post18/index.html">
 <meta property="og:site_name" content="狮子大张嘴&#39;s blog">
 <meta property="og:description" content="本文事实上为应用数学讨论班的部分课堂笔记。解释神经网络的泛化性等等都会用到更多的数学工具。这篇博文持续更新。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-03-30T08:12:44.000Z">
-<meta property="article:modified_time" content="2022-03-30T09:40:41.222Z">
+<meta property="article:modified_time" content="2022-03-31T12:02:23.659Z">
 <meta property="article:author" content="yawning-lion">
 <meta property="article:tag" content="machine learning">
 <meta name="twitter:card" content="summary_large_image">
@@ -152,7 +152,7 @@
 
 <div class="post-title">
     <h1 class="post-title__text">
-        机器学习-03-some mathematical perspectives
+        机器学习-03-some mathematical perspectives(1)
     </h1>
     <div class="post-title__meta">
         <a href="/archives/2022/03/" class="post-meta__date button">2022-03-30</a>
@@ -201,7 +201,7 @@
 <li>course grained MD。粗粒化，一些体系往往由相同性质的部分组成，比如蛋白质液晶，这时候做MD没必要单独考虑每个原子，将一些原子视作整体进行MD计算，方便许多。同样需要input potential。</li>
 <li>continuum mechanics。连续介质模型，比如流体力学弹性力学，这也是我的老本行（x）。其实感觉连续介质力学和粗粒化很像，考虑的是物质微团，这些微团宏观足够小微观足够大，一方面保证了可以用分析的手段去建模处理，一方面保证了每个微团的性质大体相同，保证了数学处理的合理性。建模时用经典力学的动量定律守恒律等获得控制方程。这里同样需要model input，是本构关系。</li>
 <li>kinetics equation。动理学方程，以玻尔茨曼（Boltzmann）方法为代表，多用于航天，考虑稀薄气体中原子的碰撞，属于介观尺度的数值模拟方法。这里的model input是表征碰撞的函数。</li>
-<li>turbulence。湍流，不多说了，青年科学家的坟墓。where the pigs don’t fly。</li>
+<li>turbulence。湍流，不多说了，青年科学家的坟墓（x）。where the pigs don’t fly。</li>
 </ul>
 <h3 id="application-of-machine-learning-for-scientific-computing"><a href="#application-of-machine-learning-for-scientific-computing" class="headerlink" title="application of machine learning for scientific computing"></a>application of machine learning for scientific computing</h3><p>由前所述，这些科学计算模型都需要有先验的模型输入，大部分情况下确定这些输入都是困难的，在机器学习出现之前确定这些输入都需要用猜蒙碰凑的方式，包括图像处理中，一代代数学家可能一辈子研究（猜）出几个好用的特征就满意了，就是说这里的handcraft是非常difficult的。然后，here comes the machine learning。</p>
 <p>这里的机器学习都指supervised learning。直观的说机器就是一台超级插值机，利用它可以解决上述问题中model input难以手工获取的困难。例如MD，就是一个机器学习应用的非常成功的例子。这里用DFT生成小规模的高精度数据，用来train粒子的potential，效果是非常好的。</p>
@@ -224,7 +224,7 @@ $$
 
     </div>
      
-    <div class="post-footer__meta"><p>updated at 2022-03-30</p></div> 
+    <div class="post-footer__meta"><p>updated at 2022-03-31</p></div> 
     <div class="post-entry__tags"><a href="/tags/machine-learning/" class="post-tags__link button"># machine learning</a></div> 
 </article>
 
@@ -232,7 +232,7 @@ $$
     <div class="nav">
         <div class="nav__prev">
             
-                <a href="/2022/03/30/post19/" class="nav__link">
+                <a href="/2022/03/31/post19/" class="nav__link">
                     <div>
                         <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M589.088 790.624L310.464 512l278.624-278.624 45.248 45.248L400.96 512l233.376 233.376z" fill="#808080"></path></svg>
                     </div>
@@ -241,7 +241,7 @@ $$
                             Previous Post
                         </div>
                         <div class="nav__title">
-                            读书-射雕三部曲&amp;《天龙八部》-“满怀愧疚的活下去吧”
+                            梦蝶-射雕三部曲&amp;《天龙八部》-满怀愧疚的活下去吧
                         </div>
                     </div>
                 </a>
