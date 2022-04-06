@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+
+    
+
+    <!-- 渲染优化 -->
+    <meta name="renderer" content="webkit">
+    <meta name="force-rendering" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="HandheldFriendly" content="True" >
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!--icon-->
+
+    
+        <link rel="shortcut icon" href="/images/favicon32.ico">
+    
+    
+        <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon16.ico">
+    
+    
+        <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon32.ico">
+    
+    
+    
+
+
+    <!-- meta -->
+
+
+<title>机器学习-04-some mathematical perspectives(2) | 狮子大张嘴&#39;s blog</title>
+
+
+    <meta name="keywords" content="machine learning">
+
+
+
+
+    <!-- OpenGraph -->
+ 
+    <meta name="description" content="从误差分解的角度，分析了维度灾难（CoD）的成因；在此基础上，用我看不懂的定理分析了机器学习中的误差。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习-04-some mathematical perspectives(2)">
+<meta property="og:url" content="https://yawninglion.github.io/2022/04/05/post20/index.html">
+<meta property="og:site_name" content="狮子大张嘴&#39;s blog">
+<meta property="og:description" content="从误差分解的角度，分析了维度灾难（CoD）的成因；在此基础上，用我看不懂的定理分析了机器学习中的误差。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-04-05T14:46:15.000Z">
+<meta property="article:modified_time" content="2022-04-06T11:05:44.959Z">
+<meta property="article:author" content="yawning-lion">
+<meta property="article:tag" content="machine learning">
+<meta name="twitter:card" content="summary_large_image">
+
+
+    
+<link rel="stylesheet" href="/css/style/main.css">
+ 
+
+    
+    
+        <link rel="stylesheet" id="hl-default-theme" href="/css/highlight/default.css" media="none" >
+        
+            <link rel="stylesheet" id="hl-dark-theme" href="/css/highlight/dark.css" media="none">
+        
+    
+
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/style/dark.css">
+
+    
+<script src="/js/darkmode.js"></script>
+
+
+
+     
+
+    <!-- custom head -->
+
+<meta name="generator" content="Hexo 5.4.1"></head>
+
+    <body>
+        <div id="app">
+            <header class="header">
+    <div class="header__left">
+        <a href="/" class="button">
+            <span class="logo__text">狮子大张嘴&#39;s blog</span>
+        </a>
+    </div>
+    <div class="header__right">
+        
+            <div class="navbar__menus">
+                
+                    <a href="/" class="navbar-menu button">home</a>
+                
+                    <a href="/tags/" class="navbar-menu button">tags</a>
+                
+                    <a href="/categories" class="navbar-menu button">categories</a>
+                
+                    <a href="/archives/" class="navbar-menu button">archives</a>
+                
+                    <a href="/friends/" class="navbar-menu button">friends</a>
+                
+                    <a href="/page/" class="navbar-menu button">Page</a>
+                
+            </div>
+        
+        
+        
+    <a href="/search/" id="btn-search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="24" height="24" fill="currentColor" stroke="currentColor" stroke-width="32"><path d="M192 448c0-141.152 114.848-256 256-256s256 114.848 256 256-114.848 256-256 256-256-114.848-256-256z m710.624 409.376l-206.88-206.88A318.784 318.784 0 0 0 768 448c0-176.736-143.264-320-320-320S128 271.264 128 448s143.264 320 320 320a318.784 318.784 0 0 0 202.496-72.256l206.88 206.88 45.248-45.248z"></path></svg>
+    </a>
+
+
+        
+        
+    <a href="javaScript:void(0);" id="btn-toggle-dark">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+    </a>
+
+
+        
+            <a class="dropdown-icon button" id="btn-dropdown" tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width='24' height='24' fill="none" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"><path fill="currentColor" d="M3.314,4.8h13.372c0.41,0,0.743-0.333,0.743-0.743c0-0.41-0.333-0.743-0.743-0.743H3.314c-0.41,0-0.743,0.333-0.743,0.743C2.571,4.467,2.904,4.8,3.314,4.8z M16.686,15.2H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,15.2,16.686,15.2z M16.686,9.257H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,9.257,16.686,9.257z"></path></svg></a>
+            <div class="dropdown-menus" id="dropdown-menus">
+                
+                    <a href="/" class="dropdown-menu button">home</a>
+                
+                    <a href="/tags/" class="dropdown-menu button">tags</a>
+                
+                    <a href="/categories" class="dropdown-menu button">categories</a>
+                
+                    <a href="/archives/" class="dropdown-menu button">archives</a>
+                
+                    <a href="/friends/" class="dropdown-menu button">friends</a>
+                
+                    <a href="/page/" class="dropdown-menu button">Page</a>
+                
+            </div>
+        
+    </div>
+</header>
+
+
+            <main class="main">
+    
+
+<div class="post-title">
+    <h1 class="post-title__text">
+        机器学习-04-some mathematical perspectives(2)
+    </h1>
+    <div class="post-title__meta">
+        <a href="/archives/2022/04/" class="post-meta__date button">2022-04-05</a>
+        
+    <span class="separate-dot"></span><a href="/categories/%E6%95%B0%E7%90%86%E5%9F%BA%E7%A1%80%E8%A1%A5%E5%AE%8C%E8%AE%A1%E5%88%92/" class="button">数理基础补完计划</a>
+
+ 
+        
+    
+    
+
+
+ 
+
+ 
+    </div>
+</div>
+
+
+    <aside class="post-side">
+        <div class="post-side__toc">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%AF%E5%B7%AE%E5%88%86%E8%A7%A3"><span class="toc-text">误差分解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%B4%E6%95%B0%E7%81%BE%E9%9A%BE%EF%BC%88CoD%EF%BC%89"><span class="toc-text">维数灾难（CoD）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%A0%E7%BB%9F%E6%96%B9%E6%B3%95%E4%B8%AD%E7%9A%84%E6%A8%A1%E5%9E%8B%E8%AF%AF%E5%B7%AE"><span class="toc-text">传统方法中的模型误差</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Monte-Carlo%E7%A7%AF%E5%88%86"><span class="toc-text">Monte Carlo积分</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A0%B4%E9%99%A4CoD"><span class="toc-text">破除CoD</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B0%E8%A7%86%E8%A7%92%E4%B8%8B%E7%9A%84generaliaztion-gap"><span class="toc-text">新视角下的generaliaztion gap</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Rademacher-Complexity"><span class="toc-text">Rademacher Complexity</span></a></li></ol>
+        </div>
+    </aside>
+    <a class="btn-toc button" id="btn-toc" tabindex="0">
+        <svg viewBox="0 0 1024 1024" width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+            <path d="M128 256h64V192H128zM320 256h576V192H320zM128 544h64v-64H128zM320 544h576v-64H320zM128 832h64v-64H128zM320 832h576v-64H320z" fill="currentColor"></path>
+        </svg>
+    </a>
+    <div class="toc-menus" id="toc-menus">
+        <div class="toc-title">Article Directory</div>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%AF%E5%B7%AE%E5%88%86%E8%A7%A3"><span class="toc-text">误差分解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%B4%E6%95%B0%E7%81%BE%E9%9A%BE%EF%BC%88CoD%EF%BC%89"><span class="toc-text">维数灾难（CoD）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%A0%E7%BB%9F%E6%96%B9%E6%B3%95%E4%B8%AD%E7%9A%84%E6%A8%A1%E5%9E%8B%E8%AF%AF%E5%B7%AE"><span class="toc-text">传统方法中的模型误差</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Monte-Carlo%E7%A7%AF%E5%88%86"><span class="toc-text">Monte Carlo积分</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A0%B4%E9%99%A4CoD"><span class="toc-text">破除CoD</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B0%E8%A7%86%E8%A7%92%E4%B8%8B%E7%9A%84generaliaztion-gap"><span class="toc-text">新视角下的generaliaztion gap</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Rademacher-Complexity"><span class="toc-text">Rademacher Complexity</span></a></li></ol>
+    </div>
+
+
+<article class="post post__with-toc content-card">
+    <div class="post__header"></div>
+    <div class="post__content">
+        <p>从误差分解的角度，分析了维度灾难（CoD）的成因；在此基础上，用我看不懂的定理分析了机器学习中的误差。</p>
+<h2 id="误差分解"><a href="#误差分解" class="headerlink" title="误差分解"></a>误差分解</h2><p>机器学习得到的模型我们记为$\hat f$，真实模型为$f$，$f-\hat f$可以分解为</p>
+<p>$$<br>f-\hat f = f- f_m+f_m -f_n +f_n-f<br>$$</p>
+<ul>
+<li><p>$f-f_m$在某个函数空间(hypotheis space)下对$f$产生的最佳逼近的误差，approximation error，可以理解为模型误差</p>
+</li>
+<li><p>$f_m -f_n$，$f_n$为机器学习中利用有限数据，即优化empircal risk得到的函数，和$f_m$存在误差，estimation error，实际上是generalization gap</p>
+</li>
+<li><p>$f_n - \hat f$是优化loss时的误差，loss一般没法GD（gradient descent）到0，这又是一波误差</p>
+</li>
+</ul>
+<p>通过分别分析三个误差，可以理解不同因素对机器学习中误差的成因。</p>
+<h2 id="维数灾难（CoD）"><a href="#维数灾难（CoD）" class="headerlink" title="维数灾难（CoD）"></a>维数灾难（CoD）</h2><p>我们先来看第一个误差，分析这一部分可以得到对CoD的理解。</p>
+<h3 id="传统方法中的模型误差"><a href="#传统方法中的模型误差" class="headerlink" title="传统方法中的模型误差"></a>传统方法中的模型误差</h3><p>以数值积分为例，Grid-based quadrature rules：</p>
+<p>$$<br>I(g)-I_n(g) \sim \frac{C}{m^{\frac{\alpha}{d} }}<br>$$</p>
+<p>大意就是，用传统的画格子积分，如果$\alpha=1$,误差中$m^{-\frac{\alpha}{d}}=0.1$的话，会有$m=10^d$，就是说离散程度$m$是维度$d$的指数项。</p>
+<p>意思就是说，在高维情况下用这种格子离散化的积分，想要达到理想的误差，会要求很高的离散程度，这对计算的要求是很高的。</p>
+<p>这就是维数灾难，计算代价随维数指数级增大。</p>
+<p>事实上，对于其他传统方法，比如样条插值小波变换等，在一组basis function下的拟合，都存在这种问题。</p>
+<h3 id="Monte-Carlo积分"><a href="#Monte-Carlo积分" class="headerlink" title="Monte Carlo积分"></a>Monte Carlo积分</h3><p>蒙特卡洛积分是用样本平均值来替代积分值。</p>
+<p>在$x \sim uniform(a,b)$时，取</p>
+<p>$$<br>g(x_n)  =\frac {\sum_{i}^{n}g(x_i)}{n}<br>$$</p>
+<p>可以证明，样本平均值的期望满足</p>
+<p>$$<br>(b-a)E[g(x_n)] = \int_a^b g(x)dx  =I<br>$$</p>
+<p>可以证明这个方法的误差</p>
+<p>$$<br>E[(I(g)-I_m(g))^2] = \frac{var(g)}{m}<br>$$</p>
+<h4 id="破除CoD"><a href="#破除CoD" class="headerlink" title="破除CoD"></a>破除CoD</h4><p>这是非常exciting的！只要样本个数取的足够多，无论维数几何，误差都可以以$m^{-1}$的速度接近于0。</p>
+<p>也正是因为这种特性，蒙特卡洛积分被广泛应用于物理中的高维积分。</p>
+<p>这样看，蒙特卡洛积分好像是一种破除CoD的方法。但事实上在高维上$var(g)$是可以很大的，会要求取更多的样本数。</p>
+<h4 id="新视角下的generaliaztion-gap"><a href="#新视角下的generaliaztion-gap" class="headerlink" title="新视角下的generaliaztion gap"></a>新视角下的generaliaztion gap</h4><p>在前一篇博文<a target="_blank" rel="noopener" href="https://yawning-lion.github.io/2022/03/30/post18/">机器学习-03-some mathematical perspectives(1)</a>中提到，机器学习优化的是empirical loss，但真正关心的是全局上的积分population loss，二者的差距就叫generalization gap。</p>
+<p>empirical loss是样本（training data）上的误差，而样本是随机取得的——那么是不是可以把empirical loss 看成是对population loss的一个蒙特卡洛积分？这样子二者间的误差也是以$m^{-1}$的速度接近于0的？</p>
+<p>想法很exciting，但很遗憾不是的。因为在机器学习中$g(x_n)$是和样本$x_n$有关的，也就是说不同的training data会出现不同的参数，这样子误差的估计就不会有非常整齐的形式，能有整齐的$\frac{var(g)}{m}$是因为变量之间无关，统统消掉了！</p>
+<p>可以联想到龙格库塔（runge-kutta）现象，不同采样点可以拟合出各式各样千奇百怪的曲线，与真实曲线相差甚远。</p>
+<h2 id="Rademacher-Complexity"><a href="#Rademacher-Complexity" class="headerlink" title="Rademacher Complexity"></a>Rademacher Complexity</h2><p>放弃了，这里看不懂，以后有机会补上。</p>
+<p>好像就是说，最后机器学习模型的generalization gap还是可以被控制住，控制在</p>
+<p>$$<br>\frac{\gamma_1(f^*)}{m}+\frac{\gamma_2(f^*)}{n^\frac{1}{2}}<br>$$</p>
+<p>对于resnet，二层神经网络都是被这个Monte Carlo bounds控制，没有CoD。</p>
+<p>另外一件有意思的事，Hypothesis Space为全体连续函数时，Rademacher复杂度是$O(1)$过大；为李普希兹1函数时，就是小于$0.1$，此时的generalization gap $\sim n^{-\frac{1}{d}}$。</p>
+
+    </div>
+     
+    <div class="post-footer__meta"><p>updated at 2022-04-06</p></div> 
+    <div class="post-entry__tags"><a href="/tags/machine-learning/" class="post-tags__link button"># machine learning</a></div> 
+</article>
+
+
+    <div class="nav">
+        <div class="nav__prev">
+            
+        </div>
+        <div class="nav__next">
+            
+                <a href="/2022/03/31/post19/" class="nav__link">
+                    <div>
+                        <div class="nav__label">
+                            Next Post
+                        </div>
+                        <div class="nav__title">
+                            梦蝶-射雕三部曲&amp;《天龙八部》-满怀愧疚的活下去吧
+                        </div>
+                    </div>
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M434.944 790.624l-45.248-45.248L623.04 512l-233.376-233.376 45.248-45.248L713.568 512z" fill="#808080"></path></svg>
+                    </div>
+                </a>
+            
+        </div>
+    </div>
+
+
+
+
+
+</main>
+
+            <footer class="footer">
+     
+    <a href="#" class="button" id="b2t" aria-label="Back to Top" title="Back to Top">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M233.376 722.752L278.624 768 512 534.624 745.376 768l45.248-45.248L512 444.128zM192 352h640V288H192z" fill="currentColor"></path>
+        </svg>
+    </a>
+
+    
+
+
+    
+     
+ 
+
+ 
+    
+        
+        <p class="footer-copyright">
+            Copyright © 2022 <a href="/">狮子大张嘴&#39;s blog</a>
+        </p>
+    
+    
+    <p>Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme - <a href="https://github.com/ChrAlpha/hexo-theme-cards" target="_blank">Cards</a></p>
+</footer>
+
+        </div>
+        
+    <script defer src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.1.0/dist/lazyload.min.js"></script>
+    <script>
+        window.lazyLoadOptions = {
+            elements_selector: ".lazy",
+            threshold: 0
+        };
+    </script>
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+    
+ 
+
+ 
+
+
+    <script>
+        if (typeof MathJax === 'undefined') {
+            window.MathJax = {
+                loader: {
+                    source: {
+                        '[tex]/amsCd': '[tex]/amscd',
+                        '[tex]/AMScd': '[tex]/amscd'
+                    }
+                },
+                tex: {
+                    inlineMath: {'[+]': [['$', '$']]},
+                    tags: 'ams'
+                },
+                options: {
+                    renderActions: {
+                        findScript: [10, doc => {
+                            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                                const display = !!node.type.match(/; *mode=display/);
+                                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                                const text = document.createTextNode('');
+                                node.parentNode.replaceChild(text, node);
+                                math.start = {node: text, delim: '', n: 0};
+                                math.end = {node: text, delim: '', n: 0};
+                                doc.math.push(math);
+                            });
+                        }, '', false],
+                        insertedScript: [200, () => {
+                            document.querySelectorAll('mjx-container').forEach(node => {
+                                let target = node.parentNode;
+                                if (target.nodeName.toLowerCase() === 'li') {
+                                    target.parentNode.classList.add('has-jax');
+                                }
+                            });
+                        }, '', false]
+                    }
+                }
+            };
+            (function () {
+                var script = document.createElement('script');
+                script.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js";
+                script.defer = true;
+                document.head.appendChild(script);
+            })();
+        } else {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+        }
+    </script>
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+
+    </body>
+</html>
