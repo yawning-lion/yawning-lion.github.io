@@ -31,22 +31,27 @@
     <!-- meta -->
 
 
-<title>post23 | 狮子大张嘴&#39;s blog</title>
+<title>并行计算-04-gcc&amp;makefile | 狮子大张嘴&#39;s blog</title>
 
+
+    <meta name="keywords" content="并行计算">
 
 
 
 
     <!-- OpenGraph -->
  
-    <meta property="og:type" content="article">
-<meta property="og:title" content="post23">
+    <meta name="description" content="大家都知道gcc，但大家可以不依赖ide使用gcc编译程序吗？跟博主一起来看看怎么用makefile编译程序吧（x）。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="并行计算-04-gcc&amp;makefile">
 <meta property="og:url" content="https://yawninglion.github.io/2022/04/10/post23/index.html">
 <meta property="og:site_name" content="狮子大张嘴&#39;s blog">
+<meta property="og:description" content="大家都知道gcc，但大家可以不依赖ide使用gcc编译程序吗？跟博主一起来看看怎么用makefile编译程序吧（x）。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-04-09T17:52:04.000Z">
-<meta property="article:modified_time" content="2022-04-09T17:52:04.014Z">
+<meta property="article:modified_time" content="2022-04-16T17:56:37.201Z">
 <meta property="article:author" content="yawning-lion">
+<meta property="article:tag" content="并行计算">
 <meta name="twitter:card" content="summary_large_image">
 
 
@@ -147,11 +152,13 @@
 
 <div class="post-title">
     <h1 class="post-title__text">
-        post23
+        并行计算-04-gcc&amp;makefile
     </h1>
     <div class="post-title__meta">
         <a href="/archives/2022/04/" class="post-meta__date button">2022-04-10</a>
         
+    <span class="separate-dot"></span><a href="/categories/%E5%8E%BB%E7%A0%81%E5%A4%B4%E6%95%B4%E7%82%B9%E8%96%AF%E6%9D%A1/" class="button">去码头整点薯条</a>
+
  
         
     
@@ -167,7 +174,7 @@
 
     <aside class="post-side">
         <div class="post-side__toc">
-            
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#GCC"><span class="toc-text">GCC</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95"><span class="toc-text">基本语法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%89%E9%A1%B9"><span class="toc-text">选项</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Dmacro-defn"><span class="toc-text">-Dmacro[&#x3D;defn]</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#I%E5%A4%B4%E6%96%87%E4%BB%B6%E8%B7%AF%E5%BE%84"><span class="toc-text">-I头文件路径</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E8%AF%91%E5%99%A8%E7%89%88%E6%9C%AC"><span class="toc-text">编译器版本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%93%BE%E6%8E%A5%E5%88%B0%E5%BA%93-l"><span class="toc-text">链接到库-l</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AD%A6%E5%91%8A%E6%89%80%E6%9C%89"><span class="toc-text">警告所有</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%AB%98%E7%BA%A7%E9%80%89%E9%A1%B9"><span class="toc-text">高级选项</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B"><span class="toc-text">编译过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%8A%E6%9F%90%E4%B8%AA%E6%96%87%E4%BB%B6%E5%8F%98%E6%88%90%E5%85%B1%E4%BA%AB%E5%BA%93"><span class="toc-text">把某个文件变成共享库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9E%E4%B8%8A%E8%87%AA%E5%B7%B1%E7%9A%84%E5%BA%93"><span class="toc-text">连上自己的库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%93%E6%90%9C%E7%B4%A2%E8%B7%AF%E5%BE%84"><span class="toc-text">库搜索路径</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E6%97%B6%E5%8A%A8%E6%80%81%E5%BA%93%E6%9F%A5%E6%89%BE%E8%B7%AF%E5%BE%84"><span class="toc-text">运行时动态库查找路径</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6%E7%9A%84%E4%BF%A1%E6%81%AF"><span class="toc-text">查看可执行文件的信息</span></a></li></ol></li></ol>
         </div>
     </aside>
     <a class="btn-toc button" id="btn-toc" tabindex="0">
@@ -177,23 +184,110 @@
     </a>
     <div class="toc-menus" id="toc-menus">
         <div class="toc-title">Article Directory</div>
-        
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#GCC"><span class="toc-text">GCC</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95"><span class="toc-text">基本语法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%89%E9%A1%B9"><span class="toc-text">选项</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Dmacro-defn"><span class="toc-text">-Dmacro[&#x3D;defn]</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#I%E5%A4%B4%E6%96%87%E4%BB%B6%E8%B7%AF%E5%BE%84"><span class="toc-text">-I头文件路径</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E8%AF%91%E5%99%A8%E7%89%88%E6%9C%AC"><span class="toc-text">编译器版本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%93%BE%E6%8E%A5%E5%88%B0%E5%BA%93-l"><span class="toc-text">链接到库-l</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AD%A6%E5%91%8A%E6%89%80%E6%9C%89"><span class="toc-text">警告所有</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%AB%98%E7%BA%A7%E9%80%89%E9%A1%B9"><span class="toc-text">高级选项</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B"><span class="toc-text">编译过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%8A%E6%9F%90%E4%B8%AA%E6%96%87%E4%BB%B6%E5%8F%98%E6%88%90%E5%85%B1%E4%BA%AB%E5%BA%93"><span class="toc-text">把某个文件变成共享库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9E%E4%B8%8A%E8%87%AA%E5%B7%B1%E7%9A%84%E5%BA%93"><span class="toc-text">连上自己的库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%93%E6%90%9C%E7%B4%A2%E8%B7%AF%E5%BE%84"><span class="toc-text">库搜索路径</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E6%97%B6%E5%8A%A8%E6%80%81%E5%BA%93%E6%9F%A5%E6%89%BE%E8%B7%AF%E5%BE%84"><span class="toc-text">运行时动态库查找路径</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6%E7%9A%84%E4%BF%A1%E6%81%AF"><span class="toc-text">查看可执行文件的信息</span></a></li></ol></li></ol>
     </div>
 
 
 <article class="post post__with-toc content-card">
     <div class="post__header"></div>
     <div class="post__content">
-        
+        <h2 id="GCC"><a href="#GCC" class="headerlink" title="GCC"></a>GCC</h2><h3 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc [-options] infile</span><br></pre></td></tr></table></figure>
+
+<p>根据源代码编译文件，中间是选项。</p>
+<p>最简单的就是直接编译，然后运行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gcc hello.c</span><br><span class="line">./a.out</span><br></pre></td></tr></table></figure>
+
+<p>这里的<code>a.out</code>应该就是可执行的输出文件，不是<code>.exe</code>啊，这里头的区别还得在看看。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./a.out</span><br></pre></td></tr></table></figure>
+
+<p><code>./</code>是啥一般性的运行命令吗，以及输出文件的名称<code>a</code>是默认的吗？都不知道欸。</p>
+<p><em><strong>附注：不是什么东西都可以往.h里写</strong></em></p>
+<h2 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h2><h3 id="Dmacro-defn"><a href="#Dmacro-defn" class="headerlink" title="-Dmacro[=defn]"></a>-Dmacro[=defn]</h3><p>可以定义宏，人为塞进来一个东西控制编译（相当于输入参数，源码中会有接口）</p>
+<p>如使用单精度</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-DUSE_SINGLE</span><br></pre></td></tr></table></figure>
+
+<p><code>USE_SINGLE</code>是在程序里有的接口。</p>
+<h3 id="I头文件路径"><a href="#I头文件路径" class="headerlink" title="-I头文件路径"></a><code>-I</code>头文件路径</h3><p>添加头文件搜索路径。假如自己写了个头文件在include里，</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc axphy.c main.c</span><br></pre></td></tr></table></figure>
+
+<p>会报错，因为编译器不到头文件在哪。</p>
+<p>需要加</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-I../include</span><br></pre></td></tr></table></figure>
+
+<p><code>../</code>表示上一层目录，记住<code>-I</code>和后面路径间没有空格。</p>
+<p>即</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc axphy.c main.c -I../include</span><br></pre></td></tr></table></figure>
+
+<h3 id="编译器版本"><a href="#编译器版本" class="headerlink" title="编译器版本"></a>编译器版本</h3><p>然后会继续报错。老版本编译器不支持新特性。 比如</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; N; ++i)</span><br></pre></td></tr></table></figure>
+
+<p>这个闭包是个好东西，但老版本不支持。</p>
+<p>需要在后面加</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-std=c99</span><br></pre></td></tr></table></figure>
+
+<h3 id="链接到库-l"><a href="#链接到库-l" class="headerlink" title="链接到库-l"></a>链接到库<code>-l</code></h3><p>同一个名字的函数可能在不同库里有不同的实现，故需要指定。</p>
+<p>用</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-lm</span><br></pre></td></tr></table></figure>
+
+<p>相当于链接到<code>libm.so</code>，这就是<code>m</code>的含义。</p>
+<p>意思是链接到数学库。<strong>需注意有书写顺序。</strong></p>
+<p><em><strong>附注：头文件只是告诉了函数的声明，没有说函数的实现，具体实现都在`.so里</strong></em></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc axphy.c main.c -I../include -gcc axphy.c main.c -I../include</span><br></pre></td></tr></table></figure>
+
+<p>到这里就可以编译出<code>a.out</code>了。</p>
+<h3 id="警告所有"><a href="#警告所有" class="headerlink" title="警告所有"></a>警告所有</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-WALL</span><br></pre></td></tr></table></figure>
+
+<p>打开然后警告所有可能的错误，这种时候编译器还是很聪明的。</p>
+<h3 id="高级选项"><a href="#高级选项" class="headerlink" title="高级选项"></a>高级选项</h3><ul>
+<li><p><code>foption</code>打开某种特性比如<code>-fopenmp</code></p>
+</li>
+<li><p><code>-o0,-o1</code>：打开优化选项，让程序更快。</p>
+</li>
+</ul>
+<h2 id="编译过程"><a href="#编译过程" class="headerlink" title="编译过程"></a>编译过程</h2><h3 id="把某个文件变成共享库"><a href="#把某个文件变成共享库" class="headerlink" title="把某个文件变成共享库"></a>把某个文件变成共享库</h3><p>如果没有main，没法编译为可执行文件。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-shared -fPIC -o libaxphy.so</span><br></pre></td></tr></table></figure>
+
+<p>加上第一个就行，第二个也一定也加，不然容易出问题，第三个是共享库的名称格式。</p>
+<h3 id="连上自己的库"><a href="#连上自己的库" class="headerlink" title="连上自己的库"></a>连上自己的库</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-laxhpy</span><br></pre></td></tr></table></figure>
+
+<p>这是连接库的默认格式。</p>
+<h3 id="库搜索路径"><a href="#库搜索路径" class="headerlink" title="库搜索路径"></a>库搜索路径</h3><p>默认不会在<code>main.c</code>（待编译文件）同层级位置下搜索库，要加</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-L. -laxphy</span><br></pre></td></tr></table></figure>
+
+<p><code>-L. </code>是声明在当前目录搜索。</p>
+<p>但这样还是会报错。</p>
+<p><strong>但谁说我编译时候用到的库就是我运行时候用到的库？编译时运行时库查找路径不同。</strong> 绕起来了（x）.</p>
+<h3 id="运行时动态库查找路径"><a href="#运行时动态库查找路径" class="headerlink" title="运行时动态库查找路径"></a>运行时动态库查找路径</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-Wl,rpath=\<span class="variable">$ORIGIN</span></span><br></pre></td></tr></table></figure>
+
+<p>告诉程序运行时用到的库就在当前可执行文件所在的目录。</p>
+<h3 id="查看可执行文件的信息"><a href="#查看可执行文件的信息" class="headerlink" title="查看可执行文件的信息"></a>查看可执行文件的信息</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">readlf -d a.out |less</span><br></pre></td></tr></table></figure>
+
+<p>显示可执行文件的运行依赖库等等。根据输入的信息就把程序写死了。</p>
+<p>to be continued…</p>
+
     </div>
      
-    <div class="post-footer__meta"><p>updated at 2022-04-10</p></div> 
-    <div class="post-entry__tags"></div> 
+    <div class="post-footer__meta"><p>updated at 2022-04-17</p></div> 
+    <div class="post-entry__tags"><a href="/tags/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97/" class="post-tags__link button"># 并行计算</a></div> 
 </article>
 
 
     <div class="nav">
         <div class="nav__prev">
+            
+                <a href="/2022/04/17/post24/" class="nav__link">
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M589.088 790.624L310.464 512l278.624-278.624 45.248 45.248L400.96 512l233.376 233.376z" fill="#808080"></path></svg>
+                    </div>
+                    <div>
+                        <div class="nav__label">
+                            Previous Post
+                        </div>
+                        <div class="nav__title">
+                            十六日谈-02-dead in the water
+                        </div>
+                    </div>
+                </a>
             
         </div>
         <div class="nav__next">
