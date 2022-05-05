@@ -48,13 +48,13 @@
 <meta property="og:site_name" content="狮子大张嘴&#39;s blog">
 <meta property="og:description" content="大家都知道gcc，但大家可以不依赖ide使用gcc编译程序吗？跟博主一起来看看怎么用makefile编译程序吧（x）。">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="file:///C:/Users/RSC/AppData/Roaming/marktext/images/2022-04-18-01-16-43-image.png">
+<meta property="og:image" content="https://yawninglion.github.io/2022/04/10/post23/2022-04-18-01-16-43-image.png">
 <meta property="article:published_time" content="2022-04-09T17:52:04.000Z">
-<meta property="article:modified_time" content="2022-04-17T17:35:06.695Z">
+<meta property="article:modified_time" content="2022-05-05T15:40:27.566Z">
 <meta property="article:author" content="yawning-lion">
 <meta property="article:tag" content="并行计算">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="file:///C:/Users/RSC/AppData/Roaming/marktext/images/2022-04-18-01-16-43-image.png">
+<meta name="twitter:image" content="https://yawninglion.github.io/2022/04/10/post23/2022-04-18-01-16-43-image.png">
 
 
     
@@ -231,7 +231,7 @@
 <p>用</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-lm</span><br></pre></td></tr></table></figure>
 
-<p>相当于链接到<code>libm.so</code>，这就是<code>m</code>的含义。</p>
+<p>相当于链接到<code>libmath.so</code>，这就是<code>lm</code>的含义。l代表lib，所有库的开头格式。</p>
 <p>意思是链接到数学库。<strong>需注意有书写顺序。</strong></p>
 <p><em><strong>附注：头文件只是告诉了函数的声明，没有说函数的实现，具体实现都在`.so里</strong></em></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc axphy.c main.c -I../include -gcc axphy.c main.c -I../include</span><br></pre></td></tr></table></figure>
@@ -274,7 +274,7 @@
 <p><code>recipe</code>:生成方法，前面必须有<Tab>。其实就是shell 命令。</Tab></p>
 <p>其实就是把bash里该写的命令写一起了。</p>
 <p>从终产物到依赖产物，一层层写下去。</p>
-<img src="file:///C:/Users/RSC/AppData/Roaming/marktext/images/2022-04-18-01-16-43-image.png" class="lazy" data-srcset="file:///C:/Users/RSC/AppData/Roaming/marktext/images/2022-04-18-01-16-43-image.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAABlBMVEXMzMyWlpYU2uzLAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAACklEQVQImWNgAAAAAgAB9HFkpgAAAABJRU5ErkJggg==" title alt width="600">
+<img src="/2022/04/10/post23/2022-04-18-01-16-43-image.png" class="lazy" data-srcset="/2022/04/10/post23/2022-04-18-01-16-43-image.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAABlBMVEXMzMyWlpYU2uzLAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAACklEQVQImWNgAAAAAgAB9HFkpgAAAABJRU5ErkJggg==" alt="2022-04-18-01-16-43-image" style="zoom:80%;">
 
 <p>注意假如产物依赖在其他文件层级下，那要把路径写上。本质上产物依赖写上去的都是路径，同层级下直接写文件名。</p>
 <p>注意recipe更新了产物不会自动更新，需要把中间产物删掉。</p>
@@ -283,7 +283,7 @@
 
     </div>
      
-    <div class="post-footer__meta"><p>updated at 2022-04-18</p></div> 
+    <div class="post-footer__meta"><p>updated at 2022-05-05</p></div> 
     <div class="post-entry__tags"><a href="/tags/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97/" class="post-tags__link button"># 并行计算</a></div> 
 </article>
 
